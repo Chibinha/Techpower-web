@@ -1,7 +1,7 @@
 CREATE DATABASE techpower;
 USE techpower;
 
-CREATE TABLE `User`
+/*CREATE TABLE `User`
 (
  `UserID`       int NOT NULL AUTO_INCREMENT ,
  `UserName`     varchar(40) NOT NULL ,
@@ -14,10 +14,9 @@ CREATE TABLE `User`
 PRIMARY KEY (`UserID`),
 UNIQUE KEY `AK1_Customer_CustomerName` (`UserName`)
 ) AUTO_INCREMENT=1 COMMENT='Basic information 
-about Customer';
+about Customer';*/
 
 -- ************************************** `Sale`
-
 CREATE TABLE `Sale`
 (
  `SaleID`       int NOT NULL AUTO_INCREMENT ,
@@ -29,8 +28,7 @@ CREATE TABLE `Sale`
 PRIMARY KEY (`SaleID`),
 KEY `FK_Order_CustomerId_Customer` (`UserID`),
 CONSTRAINT `FK_Order_CustomerId_Customer` FOREIGN KEY `FK_Order_CustomerId_Customer` (`UserID`) REFERENCES `User` (`UserID`)
-) AUTO_INCREMENT=1 COMMENT='Order information
-like Date, Amount';
+) AUTO_INCREMENT=1 COMMENT='Order information like Date, Amount';
 
 -- ************************************** `Product`
 
@@ -79,4 +77,8 @@ CREATE TABLE `Category`
 PRIMARY KEY (`ID`),
 KEY `fkIdx_133` (`ParentID`),
 CONSTRAINT `FK_133` FOREIGN KEY `fkIdx_133` (`ParentID`) REFERENCES `Category` (`ID`)
-);
+) ENGINE=InnoDB;
+
+alter table Sale engine = InnoDB;
+alter table product engine = InnoDB;
+alter table SaleItem engine = InnoDB;

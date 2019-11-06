@@ -1,84 +1,78 @@
-CREATE DATABASE techpower;
-USE techpower;
+CREATE DATABASE tech_power;
+USE tech_power;
 
-/*CREATE TABLE `User`
-(
- `UserID`       int NOT NULL AUTO_INCREMENT ,
- `UserName`     varchar(40) NOT NULL ,
- `UserEmail`    varchar(40) NULL ,
- `UserPassword` varchar(20) NOT NULL ,
- `UserPhone`    varchar(20) NULL ,
- `UserAddress`  varchar(40) NOT NULL ,
- `UserNIF`      int(9) NOT NULL ,
 
-PRIMARY KEY (`UserID`),
-UNIQUE KEY `AK1_Customer_CustomerName` (`UserName`)
-) AUTO_INCREMENT=1 COMMENT='Basic information 
-about Customer';*/
+-- ********* Tabela Utilizadores ********* --
+CREATE TABLE `user`(
+ `id`                   int(11) NOT NULL PRIMARY KEY,
+ `username`             varchar(255) NOT NULL ,
+ `auth_key`             varchar(32) NOT NULL ,
+ `password_hash`        varchar(255) NOT NULL ,
+ `password_reset_token` varchar(255) NOT NULL ,
+ `email`                varchar(255) NOT NULL ,
+ `status`               int(6) NOT NULL ,
+ `created_at`           int(11) NOT NULL ,
+ `updated_at`           int(11) NOT NULL ,
+ `verification_token`   varchar(255) NOT NULL
+) ENGINE = InnoDb;
 
--- ************************************** `Sale`
-CREATE TABLE `Sale`
-(
- `SaleID`       int NOT NULL AUTO_INCREMENT ,
- `UserID`       int NOT NULL ,
- `SaleDate`     datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
- `TotalAmount`  decimal(12,2) NOT NULL ,
- `SaleFinished` bit NOT NULL ,
 
-PRIMARY KEY (`SaleID`),
-KEY `FK_Order_CustomerId_Customer` (`UserID`),
-CONSTRAINT `FK_Order_CustomerId_Customer` FOREIGN KEY `FK_Order_CustomerId_Customer` (`UserID`) REFERENCES `User` (`UserID`)
-) AUTO_INCREMENT=1 COMMENT='Order information like Date, Amount';
+-- ********* Tabela Perfis ********* --
+CREATE TABLE `profile`(
+ `phone`       varchar(20) NULL ,
+ `address`     varchar(255) NULL ,
+ `nif`         int(9) NULL ,
+ `postal_code` varchar(8) NULL ,
+ `city`        varchar(50) NULL ,
+ `country`     varchar(100) NULL ,
+ `id`          int(11) NOT NULL,
+FOREIGN KEY (`id`) REFERENCES `user` (`id`)
+) ENGINE = InnoDb;
 
--- ************************************** `Product`
 
-CREATE TABLE `Product`
-(
- `ProductId`      int NOT NULL AUTO_INCREMENT ,
- `ProductName`    varchar(50) NOT NULL ,
- `UnitPrice`      decimal(12,2) NULL ,
- `IsDiscontinued` bit NOT NULL DEFAULT 0 ,
- `Sku`            varchar(13) NOT NULL ,
- `Description`    varchar(5000) NOT NULL ,
- `IDCategory`     int NOT NULL ,
+-- ********* Tabela Categorias ********* --
+CREATE TABLE `category`(
+ `id`          int NOT NULL PRIMARY KEY,
+ `description` varchar(200) NOT NULL ,
+ `parent_id`   int NOT NULL ,
+FOREIGN KEY (`parent_id`) REFERENCES `category` (`id`)
+) ENGINE = InnoDb;
 
-PRIMARY KEY (`ProductId`),
-UNIQUE KEY `AK1_Product_SupplierId_ProductName` (`ProductName`),
-KEY `fkIdx_136` (`IDCategory`),
-CONSTRAINT `FK_136` FOREIGN KEY `fkIdx_136` (`IDCategory`) REFERENCES `Category` (`ID`)
-) AUTO_INCREMENT=1 COMMENT='Basic information 
-about Product';
 
--- ************************************** `SaleItem`
+-- ********* Tabela Vendas ********* --
+CREATE TABLE `sale`(
+ `id`            int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ `sale_date`     datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+ `total_amount`  decimal(12,2) NOT NULL ,
+ `sale_finished` bit NOT NULL
+) ENGINE = InnoDb;
 
-CREATE TABLE `SaleItem`
-(
- `SaleID`    int NOT NULL ,
- `ProductId` int NOT NULL ,
- `UnitPrice` decimal(12,2) NOT NULL ,
- `Quantity`  int NOT NULL ,
 
-PRIMARY KEY (`SaleID`, `ProductId`),
-KEY `FK_OrderItem_OrderId_Order` (`SaleID`),
-CONSTRAINT `FK_OrderItem_OrderId_Order` FOREIGN KEY `FK_OrderItem_OrderId_Order` (`SaleID`) REFERENCES `Sale` (`SaleID`),
-KEY `FK_OrderItem_ProductId_Product` (`ProductId`),
-CONSTRAINT `FK_OrderItem_ProductId_Product` FOREIGN KEY `FK_OrderItem_ProductId_Product` (`ProductId`) REFERENCES `Product` (`ProductId`)
-) COMMENT='Information about
-like Price, Quantity';
+-- ********* Tabela Produtos ********* --
+CREATE TABLE `product`(
+ `id`              int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ `product_name`    varchar(50) NOT NULL ,
+ `unit_price`      decimal(12,2) NULL ,
+ `is_discontinued` bit NOT NULL DEFAULT 0 ,
+ `description`     varchar(5000) NOT NULL ,
+ `id_category`     int NOT NULL ,
+FOREIGN KEY (`id_category`) REFERENCES `category` (`id`)
+) ENGINE = InnoDB;
 
--- ************************************** `Category`
 
-CREATE TABLE `Category`
-(
- `ID`          int NOT NULL ,
- `Description` varchar(200) NOT NULL ,
- `ParentID`    int NOT NULL ,
+-- ********* Tabela Linha de Vendas ********* --
+CREATE TABLE `sale_item`(
+ `id`         int NOT NULL PRIMARY KEY,
+ `unit_price` decimal(12,2) NOT NULL ,
+ `quantity`   int NOT NULL ,
+ `id_product` int NOT NULL ,
+ `id_sale`    int NOT NULL ,
+FOREIGN KEY (`id_product`) REFERENCES `product` (`id`),
+FOREIGN KEY (`id_sale`) REFERENCES `sale` (`id`)
+) ENGINE = InnoDB;
 
-PRIMARY KEY (`ID`),
-KEY `fkIdx_133` (`ParentID`),
-CONSTRAINT `FK_133` FOREIGN KEY `fkIdx_133` (`ParentID`) REFERENCES `Category` (`ID`)
-) ENGINE=InnoDB;
 
-alter table Sale engine = InnoDB;
-alter table product engine = InnoDB;
-alter table SaleItem engine = InnoDB;
+
+
+
+

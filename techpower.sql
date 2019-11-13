@@ -32,12 +32,11 @@ FOREIGN KEY (`id`) REFERENCES `user` (`id`)
 
 -- ********* Tabela Categorias ********* --
 CREATE TABLE `category`(
- `id`          int NOT NULL PRIMARY KEY,
+ `id`          int NOT NULL PRIMARY KEY AUTO_INCREMENT,
  `description` varchar(200) NOT NULL ,
- `parent_id`   int NOT NULL ,
+ `parent_id`   int,
 FOREIGN KEY (`parent_id`) REFERENCES `category` (`id`)
 ) ENGINE = InnoDb;
-
 
 -- ********* Tabela Vendas ********* --
 CREATE TABLE `sale`(

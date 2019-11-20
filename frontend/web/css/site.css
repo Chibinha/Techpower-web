@@ -3,6 +3,49 @@ body {
     height: 100%;
 }
 
+
+*{
+    font-family: inherit;
+    text-decoration: none;
+}
+
+.card {
+    margin: 35px;
+    width: 280px;
+    min-height: 430px;
+    padding: 23px;
+    box-shadow: 0 2px 55px rgba(0,0,0,0.1);
+    display: inline-block;
+  }
+  
+.card img{
+    width: 100%;
+    margin-bottom: 20px;
+
+}
+
+.card-title{
+    font-size: 18px;
+    color: black;
+}
+
+.card:hover .card-title{
+    color: #E95420;
+    text-decoration: none;
+}
+
+.price {
+    text-align: left;
+    color: #E95420;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.description{
+    font-size: 12px;
+    color: lightgray;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;

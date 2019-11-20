@@ -14,6 +14,8 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Product;
+use common\models\ProductSearch;
 
 /**
  * Site controller
@@ -73,8 +75,12 @@ class SiteController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {
-        return $this->render('index');
+    {        
+        $products = Product::find()->asArray()->all();
+
+        return $this->render('index', [
+            'products' => $products,
+        ]);
     }
 
     /**

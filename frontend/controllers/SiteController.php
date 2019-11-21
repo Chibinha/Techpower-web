@@ -76,10 +76,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {        
-        $products = Product::find()->asArray()->all();
+        //
+        $popular_products = Product::find()->limit(6)->orderBy(['id' => SORT_DESC])->asArray()->all();
+
+        $new_products = Product::find()->limit(6)->orderBy(['id' => SORT_ASC])->asArray()->all();
 
         return $this->render('index', [
-            'products' => $products,
+            'popular_products' => $popular_products,
+            'new_products' => $new_products,
         ]);
     }
 

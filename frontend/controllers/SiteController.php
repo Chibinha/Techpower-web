@@ -257,4 +257,14 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+
+    /**
+     * Displays user page.
+     *
+     * @return mixed
+     */
+    public function actionUserpage()
+    {
+        return $this->render('userpage');
+    }
 }

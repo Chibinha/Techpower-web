@@ -33,6 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'sale_date',
             'total_amount',
             'sale_finished:boolean',
+            [
+                'label' => 'Produtos Vendidos',
+                'value' => Html::encode($model->SaleItem->username),
+            ],
+            [
+                'label' => 'Cliente',
+                'value' => Html::encode($model->user->username),
+            ],
         ],
     ]) ?>
 

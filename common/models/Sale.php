@@ -44,7 +44,7 @@ class Sale extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'sale_date' => 'Sale Date',
+            'sale_date:datetime' => 'Sale Date',
             'total_amount' => 'Total Amount',
             'sale_finished' => 'Sale Finished',
         ];

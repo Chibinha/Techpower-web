@@ -36,7 +36,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => '<span class="glyphicon glyphicon-home"></span> &ensp; Home', 'url' => ['/site/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
@@ -44,17 +44,36 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
+        $menuItems[] = [
+            'label' => '<span class="glyphicon glyphicon-user"></span> &ensp; A minha conta',
+            'items' => [
+                [
+                    'label' => '<span class="glyphicon glyphicon-list"></span> &ensp; Painel da Conta',
+                    'url' => ['/site/userpage'],
+                ],
+                [
+                    'label' => '<span class="glyphicon glyphicon-info-sign"></span> &ensp; Informações da Conta',
+                    'url' => ['/site/index'],
+                ],
+                [
+                    'label' => '<span class="glyphicon glyphicon-home"></span> &ensp; Endereços',
+                    'url' => ['/site/index'],
+                ],
+                [
+                    'label' => '<span class="glyphicon glyphicon-gift"></span> &ensp; Encomendas',
+                    'url' => ['/site/index'],
+                ],
+                [
+                    'label' => '<span class="glyphicon glyphicon-remove"></span> &ensp; Logout',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ],      
+            ],
+        ];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
+        'encodeLabels' => false,
         'items' => $menuItems,
     ]);
     NavBar::end();

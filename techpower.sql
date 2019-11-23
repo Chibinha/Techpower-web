@@ -1,5 +1,5 @@
-CREATE DATABASE tech_power;
-USE tech_power;
+CREATE DATABASE techpower;
+USE techpower;
 
 
 -- ********* Tabela Utilizadores ********* --
@@ -43,7 +43,9 @@ CREATE TABLE `sale`(
  `id`            int NOT NULL AUTO_INCREMENT PRIMARY KEY,
  `sale_date`     datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ,
  `total_amount`  decimal(12,2) NOT NULL ,
- `sale_finished` bit NOT NULL
+ `sale_finished` bit NOT NULL,
+ `id_user` int NOT NULL,
+ FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
 ) ENGINE = InnoDb;
 
 

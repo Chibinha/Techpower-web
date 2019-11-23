@@ -9,15 +9,6 @@ body {
     text-decoration: none;
 }
 
-.panel{
-    margin-top: 20px;
-    padding-top: 5px;
-}
-
-.panel-body{
-    padding: 0;
-}
-
 .site-index h3{
     color: #E95420;
     font-weight: bold;
@@ -38,13 +29,14 @@ body {
 }
 
 .card {
-    margin: 25px;
-    width: 280px;
     min-height: 430px;
-    padding: 23px;
-    box-shadow: 0 2px 55px rgba(0,0,0,0.1);
+    padding: 15px;
     display: inline-block;
-    
+}
+
+.card-content {
+    box-shadow: 0 2px 55px rgba(0,0,0,0.1);
+    padding: 15px;
 }
 
 .card img{

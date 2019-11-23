@@ -50,7 +50,11 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['api/default', 'api/category'],
+                    'controller' => [
+                        'api/default',
+                        'api/category',
+                        'api/product'
+                    ],
                 ]
             ],
         ],

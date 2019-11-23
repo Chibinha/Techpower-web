@@ -35,10 +35,47 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => '<span class="glyphicon glyphicon-home"></span> &ensp; Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+
+    ?>
+    <form class="navbar-form navbar-left" action="/action_page.php">
+        <div class="form-group has-feedback search">
+            <input type="text" class="form-control" placeholder="Procurar..." />
+            <i class="glyphicon glyphicon-search form-control-feedback"></i>
+        </div>
+    </form>   
+    <?php
+
+    $menuItems = [        
+        ['label' => '<span class="glyphicon glyphicon-home"></span> &ensp; Página Inicial', 'url' => ['/site/index']],
+        ['label' => '<span class="glyphicon glyphicon-align-justify"></span> &ensp; Categorias',
+        'items' => [
+            [
+                'label' => 'Categoria 1',
+                'url' => ['/site/userpage'],
+            ],  
+            [
+                'label' => 'Categoria 2',
+                'url' => ['/site/userpage'],
+            ],  
+            [
+                'label' => 'Categoria 3',
+                'url' => ['/site/userpage'],
+            ],  
+            [
+                'label' => 'Categoria 4',
+                'url' => ['/site/userpage'],
+            ],  
+            [
+                'label' => 'Categoria 5',
+                'url' => ['/site/userpage'],
+            ],  
+            [
+                'label' => 'Categoria 6',
+                'url' => ['/site/userpage'],
+            ], 
+        ],
+    ],
+        ['label' => '<span class="glyphicon glyphicon-shopping-cart"></span> &ensp; Carrinho', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];

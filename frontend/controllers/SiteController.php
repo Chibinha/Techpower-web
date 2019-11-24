@@ -257,4 +257,14 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+
+    /**
+     * Signs user up.
+     *
+     * @return mixed
+     */
+    public function actionCart()
+    {
+        return $this->render('cart');
+    }
 }

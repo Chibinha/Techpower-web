@@ -118,3 +118,52 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+/*Shopping Cart*/
+.table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 767px) {
+    .site-cart .table tbody td .form-control{
+		width:20%;
+		display: inline-block !important;
+    }
+    
+	.remove .btn{
+        margin:1.5em 0;
+	}
+	
+	.remove .btn-danger{
+        float:center;   
+        width: 100%;
+        margin-top: -2%;
+	}
+	
+	.site-cart .table thead { 
+        display: none; 
+    }
+
+	.site-cart .table tbody td { 
+        display: block; 
+        padding: .6rem; 
+        min-width:320px;
+    }
+
+	.site-cart .table tbody tr td:first-child { 
+        background: rgb(70, 69, 69); 
+        color: #fff; 
+    }
+
+	.site-cart .table tbody td:before {
+        content: attr(data-th); 
+        font-weight: bold;
+        display: inline-block; 
+        width: 8rem;
+	}
+
+    .site-cart .container{
+        padding: 0px;
+    }
+}

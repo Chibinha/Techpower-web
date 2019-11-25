@@ -118,3 +118,27 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+/**
+*   Product details
+*/
+
+.product-image {
+    height: 400px;
+    width: 400px;
+}
+
+.product-price {
+    display: inline;
+    padding: 0 30px;
+}
+
+.product-name {
+    margin: 50px 0;
+}
+
+.product-bottom {
+    padding: 30px 0;
+    float: right;
+}

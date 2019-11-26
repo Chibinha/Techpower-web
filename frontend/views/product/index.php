@@ -30,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'product_name',
             'unit_price',
             'is_discontinued:boolean',
-            'description',
-            //'id_category',
+            //'description',
+            'id_category',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

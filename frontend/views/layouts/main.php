@@ -9,6 +9,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use frontend\components\Helper;
 
 AppAsset::register($this);
 ?>
@@ -48,32 +49,7 @@ AppAsset::register($this);
     $menuItems = [        
         ['label' => '<span class="glyphicon glyphicon-home"></span> &ensp; Página Inicial', 'url' => ['/site/index']],
         ['label' => '<span class="glyphicon glyphicon-align-justify"></span> &ensp; Categorias',
-        'items' => [
-            [
-                'label' => 'Categoria 1',
-                'url' => ['/site/userpage'],
-            ],  
-            [
-                'label' => 'Categoria 2',
-                'url' => ['/site/userpage'],
-            ],  
-            [
-                'label' => 'Categoria 3',
-                'url' => ['/site/userpage'],
-            ],  
-            [
-                'label' => 'Categoria 4',
-                'url' => ['/site/userpage'],
-            ],  
-            [
-                'label' => 'Categoria 5',
-                'url' => ['/site/userpage'],
-            ],  
-            [
-                'label' => 'Categoria 6',
-                'url' => ['/site/userpage'],
-            ], 
-        ],
+        'items' => Helper::getCategories(),
     ],
         ['label' => '<span class="glyphicon glyphicon-shopping-cart"></span> &ensp; Carrinho', 'url' => ['/site/contact']],
     ];

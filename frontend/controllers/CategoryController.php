@@ -8,6 +8,7 @@ use app\models\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\Product;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -51,9 +52,12 @@ class CategoryController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {
+    {   
+        $cats_products = Product::find()->where(['id_category' => $id])->all();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'cats_products' => $cats_products,
         ]);
     }
 

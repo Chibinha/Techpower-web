@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
@@ -29,19 +30,29 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'sale_date',
-            'total_amount',
-            'sale_finished:boolean',
-            [
-                'label' => 'Produtos Vendidos',
-                'value' => Html::encode($model->SaleItem->username),
-            ],
             [
                 'label' => 'Cliente',
                 'value' => Html::encode($model->user->username),
             ],
+            'sale_date',
+            'total_amount',
+            'sale_finished:boolean',
         ],
     ]) ?>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'label' => 'Item',
+                'value' => Html::encode(Product->find($)),
+            ],
+            'unit_price',
+            'quantity',
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+
 
 </div>

@@ -4,14 +4,22 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Carrinho';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Checkout';
 ?>
 
 <div class="site-cart">
     <h1><?= Html::encode($this->title) ?></h1>
-
     <div class="container">
+        <hr>
+   <h3>Morada de envio</h3>
+   <p>John Doe</p>
+   <p>Rua da escola do politécnico de Leiria</p>
+   <p>2210-221, Leiria</p>
+   <p>Portugal</p>
+
+   <hr>
+
+   <h3>Carrinho</h3>
 	<table class="table">
         <thead>
             <tr>
@@ -28,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="row">
                         <div class="col-sm-2 hidden-xs"><img src="https://d3ift91kaax4b9.cloudfront.net/media/catalog/product/cache/33ba37c1fda6d70c703e88ff79ea1021/p/r/product-p015531-39574_1.jpg" alt="..." class="img-responsive"/></div>
                         <div class="col-sm-9">
-                            <h4>Processador Intel Core i9-9900KS Octa-Core 4.0GHz c/ Turbo 5.0GHz 16MB Skt1151</h4>
+                            <h5>Processador Intel Core i9-9900KS Octa-Core 4.0GHz c/ Turbo 5.0GHz 16MB Skt1151</h5>
                         </div>
                     </div>
                 </td>
@@ -49,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <tr>
                 <td colspan="3" class="hidden-xs"></td>
                 <td class="hidden-xs text-center"><strong>Total 596,90€</strong></td>
-                <td><a href="#" class="btn btn-success btn-block">Checkout <i class="glyphicon glyphicon-chevron-right"></i></a></td>
+                <td><a href="#" class="btn btn-success btn-block">Finalizar compra</a></td>
             </tr>
         </tfoot>
     </table>

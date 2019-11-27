@@ -3,39 +3,38 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-
 /* @var $this yii\web\View */
-/* @var $model common\models\User */
+/* @var $model common\models\Profile */
 
 ?>
-<div class="user-update">
+<div class="profile-update">
+    <?php if (Yii::$app->session->hasFlash('message')):?>
+        <div class="alert alert-success" role="alert">
+            <?php echo yii::$app->session->getFlash('message');?>
+        </div>
+    <?php endif;?>
 
     <h1>Alterar Dados</h1>
     <div class="user-update-address">
         <?php
         $form = ActiveForm::begin([
-            'id' => 'user-update-form',
-            'options' => ['class' => 'form-horizontal'],
+            'id' => 'profile-update-form',
+            'options' => ['class' => 'form-vertical'],
         ]) ?>
             <h3>Morada</h3>
-            <?= $form->field($profile, 'address') ?>
-            <?= $form->field($profile, 'city') ?>
-            <?= $form->field($profile, 'postal_code') ?>
-            <?= $form->field($profile, 'country') ?>    
-            <?= $form->field($profile, 'nif') ?>
-            <?= $form->field($profile, 'phone') ?>      
-            <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>
+            <?= $form->field($profile, 'address')->label('Rua') ?>
+            <?= $form->field($profile, 'city')->label('Cidade') ?>
+            <?= $form->field($profile, 'postal_code')->label('Código Postal') ?>
+            <?= $form->field($profile, 'country')->label('Cidade') ?>    
+            <?= $form->field($profile, 'nif')->label('NIF') ?>
+            <?= $form->field($profile, 'phone')->label('Telefone') ?>      
+            <?= $form->field($user, 'email')->label('E-mail') ?>
+
+            <!-- <?= Html::beginTag('div', ['class' => 'form-group field-password']) ?>
+            <?= Html::label('Password', 'password', ['class' => 'control-label']) ?>
+            <?= Html::passwordInput('password', '', ['id' => 'password', 'class' => 'form-control']) ?>
+            <?= Html::endTag('div') ?> -->
+            <?= Html::submitButton('Alterar', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end() ?>
-    </div>
-    
-    <div class="user-update-password">
-        <?php
-        $form = ActiveForm::begin([
-            'id' => 'user-update-form',
-            'options' => ['class' => 'form-horizontal'],
-        ]) ?>
-            <h3>Alterar Password</h3>
-            <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>
-        <?php ActiveForm::end() ?>  
     </div>
 </div>

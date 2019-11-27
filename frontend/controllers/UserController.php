@@ -95,23 +95,19 @@ class UserController extends Controller
         if (!$profile) {
             throw new NotFoundHttpException("The user has no profile.");
         }
-        
-        $user->scenario = 'update';
-        $profile->scenario = 'update';
-        
+
         if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())) {
-            $isValid = $user->validate();
-            $isValid = $profile->validate() && $isValid;
-            if ($isValid) {
-                $user->save(false);
+            if($user->validate() && $profile->validate()) {
                 $profile->save(false);
-                return $this->redirect(['user/view', 'id' => $id]);
+                $user->save(false);
+                Yii::$app->getSession()->setFlash('message', 'Dados guardados com sucesso');
+                return $this->redirect(['update', 'id' => $user->id]);
             }
         }
-        
+
         return $this->render('update', [
-            'user' => $user,
             'profile' => $profile,
+            'user' => $user,
         ]);
     }
 

@@ -37,11 +37,13 @@ class SaleController extends Controller
     public function actionIndex()
     {
         $searchModel = new SaleSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProviderSale = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProviderSaleItem = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProviderSale' => $dataProviderSale,
+            'dataProviderSaleItem' => $dataProviderSaleItem,
         ]);
     }
 
@@ -54,8 +56,8 @@ class SaleController extends Controller
     public function actionView($id)
     {
         $searchModel = new SaleItemSeach();
-        //        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-                $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id] ] );
+        //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id] ] );
         
         return $this->render('view', [
             'model' => $this->findModel($id),

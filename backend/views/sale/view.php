@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
+use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
@@ -27,32 +28,33 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
+    
+    <?= GridView::widget([
+        'dataProviderSale' => $dataProviderSale,
+        'columns' => [
             [
-                'label' => 'Cliente',
-                'value' => Html::encode($model->user->username),
+                'attribute' => 'name',
+                'format' => 'text',
+                'label' => 'Name',
+                'value' => function ($user) {
+                    return User::findById($user->id)['username'];
+                },
             ],
             'sale_date',
             'total_amount',
             'sale_finished:boolean',
         ],
-    ]) ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'label' => 'Item',
-                'value' => Html::encode(Product->find($)),
-            ],
-            'unit_price',
-            'quantity',
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
     ]); ?>
 
-
+    <?= GridView::widget([
+        'dataProviderSaleItem' => $dataProviderSaleItem,
+        'columns' => [
+           /*  [
+                'label' => 'Item',
+                'value' => Html::encode(Product->find($)),
+            ], */
+            'unit_price',
+            'quantity',
+        ],
+    ]); ?>
 </div>

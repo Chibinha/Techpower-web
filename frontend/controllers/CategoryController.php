@@ -53,11 +53,9 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {   
-        $cats_products = Product::find()->where(['id_category' => $id])->all();
-
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'cats_products' => $cats_products,
+            'cats_products' => Category::getProductsByCategory($id),
         ]);
     }
 

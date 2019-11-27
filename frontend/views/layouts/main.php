@@ -51,7 +51,7 @@ AppAsset::register($this);
         ['label' => '<span class="glyphicon glyphicon-align-justify"></span> &ensp; Categorias',
         'items' => Helper::getCategories(),
     ],
-        ['label' => '<span class="glyphicon glyphicon-shopping-cart"></span> &ensp; Carrinho', 'url' => ['/site/contact']],
+        ['label' => '<span class="glyphicon glyphicon-shopping-cart"></span> &ensp; Carrinho', 'url' => ['/site/cart']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];

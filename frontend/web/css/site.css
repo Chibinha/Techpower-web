@@ -3,6 +3,10 @@ body {
     height: 100%;
 }
 
+.breadcrumb {
+    margin-bottom: 0;
+}
+
 *{
     font-family: inherit;
     text-decoration: none;

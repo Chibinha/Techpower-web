@@ -8,6 +8,7 @@ use common\models\UserSeach;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\Profile;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -84,14 +85,33 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $user = User::findOne($id);
+        if (!$user) {
+            throw new NotFoundHttpException("The user was not found.");
         }
-
+        
+        $profile = Profile::findOne($user->id);
+        
+        if (!$profile) {
+            throw new NotFoundHttpException("The user has no profile.");
+        }
+        
+        $user->scenario = 'update';
+        $profile->scenario = 'update';
+        
+        if ($user->load(Yii::$app->request->post()) && $profile->load(Yii::$app->request->post())) {
+            $isValid = $user->validate();
+            $isValid = $profile->validate() && $isValid;
+            if ($isValid) {
+                $user->save(false);
+                $profile->save(false);
+                return $this->redirect(['user/view', 'id' => $id]);
+            }
+        }
+        
         return $this->render('update', [
-            'model' => $model,
+            'user' => $user,
+            'profile' => $profile,
         ]);
     }
 

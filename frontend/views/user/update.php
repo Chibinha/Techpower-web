@@ -1,21 +1,41 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
-$this->title = 'Update User: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="user-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+    <h1>Alterar Dados</h1>
+    <div class="user-update-address">
+        <?php
+        $form = ActiveForm::begin([
+            'id' => 'user-update-form',
+            'options' => ['class' => 'form-horizontal'],
+        ]) ?>
+            <h3>Morada</h3>
+            <?= $form->field($profile, 'address') ?>
+            <?= $form->field($profile, 'city') ?>
+            <?= $form->field($profile, 'postal_code') ?>
+            <?= $form->field($profile, 'country') ?>    
+            <?= $form->field($profile, 'nif') ?>
+            <?= $form->field($profile, 'phone') ?>      
+            <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>
+        <?php ActiveForm::end() ?>
+    </div>
+    
+    <div class="user-update-password">
+        <?php
+        $form = ActiveForm::begin([
+            'id' => 'user-update-form',
+            'options' => ['class' => 'form-horizontal'],
+        ]) ?>
+            <h3>Alterar Password</h3>
+            <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>
+        <?php ActiveForm::end() ?>  
+    </div>
 </div>

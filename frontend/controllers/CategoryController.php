@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\Product;
+use yii\data\Pagination;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -53,9 +54,18 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {   
+        /* Pagination */
+        $query = Category::getProductsByCategory($id);
+        $count = $query->count();
+        $pages = new Pagination(['totalCount' => $count]);
+        $products = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+        
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'cats_products' => Category::getProductsByCategory($id),
+            'products' => $products,
+            'pages' => $pages,
         ]);
     }
 

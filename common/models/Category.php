@@ -75,6 +75,6 @@ class Category extends \yii\db\ActiveRecord
     }
 
     public static function getProductsByCategory($id){
-        return Product::find()->where(['id_category' => $id])->all();
+        return Product::find()->where(['id_category' => $id]);
     }
 }

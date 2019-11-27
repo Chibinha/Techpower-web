@@ -61,20 +61,12 @@ AppAsset::register($this);
             'label' => '<span class="glyphicon glyphicon-user"></span> &ensp; A minha conta',
             'items' => [
                 [
-                    'label' => '<span class="glyphicon glyphicon-list"></span> &ensp; Painel da Conta',
-                    'url' => ['/site/userpage'],
-                ],
-                [
                     'label' => '<span class="glyphicon glyphicon-info-sign"></span> &ensp; Informações da Conta',
-                    'url' => ['/site/index'],
-                ],
-                [
-                    'label' => '<span class="glyphicon glyphicon-home"></span> &ensp; Endereços',
-                    'url' => ['/site/index'],
+                    'url' => ['/user/view'],
                 ],
                 [
                     'label' => '<span class="glyphicon glyphicon-gift"></span> &ensp; Encomendas',
-                    'url' => ['/site/index'],
+                    'url' => ['/sale/view'],
                 ],
                 [
                     'label' => '<span class="glyphicon glyphicon-remove"></span> &ensp; Logout',

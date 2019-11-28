@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'sale_date',
             'total_amount',
             'sale_finished:boolean',
-            'id_user',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

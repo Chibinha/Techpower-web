@@ -35,12 +35,10 @@ class SaleController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SaleSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $orders = Sale::find()->orderBy(['id' => SORT_DESC])->asArray()->where(['id_user' => Yii::$app->user->id])->all();
+        
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'orders' =>$orders,
         ]);
     }
 

@@ -66,7 +66,7 @@ AppAsset::register($this);
                 ],
                 [
                     'label' => '<span class="glyphicon glyphicon-gift"></span> &ensp; Encomendas',
-                    'url' => ['/sale/view'],
+                    'url' => ['/sale/index'],
                 ],
                 [
                     'label' => '<span class="glyphicon glyphicon-remove"></span> &ensp; Logout',

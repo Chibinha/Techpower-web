@@ -241,11 +241,11 @@ a.desc:after {
 		display: inline-block !important;
     }
     
-	.remove .btn{
+	.view#remove .btn{
         margin:1.5em 0;
 	}
 	
-	.remove .btn-danger{
+	.view#remove .btn-warning#btn-danger{
         float:center;   
         width: 100%;
         margin-top: -2%;

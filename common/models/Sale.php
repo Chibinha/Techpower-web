@@ -70,4 +70,14 @@ class Sale extends \yii\db\ActiveRecord
     {
         return $this->hasMany(SaleItem::className(), ['id_sale' => 'id']);
     }
+
+    
+    public static function getSaleState($order){
+        if ($order['sale_finished'] == 1){
+            echo"Encomenda expedida";
+        }
+        else{
+            echo "A aguardar pagamento";
+        }
+    }
 }

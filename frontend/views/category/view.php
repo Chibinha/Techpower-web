@@ -9,7 +9,7 @@ use yii\widgets\LinkPager;
 /* @var $this yii\web\View */
 /* @var $model common\models\Category */
 
-$this->title = $model->description;
+$this->title = $model->description . '| TechPower';
 ?>
 <div class="category-view">
     <div class="body-content">

@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Profile */
+$this->title = 'Alterar Dados | TechPower';
 
 ?>
 <div class="profile-update">

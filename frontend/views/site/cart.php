@@ -4,11 +4,11 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Checkout';
+$this->title = 'Carrinho | TechPower';
 ?>
 
 <div class="site-cart">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Checkout</h1>
     <div class="container">
         <hr>
    <h3>Morada de envio</h3>

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
 
-$this->title = $model->product_name;
+$this->title = $model->product_name . ' | TechPower';
 ?>
 <div class="product-view">
 

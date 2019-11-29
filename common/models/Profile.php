@@ -63,6 +63,14 @@ class Profile extends \yii\db\ActiveRecord
     }
 
     /**
+       * @inheritdoc$primaryKey
+       */
+      public static function primaryKey()
+      {
+          return ["id_user"];
+      }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getUser()

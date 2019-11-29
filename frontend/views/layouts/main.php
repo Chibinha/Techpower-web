@@ -62,11 +62,11 @@ AppAsset::register($this);
             'items' => [
                 [
                     'label' => '<span class="glyphicon glyphicon-info-sign"></span> &ensp; Informações da Conta',
-                    'url' => ['/user/view'],
+                    'url' => ['/user/update', 'id' => Helper::getLoggedUser()],
                 ],
                 [
                     'label' => '<span class="glyphicon glyphicon-gift"></span> &ensp; Encomendas',
-                    'url' => ['/sale/view'],
+                    'url' => ['/sale/index', 'id' => Helper::getLoggedUser()],
                 ],
                 [
                     'label' => '<span class="glyphicon glyphicon-remove"></span> &ensp; Logout',

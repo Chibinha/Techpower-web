@@ -3,6 +3,7 @@
 namespace frontend\components;
 
 use common\models\Category;
+use Yii;
 
 class Helper
 {
@@ -19,5 +20,8 @@ class Helper
         return $menu_item;
     }
 
+    public static function getLoggedUser(){
+        return Yii::$app->user->identity->id;
+    }
 }
     

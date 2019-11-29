@@ -7,9 +7,9 @@ use yii\data\ActiveDataProvider;
 use common\models\SaleItem;
 
 /**
- * SaleItemSeach represents the model behind the search form of `common\models\SaleItem`.
+ * SaleItemSearch represents the model behind the search form of `common\models\SaleItem`.
  */
-class SaleItemSeach extends SaleItem
+class SaleItemSearch extends SaleItem
 {
     /**
      * {@inheritdoc}

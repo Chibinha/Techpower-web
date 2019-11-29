@@ -17,7 +17,7 @@ class SaleSearch extends Sale
     public function rules()
     {
         return [
-            [['id', 'id_user'], 'integer'],
+            [['id'], 'integer'],
             [['sale_date'], 'safe'],
             [['total_amount'], 'number'],
             [['sale_finished'], 'boolean'],
@@ -64,7 +64,6 @@ class SaleSearch extends Sale
             'sale_date' => $this->sale_date,
             'total_amount' => $this->total_amount,
             'sale_finished' => $this->sale_finished,
-            'id_user' => $this->id_user,
         ]);
 
         return $dataProvider;

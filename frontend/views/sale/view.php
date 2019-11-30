@@ -6,10 +6,10 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
 
-$this->title = $model->id;
+$this->title = 'Encomenda #' . $model->id . ' | TechPower';
 ?>
 <div class="sale-view">
-    <h1>Encomenda # <?= Html::encode($this->title) ?></h1>
+    <h1>Encomenda #<?= $model->id ?></h1>
     <br>
     <h4 style="font-weight: bold;">Morada de entrega</h4>
     <p>John Doe</p>

@@ -161,7 +161,7 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Registo efetuado com sucesso');
+            Yii::$app->session->setFlash('success', 'Registo efetuado com sucesso.');
             return $this->goHome();
         }
 
@@ -273,5 +273,5 @@ class SiteController extends Controller
     public function actionCart()
     {
         return $this->render('cart');
-
+    }
 }

@@ -17,6 +17,7 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\Product;
 use common\models\ProductSearch;
+use common\models\Profile;
 
 /**
  * Site controller
@@ -272,6 +273,11 @@ class SiteController extends Controller
      */
     public function actionCart()
     {
-        return $this->render('cart');
+        $user_id = Yii::$app->user->getId();
+        $profile = Profile::findOne($user_id);
+
+        return $this->render('cart', [
+            'profile' => $profile,
+        ]);
     }
 }

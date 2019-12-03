@@ -11,11 +11,11 @@ $this->title = 'Carrinho | TechPower';
     <h1>Checkout</h1>
     <div class="container">
         <hr>
-   <h3>Morada de envio</h3>
-   <p>John Doe</p>
-   <p>Rua da escola do politécnico de Leiria</p>
-   <p>2210-221, Leiria</p>
-   <p>Portugal</p>
+    <p><?= $profile['firstName'], " " , $profile['lastName']?></p>
+    <p><?= $profile['address']?></p>
+    <p><?= $profile['city']?></p>
+    <p><?= $profile['postal_code']?></p>
+    <p><?= $profile['country']?></p>
 
    <hr>
 

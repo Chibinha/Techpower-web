@@ -31,24 +31,26 @@ $this->title = 'Carrinho | TechPower';
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td data-th="Item">
-                    <div class="row">
-                        <div class="col-sm-2 hidden-xs"><img src="https://d3ift91kaax4b9.cloudfront.net/media/catalog/product/cache/33ba37c1fda6d70c703e88ff79ea1021/p/r/product-p015531-39574_1.jpg" alt="..." class="img-responsive"/></div>
-                        <div class="col-sm-9">
-                            <h5>Processador Intel Core i9-9900KS Octa-Core 4.0GHz c/ Turbo 5.0GHz 16MB Skt1151</h5>
+            <?php foreach ($cart as $product) { ?>
+                <tr>
+                    <td data-th="Item">
+                        <div class="row">
+                            <div class="col-sm-2 hidden-xs"><img src="https://d3ift91kaax4b9.cloudfront.net/media/catalog/product/cache/33ba37c1fda6d70c703e88ff79ea1021/p/r/product-p015531-39574_1.jpg" alt="..." class="img-responsive"/></div>
+                            <div class="col-sm-9">
+                                <h5><?= $product->product_name ?></h5>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td data-th="Preço">596,90€</td>
-                <td data-th="Quantidade">
-                    <input type="number" class="form-control text-center" value="1">
-                </td>
-                <td data-th="Subtotal:" class="text-center">596,90€</td>
-                <td class="remove">
-                    <button class="btn btn-danger btn-sm">Remover Item <i class="glyphicon glyphicon-trash"></i></button>								
-                </td>               
-            </tr>
+                    </td>
+                    <td data-th="Preço"><?= $product->unit_price ?>€</td>
+                    <td data-th="Quantidade">
+                        <input type="number" class="form-control text-center" value="1">
+                    </td>
+                    <td data-th="Subtotal:" class="text-center"><?= $product->unit_price ?>€</td>
+                    <td class="remove">
+                        <button class="btn btn-danger btn-sm">Remover Item <i class="glyphicon glyphicon-trash"></i></button>								
+                    </td>               
+                </tr>
+            <?php } ?>
         </tbody>
         <tfoot>
             <tr class="visible-xs">

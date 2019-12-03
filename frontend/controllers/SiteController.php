@@ -76,7 +76,7 @@ class SiteController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {        
+    {
         $new_products = Product::find()->limit(12)->orderBy(['id' => SORT_DESC])->asArray()->all();
 
         return $this->render('index', [
@@ -273,5 +273,19 @@ class SiteController extends Controller
     public function actionCart()
     {
         return $this->render('cart');
+    }
+
+    /**
+     * Search products.
+     *
+     * @return mixed
+     */
+    public function actionSearch()
+    {
+        $query = Yii::$app->request->get('query');
+
+        return $this->render('index', [
+            'new_products' => Product::find()->where(['like', 'product_name', $query])->limit(12)->orderBy(['id' => SORT_DESC])->asArray()->all(),
+        ]);
     }
 }

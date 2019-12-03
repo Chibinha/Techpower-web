@@ -41,12 +41,12 @@ AppAsset::register($this);
 
         $menuItems = [
             ['label' => '<li>'
-                . Html::beginForm(['/site/search'], 'post', ['class' => 'navbar-form'])
+                . Html::beginForm(['/site/search'], 'get', ['class' => 'navbar-form'])
                 . '<div class="form-group has-feedback search">'
                 . Html::textInput('query', 'Procurar...', ['class' => 'form-control'])
                 . Html::submitButton(
                     '',
-                    ['class' => 'glyphicon glyphicon-search form-control-feedback']
+                    ['class' => 'submit glyphicon glyphicon-search form-control-feedback']
                 )
                 . '</div>'
                 . Html::endForm()

@@ -23,8 +23,22 @@ $this->title = 'Registar | TechPower';
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
+                <hr>
+
+                <?= $form->field($model, 'phone') ?>
+
+                <?= $form->field($model, 'address') ?>
+
+                <?= $form->field($model, 'postal_code') ?>
+
+                <?= $form->field($model, 'city') ?>
+
+                <?= $form->field($model, 'country') ?>
+
+                <?= $form->field($model, 'nif') ?> 
+
                 <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton('Registar', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

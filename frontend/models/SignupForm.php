@@ -4,6 +4,7 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use common\models\User;
+use common\models\Profile;
 
 /**
  * Signup form
@@ -13,7 +14,12 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
-
+    public $phone;
+    public $address;
+    public $nif;
+    public $postal_code;
+    public $city;
+    public $country;
 
     /**
      * {@inheritdoc}
@@ -34,6 +40,32 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['phone', 'trim'],
+            ['phone', 'required'],
+            ['phone', 'string', 'min' => 9, 'max' => 20],
+            ['phone', 'unique', 'targetClass' => '\common\models\Profile', 'message' => 'Já existe uma conta registada com este número de telefone'],
+
+            ['address', 'trim'],
+            ['address', 'required'],
+            ['address', 'string', 'min' => 2, 'max' => 255],
+
+            ['nif', 'trim'],
+            ['nif', 'required'],
+            ['nif', 'string', 'min' => 9, 'max' => 9],
+            ['nif', 'unique', 'targetClass' => '\common\models\Profile', 'message' => 'Já existe uma conta registada com este NIF'],
+
+            ['postal_code', 'trim'],
+            ['postal_code', 'required'],
+            ['postal_code', 'string', 'min' => 4, 'max' => 8],
+
+            ['city', 'trim'],
+            ['city', 'required'],
+            ['city', 'string', 'min' => 2, 'max' => 50],
+
+            ['country', 'trim'],
+            ['country', 'required'],
+            ['country', 'string', 'min' => 2, 'max' => 100],
         ];
     }
 
@@ -54,8 +86,20 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-        return $user->save() && $this->sendEmail($user);
+        $user->save();
+        $getlast = Yii::$app->db->getLastInsertId();
 
+        $profile = new Profile();
+        $profile->phone = $this->phone;
+        $profile->address = $this->address;
+        $profile->nif = $this->nif;
+        $profile->postal_code = $this->postal_code;
+        $profile->city = $this->city;
+        $profile->country = $this->country;
+        $profile->id_user = $getlast;
+        $profile->save();
+
+        return $this->sendEmail($user);
     }
 
     /**

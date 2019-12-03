@@ -1,5 +1,4 @@
 <?php
-
 namespace common\models;
 
 use Yii;
@@ -9,27 +8,27 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * This is the model class for table "user".
+ * User model
  *
- * @property int $id
+ * @property integer $id
  * @property string $username
- * @property string $auth_key
  * @property string $password_hash
  * @property string $password_reset_token
- * @property string $email
- * @property int $status
- * @property int $created_at
- * @property int $updated_at
  * @property string $verification_token
- *
- * @property Profile[] $profiles
+ * @property string $email
+ * @property string $auth_key
+ * @property integer $status
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
-    
+
+
     /**
      * {@inheritdoc}
      */
@@ -41,22 +40,13 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function behaviors()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
-            [['auth_key'], 'string', 'max' => 32],
-            [['username'], 'unique'],
-            [['email'], 'unique'],
-            [['password_reset_token'], 'unique'],
+            TimestampBehavior::className(),
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -70,9 +60,20 @@ class User extends ActiveRecord implements IdentityInterface
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'verification_token' => 'Verification Token',
-        ];
+        ];  
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            ['status', 'default', 'value' => self::STATUS_INACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+        ];
+    }
+    
     /**
      * @return \yii\db\ActiveQuery
      */

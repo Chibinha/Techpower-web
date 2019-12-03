@@ -266,12 +266,12 @@ class SiteController extends Controller
     }
 
     /**
-     * Signs user up.
+     * Shopping cart.
      *
      * @return mixed
      */
     public function actionCart()
     {
         return $this->render('cart');
-    }
+
 }

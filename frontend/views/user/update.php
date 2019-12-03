@@ -33,7 +33,9 @@ $this->title = 'Alterar Dados | TechPower';
             <?= $form->field($profile, 'phone')->label('Telefone') ?>      
             <?= $form->field($user, 'email')->label('E-mail') ?>
 
-            <?= Html::submitButton('Alterar', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('Alterar dados', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end() ?>
+        <hr>
+        <?= Html::submitButton('Apagar conta', ['class' => 'btn btn-danger']) ?>
     </div>
 </div>

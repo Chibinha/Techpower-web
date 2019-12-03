@@ -17,7 +17,7 @@ $this->title = 'Encomenda #' . $model->id . ' | TechPower';
     <h1>Encomenda #<?= $model->id ?></h1>
     <br>
     <h4 style="font-weight: bold;">Morada de entrega</h4>
-    <p>TODO ---------> add column name to database table profile</p>
+    <p><?= $profile['firstName'], " " , $profile['lastName']?></p>
     <p><?= $profile['address']?></p>
     <p><?= $profile['city']?></p>
     <p><?= $profile['postal_code']?></p>

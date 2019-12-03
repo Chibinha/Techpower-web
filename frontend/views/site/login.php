@@ -16,14 +16,14 @@ $this->title = 'Login | TechPower';
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Nome de Utilizador') ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                <?= $form->field($model, 'rememberMe')->checkbox()->label('Lembrar-me') ?>
 
                 <div style="color:#999;margin:1em 0">
-                    <?= Html::a('Recuperar Password ', ['site/request-password-reset']) ?>.
+                    <?= Html::a('Esqueceu a sua password?', ['site/request-password-reset']) ?>
                     <br>
                     <?= Html::a('Reenviar verificação de email', ['site/resend-verification-email']) ?>
                 </div>

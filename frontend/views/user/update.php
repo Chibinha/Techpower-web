@@ -23,6 +23,8 @@ $this->title = 'Alterar Dados | TechPower';
             'options' => ['class' => 'form-vertical'],
         ]) ?>
             <h3>Morada</h3>
+            <?= $form->field($profile, 'firstName')->label('Nome') ?>
+            <?= $form->field($profile, 'lastName')->label('Apelido') ?>
             <?= $form->field($profile, 'address')->label('Rua') ?>
             <?= $form->field($profile, 'city')->label('Cidade') ?>
             <?= $form->field($profile, 'postal_code')->label('Código Postal') ?>
@@ -31,10 +33,6 @@ $this->title = 'Alterar Dados | TechPower';
             <?= $form->field($profile, 'phone')->label('Telefone') ?>      
             <?= $form->field($user, 'email')->label('E-mail') ?>
 
-            <!-- <?= Html::beginTag('div', ['class' => 'form-group field-password']) ?>
-            <?= Html::label('Password', 'password', ['class' => 'control-label']) ?>
-            <?= Html::passwordInput('password', '', ['id' => 'password', 'class' => 'form-control']) ?>
-            <?= Html::endTag('div') ?> -->
             <?= Html::submitButton('Alterar', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end() ?>
     </div>

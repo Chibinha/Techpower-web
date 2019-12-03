@@ -34,6 +34,8 @@ class Profile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['firstName'], 'string', 'max' => 50],
+            [['lastName'], 'string', 'max' => 50],
             [['nif', 'id_user'], 'integer'],
             [['id_user'], 'required'],
             [['phone'], 'string', 'max' => 20],
@@ -52,6 +54,8 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'firstName' => 'First Name',
+            'lastName' => 'Last Name',
             'phone' => 'Phone',
             'address' => 'Address',
             'nif' => 'Nif',

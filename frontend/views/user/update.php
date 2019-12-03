@@ -31,7 +31,6 @@ $this->title = 'Alterar Dados | TechPower';
             <?= $form->field($profile, 'country')->label('Cidade') ?>    
             <?= $form->field($profile, 'nif')->label('NIF') ?>
             <?= $form->field($profile, 'phone')->label('Telefone') ?>      
-            <?= $form->field($user, 'email')->label('E-mail') ?>
 
             <?= Html::submitButton('Alterar dados', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end() ?>

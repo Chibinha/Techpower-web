@@ -39,18 +39,16 @@ AppAsset::register($this);
             ],
         ]);
 
+        echo '<ul class="navbar-nav navbar-right col-"><li><form action="/site/search" method="get" class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input name="query" type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </form>';
+
         $menuItems = [
-            ['label' => '<li>'
-                . Html::beginForm(['/site/search'], 'get', ['class' => 'navbar-form'])
-                . '<div class="form-group has-feedback search">'
-                . Html::textInput('query', 'Procurar...', ['class' => 'form-control'])
-                . Html::submitButton(
-                    '',
-                    ['class' => 'submit glyphicon glyphicon-search form-control-feedback']
-                )
-                . '</div>'
-                . Html::endForm()
-                . '</li>'],
             ['label' => '<span class="glyphicon glyphicon-home"></span> &ensp; Página Inicial', 'url' => ['/site/index']],
             [
                 'label' => '<span class="glyphicon glyphicon-align-justify"></span> &ensp; Categorias',
@@ -82,10 +80,11 @@ AppAsset::register($this);
             ];
         }
         echo Nav::widget([
-            'options' => ['class' => 'navbar-nav navbar-right col-'],
+            'options' => ['class' => 'navbar-nav'],
             'encodeLabels' => false,
             'items' => $menuItems,
         ]);
+        echo '</li></ul>';
         NavBar::end();
         ?>
 

@@ -70,4 +70,22 @@ class Sale extends \yii\db\ActiveRecord
     {
         return $this->hasMany(SaleItem::className(), ['id_sale' => 'id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProducts()
+    {
+        return $this->hasMany(Product::className(), ['id' => 'id_product'])->via('SaleItem');
+    }
+
+    /* public function getTotal()
+    {
+        $total=0;
+        $Sale_Items = $this->hasMany(SaleItem::className(), ['id_sale' => 'id']);
+        foreach (sal)
+        (
+            $total = $this->unit_price * $this->quantity
+        )
+    } */
 }

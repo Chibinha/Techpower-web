@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sale-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Sale #<?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -28,33 +28,37 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    
-    <?= GridView::widget([
-        'dataProviderSale' => $dataProviderSale,
-        'columns' => [
-            [
-                'attribute' => 'name',
-                'format' => 'text',
-                'label' => 'Name',
-                'value' => function ($user) {
-                    return User::findById($user->id)['username'];
-                },
-            ],
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'user.username',
             'sale_date',
             'total_amount',
-            'sale_finished:boolean',
+            'sale_finished'
         ],
+    ]) ?>
+
+ 
+
+    
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            [
+            'attribute' => 'Produto',
+            'value' => 'product.product_name'
+            ],
+            [
+                'attribute' => 'Preço por Unidade',
+                'value' => 'unit_price'
+            ],
+            [
+                'attribute' => 'Quantidade',
+                'value' => 'quantity'
+            ],
+        ]
     ]); ?>
 
-    <?= GridView::widget([
-        'dataProviderSaleItem' => $dataProviderSaleItem,
-        'columns' => [
-           /*  [
-                'label' => 'Item',
-                'value' => Html::encode(Product->find($)),
-            ], */
-            'unit_price',
-            'quantity',
-        ],
-    ]); ?>
+   
 </div>

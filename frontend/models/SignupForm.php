@@ -29,14 +29,14 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este nome de utilizador já está registado.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este e-mail já está registado.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
@@ -44,7 +44,7 @@ class SignupForm extends Model
             ['phone', 'trim'],
             ['phone', 'required'],
             ['phone', 'string', 'min' => 9, 'max' => 20],
-            ['phone', 'unique', 'targetClass' => '\common\models\Profile', 'message' => 'Já existe uma conta registada com este número de telefone'],
+            ['phone', 'unique', 'targetClass' => '\common\models\Profile', 'message' => 'Já existe uma conta registada com este número de telefone.'],
 
             ['address', 'trim'],
             ['address', 'required'],
@@ -53,7 +53,7 @@ class SignupForm extends Model
             ['nif', 'trim'],
             ['nif', 'required'],
             ['nif', 'string', 'min' => 9, 'max' => 9],
-            ['nif', 'unique', 'targetClass' => '\common\models\Profile', 'message' => 'Já existe uma conta registada com este NIF'],
+            ['nif', 'unique', 'targetClass' => '\common\models\Profile', 'message' => 'Já existe uma conta registada com este NIF.'],
 
             ['postal_code', 'trim'],
             ['postal_code', 'required'],

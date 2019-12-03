@@ -17,25 +17,25 @@ $this->title = 'Registar | TechPower';
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Nome de Utilizador') ?>
 
-                <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'email')->label('E-mail') ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <hr>
 
-                <?= $form->field($model, 'phone') ?>
+                <?= $form->field($model, 'phone')->label('Telefone') ?>
 
-                <?= $form->field($model, 'address') ?>
+                <?= $form->field($model, 'address')->label('Morada') ?>
 
-                <?= $form->field($model, 'postal_code') ?>
+                <?= $form->field($model, 'postal_code')->label('Código de Postal') ?>
 
-                <?= $form->field($model, 'city') ?>
+                <?= $form->field($model, 'city')->label('Cidade') ?>
 
-                <?= $form->field($model, 'country') ?>
+                <?= $form->field($model, 'country')->label('País') ?>
 
-                <?= $form->field($model, 'nif') ?> 
+                <?= $form->field($model, 'nif')->label('NIF') ?> 
 
                 <div class="form-group">
                     <?= Html::submitButton('Registar', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>

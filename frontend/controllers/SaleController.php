@@ -8,6 +8,9 @@ use common\models\SaleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\SaleItem;
+use common\models\User;
+use common\models\Profile;
 
 /**
  * SaleController implements the CRUD actions for Sale model.
@@ -50,8 +53,21 @@ class SaleController extends Controller
      */
     public function actionView($id)
     {
+        // Procura as linhas de venda com o mesmo id do que a encomenda
+        $sale_item_model = SaleItem::find()->asArray()->where(['id_sale' => $id])->all();
+
+        // Procura os dados do Profile através de relacionamentos de tabelas
+        $sale = Sale::findOne($id);
+        $user_id=$sale['id_user'];
+        $get_profile = Profile::findOne($user_id);
+
+        // Procura o nome do produto que está na linha de venda
+        
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'sale_item_model' => $sale_item_model,
+            'profile' => $get_profile,
         ]);
     }
 

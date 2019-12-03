@@ -236,6 +236,7 @@ a.desc:after {
 }
 
 @media screen and (max-width: 767px) {
+    /* View do Carrinho */
     .site-cart .table tbody td .form-control{
 		width:20%;
 		display: inline-block !important;
@@ -274,6 +275,33 @@ a.desc:after {
 	}
 
     .site-cart .container{
+        padding: 0px;
+    }
+
+    /* View da Sale */
+    .sale-view .table thead { 
+        display: none; 
+    }
+
+	.sale-view .table tbody td { 
+        display: block; 
+        padding: .6rem; 
+        min-width:320px;
+    }
+
+	.sale-view .table tbody tr td:first-child { 
+        background: rgb(70, 69, 69); 
+        color: #fff; 
+    }
+
+	.sale-view .table tbody td:before {
+        content: attr(data-th); 
+        font-weight: bold;
+        display: inline-block; 
+        width: 8rem;
+	}
+
+    .sale-view .container{
         padding: 0px;
     }
 }

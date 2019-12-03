@@ -9,13 +9,13 @@ use yii\widgets\LinkPager;
 /* @var $this yii\web\View */
 /* @var $model common\models\Category */
 
-$this->title = $model->description . '| TechPower';
+$this->title = $model->description . ' | TechPower';
 ?>
 <div class="category-view">
     <div class="body-content">
         <div class="row">
             <div class="panel panel-default">
-                <p class="title"><span class="special">| </span><?= Html::encode($this->title) ?></p>
+                <p class="title"><span class="special">| </span><?= Html::encode($model->description) ?></p>
                 <div class="panel-body">
                     <?php foreach($products as $product){ ?>
                     <div class="card col-sm-6 col-md-3">

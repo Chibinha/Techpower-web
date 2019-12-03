@@ -19,6 +19,8 @@ CREATE TABLE `user`(
 
 -- ********* Tabela Perfis ********* --
 CREATE TABLE `profile`(
+ `firstName`   varchar(50) NOT NULL,
+ `lastName`   varchar(50) NOT NULL,
  `phone`       varchar(20) NULL ,
  `address`     varchar(255) NULL ,
  `nif`         int(9) NULL ,

@@ -17,6 +17,10 @@ $this->title = 'Registar | TechPower';
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
+                <?= $form->field($model, 'firstName')->label('Nome') ?>
+
+                <?= $form->field($model, 'lastName')->label('Apelido') ?>
+
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Nome de Utilizador') ?>
 
                 <?= $form->field($model, 'email')->label('E-mail') ?>

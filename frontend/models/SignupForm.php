@@ -11,6 +11,8 @@ use common\models\Profile;
  */
 class SignupForm extends Model
 {
+    public $firstName;
+    public $lastName;
     public $username;
     public $email;
     public $password;
@@ -40,6 +42,14 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+            ['firstName', 'trim'],
+            ['firstName', 'required'],
+            ['firstName', 'string', 'min' => 2, 'max' => 50],
+
+            ['lastName', 'trim'],
+            ['lastName', 'required'],
+            ['lastName', 'string', 'min' => 2, 'max' => 50],
 
             ['phone', 'trim'],
             ['phone', 'required'],
@@ -90,6 +100,8 @@ class SignupForm extends Model
         $getlast = Yii::$app->db->getLastInsertId();
 
         $profile = new Profile();
+        $profile->firstName = $this->firstName;
+        $profile->lastName = $this->lastName;
         $profile->phone = $this->phone;
         $profile->address = $this->address;
         $profile->nif = $this->nif;

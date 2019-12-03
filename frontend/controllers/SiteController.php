@@ -80,6 +80,7 @@ class SiteController extends Controller
         $new_products = Product::find()->limit(12)->orderBy(['id' => SORT_DESC])->asArray()->all();
 
         return $this->render('index', [
+            'pageName' => 'Novidades',
             'new_products' => $new_products,
         ]);
     }
@@ -285,6 +286,7 @@ class SiteController extends Controller
         $query = Yii::$app->request->get('query');
 
         return $this->render('index', [
+            'pageName' => 'Resultados da procura: ' . $query,
             'new_products' => Product::find()->where(['like', 'product_name', $query])->limit(12)->orderBy(['id' => SORT_DESC])->asArray()->all(),
         ]);
     }

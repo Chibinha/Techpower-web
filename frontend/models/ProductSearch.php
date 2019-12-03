@@ -11,6 +11,8 @@ use common\models\Product;
  */
 class ProductSearch extends Product
 {
+    public $productSearch;
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +20,7 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'id_category'], 'integer'],
-            [['product_name', 'description'], 'safe'],
+            [['product_name', 'description', 'productSearch'], 'safe'],
             [['unit_price'], 'number'],
             [['is_discontinued'], 'boolean'],
         ];
@@ -58,16 +60,7 @@ class ProductSearch extends Product
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'unit_price' => $this->unit_price,
-            'is_discontinued' => $this->is_discontinued,
-            'id_category' => $this->id_category,
-        ]);
-
-        $query->andFilterWhere(['like', 'product_name', $this->product_name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'product_name', $this->productSearch]);
 
         return $dataProvider;
     }

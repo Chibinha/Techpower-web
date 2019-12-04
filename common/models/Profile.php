@@ -36,7 +36,8 @@ class Profile extends \yii\db\ActiveRecord
         return [
             [['firstName'], 'string', 'max' => 50],
             [['lastName'], 'string', 'max' => 50],
-            [['nif', 'id_user'], 'integer'],
+            [['id_user', 'nif'], 'integer'],
+            [['nif'], 'unique'],
             [['id_user'], 'required'],
             [['phone'], 'string', 'max' => 20],
             [['address'], 'string', 'max' => 255],

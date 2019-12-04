@@ -125,6 +125,15 @@ class UserController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionRemove($id)
+    {
+        $model = $this->findModel($id);
+        $model->status = '0';
+        $model->save();
+        return $this->redirect(['site/index']);
+    }
+    
+
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

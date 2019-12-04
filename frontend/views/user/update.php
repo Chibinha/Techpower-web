@@ -19,7 +19,7 @@ $this->title = 'Alterar Dados | TechPower';
     <div class="user-update-address">
         <?php
         $form = ActiveForm::begin([
-            'id' => 'profile-update-form',
+            'id' => 'user-update-form',
             'options' => ['class' => 'form-vertical'],
         ]) ?>
             <h3>Morada</h3>
@@ -31,10 +31,11 @@ $this->title = 'Alterar Dados | TechPower';
             <?= $form->field($profile, 'country')->label('Cidade') ?>    
             <?= $form->field($profile, 'nif')->label('NIF') ?>
             <?= $form->field($profile, 'phone')->label('Telefone') ?>      
+            <?= $form->field($user, 'email')->label('E-mail') ?>      
 
             <?= Html::submitButton('Alterar dados', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end() ?>
         <hr>
-        <?= Html::submitButton('Apagar conta', ['class' => 'btn btn-danger']) ?>
+        <?= Html::a('Apagar Conta', ['remove', 'id' => $user->id], ['class' => 'btn btn-danger']) ?>
     </div>
 </div>

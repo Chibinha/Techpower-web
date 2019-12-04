@@ -52,18 +52,25 @@ class SignupForm extends Model
             ['lastName', 'string', 'min' => 2, 'max' => 50],
 
             ['phone', 'trim'],
+            ['phone', 'integer', 'message' => 'Número de telefone incorreto.'],
             ['phone', 'required'],
-            ['phone', 'string', 'min' => 9, 'max' => 20],
-            ['phone', 'unique', 'targetClass' => '\common\models\Profile', 'message' => 'Já existe uma conta registada com este número de telefone.'],
+            ['phone', 'string', 'min' => 9, 'max' => 9, 
+                'tooShort' => 'O número de telefone tem que ter 9 dígitos.', 
+                'tooLong' => 'O número de telefone não pode ter 9 dígitos.'
+            ],
 
             ['address', 'trim'],
             ['address', 'required'],
             ['address', 'string', 'min' => 2, 'max' => 255],
 
             ['nif', 'trim'],
+            ['nif', 'integer', 'message' => 'NIF incorreto.'],
             ['nif', 'required'],
-            ['nif', 'string', 'min' => 9, 'max' => 9],
-            ['nif', 'unique', 'targetClass' => '\common\models\Profile', 'message' => 'Já existe uma conta registada com este NIF.'],
+            ['nif', 'string', 'min' => 9, 'max' => 9, 
+                'tooShort' => 'O NIF tem que ter 9 dígitos.' , 
+                'tooLong' => 'O NIF tem que ter 9 dígitos.',
+            ],
+            ['nif', 'unique', 'targetClass' => '\common\models\Profile', 'message' => 'NIF já registado.'],
 
             ['postal_code', 'trim'],
             ['postal_code', 'required'],

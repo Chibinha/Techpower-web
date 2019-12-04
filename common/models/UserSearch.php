@@ -7,9 +7,9 @@ use yii\data\ActiveDataProvider;
 use common\models\User;
 
 /**
- * UserSeach represents the model behind the search form of `common\models\User`.
+ * UserSearch represents the model behind the search form of `common\models\User`.
  */
-class UserSeach extends User
+class UserSearch extends User
 {
     /**
      * {@inheritdoc}

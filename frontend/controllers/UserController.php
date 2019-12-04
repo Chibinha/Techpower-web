@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\User;
-use common\models\UserSeach;
+use common\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new UserSeach();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

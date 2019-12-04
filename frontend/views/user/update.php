@@ -36,6 +36,12 @@ $this->title = 'Alterar Dados | TechPower';
             <?= Html::submitButton('Alterar dados', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end() ?>
         <hr>
-        <?= Html::a('Apagar Conta', ['remove', 'id' => $user->id], ['class' => 'btn btn-danger']) ?>
+        <?= Html::a('Apagar Conta', ['remove', 'id' => $user->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Tem a certeza que pretende apagar a sua conta?',
+                'method' => 'post',
+            ],
+        ]) ?>
     </div>
 </div>

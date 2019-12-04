@@ -25,7 +25,7 @@ $this->title = 'Alterar Dados | TechPower';
             <h3>Informação Geral</h3>
             <?= $form->field($profile, 'firstName')->label('Nome') ?>
             <?= $form->field($profile, 'lastName')->label('Apelido') ?>
-            <?= $form->field($user, 'email')->label('******E-mail NOT WORKING******') ?>
+            <?= $form->field($user, 'email')->label('E-mail') ?>
             <hr>
             <h3>Morada</h3>
             <?= $form->field($profile, 'address')->label('Rua') ?>

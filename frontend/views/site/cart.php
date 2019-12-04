@@ -13,11 +13,15 @@ $this->registerJsFile('@web/js/script.js',['depends' => [\yii\web\JqueryAsset::c
     <div class="container">
     <hr>
     <h3>Morada de Entrega</h3>
+    <?php if(Yii::$app->user->isGuest){ ?>
+    <a href="login">Inicie Sessão</a>
+    <?php } else {?>
     <p><?= $profile['firstName'], " " , $profile['lastName']?></p>
     <p><?= $profile['address']?></p>
     <p><?= $profile['city']?></p>
     <p><?= $profile['postal_code']?></p>
     <p><?= $profile['country']?></p>
+    <?php } ?>
 
    <hr>
 
@@ -49,8 +53,8 @@ $this->registerJsFile('@web/js/script.js',['depends' => [\yii\web\JqueryAsset::c
                     </td>
                     <td id="subtotal" name ="subtotal" data-th="Subtotal:" class="text-center"><?= $product->unit_price ?>€</td>
                     <td class="remove">
-                        <button class="btn btn-danger btn-sm">Remover Item <i class="glyphicon glyphicon-trash"></i></button>								
-                    </td>               
+                        <?= Html::a('Remover Item', ['product/removecart', 'id' => $product->id], ['class' => 'btn btn-danger btn-sm']) ?>
+                    </td>         
                 </tr>
             <?php } ?>
         </tbody>

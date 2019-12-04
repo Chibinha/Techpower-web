@@ -278,6 +278,7 @@ class SiteController extends Controller
         $cartId = [];
 
         $session = Yii::$app->session;
+        $cart = [];
         if ($session->isActive) {
             
             if ($session->has('cart')) {

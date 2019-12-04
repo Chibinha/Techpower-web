@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\User;
+use common\models\Profile;
 use common\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -85,6 +86,7 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $profile = $model->getProfiles();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -92,6 +94,7 @@ class UserController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'perfil' => $profile
         ]);
     }
 

@@ -1,10 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use yii\web\YiiAsset;
 use yii\grid\GridView;
-use common\models\User;
 use common\models\Sale;
+use common\models\User;
+use yii\helpers\VarDumper;
+use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
@@ -41,10 +43,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <tbody>
                 <td data-th="Cliente"><?= $cliente['username'] ?></td>
                 <td data-th="Data"><?= $model['sale_date'] ?></td>
-                <td data-th="Total"><?= $model['total_amount'] ?>€</td>
-                <!-- <td data-th="Estado"><?php /* Sale::getSaleState($order) */?> -->
-                </td>      
-            </tr>
+                <td data-th="Total"><?= $total ?>€</td>
+                <!-- <td data-th="Estado"><?php /* Sale::getSaleState($order) */?></td> -->
+            </tr> 
         </tbody>
     </table>
     

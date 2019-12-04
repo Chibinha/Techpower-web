@@ -36,12 +36,15 @@ class SaleController extends Controller
      */
     public function actionIndex()
     {
+       /*  $sale = $this->findModel(); */
         $searchModel = new SaleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        /* $final_sale = $sale->getTotal(); */
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            /* 'total' => $final_sale */
         ]);
     }
 
@@ -60,12 +63,16 @@ class SaleController extends Controller
         $sale = Sale::findOne($id);
         $user_id=$sale['id_user'];
         $get_user = User::findOne($user_id);
+        $final_sale = $sale->getTotal();
+        $sale->total_amount[$final_sale];
+        $sale->save();
         
         return $this->render('view', [
             'model' => $sale,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
             'cliente' => $get_user,
+            'total' => $final_sale
         ]);
     }
 

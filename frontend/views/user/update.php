@@ -22,16 +22,18 @@ $this->title = 'Alterar Dados | TechPower';
             'id' => 'user-update-form',
             'options' => ['class' => 'form-vertical'],
         ]) ?>
-            <h3>Morada</h3>
+            <h3>Informação Geral</h3>
             <?= $form->field($profile, 'firstName')->label('Nome') ?>
             <?= $form->field($profile, 'lastName')->label('Apelido') ?>
+            <?= $form->field($user, 'email')->label('******E-mail NOT WORKING******') ?>
+            <hr>
+            <h3>Morada</h3>
             <?= $form->field($profile, 'address')->label('Rua') ?>
             <?= $form->field($profile, 'city')->label('Cidade') ?>
             <?= $form->field($profile, 'postal_code')->label('Código Postal') ?>
             <?= $form->field($profile, 'country')->label('Cidade') ?>    
             <?= $form->field($profile, 'nif')->label('NIF') ?>
             <?= $form->field($profile, 'phone')->label('Telefone') ?>      
-            <?= $form->field($user, 'email')->label('E-mail') ?>      
 
             <?= Html::submitButton('Alterar dados', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end() ?>

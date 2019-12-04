@@ -9,7 +9,7 @@ use common\models\SaleItemSeach;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use common\models\User;
 /**
  * SaleController implements the CRUD actions for Sale model.
  */
@@ -56,11 +56,16 @@ class SaleController extends Controller
         $sale = $this->findModel($id);
         $searchModel = new SaleItemSeach();
         $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id] ] );
+
+        $sale = Sale::findOne($id);
+        $user_id=$sale['id_user'];
+        $get_user = User::findOne($user_id);
         
         return $this->render('view', [
             'model' => $sale,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'cliente' => $get_user,
         ]);
     }
 

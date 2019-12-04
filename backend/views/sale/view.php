@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
 use common\models\User;
+use common\models\Sale;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
@@ -27,27 +28,33 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'user.username',
-            'sale_date',
-            'total_amount',
-            'sale_finished'
-        ],
-    ]) ?>
-
- 
-
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width:15%">Cliente</th>
+                <th style="width:15%">Data</th>
+                <th style="width:15%">Total</th>
+                <th style="width:15%">Estado</th>
+                <th style="width:1%"></th>
+            </tr>
+        </thead>
+        <tbody>
+                <td data-th="Cliente"><?= $cliente['username'] ?></td>
+                <td data-th="Data"><?= $model['sale_date'] ?></td>
+                <td data-th="Total"><?= $model['total_amount'] ?>€</td>
+                <!-- <td data-th="Estado"><?php /* Sale::getSaleState($order) */?> -->
+                </td>      
+            </tr>
+        </tbody>
+    </table>
     
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
-            'attribute' => 'Produto',
-            'value' => 'product.product_name'
+                'attribute' => 'Produto',
+                'value' => 'product.product_name'
             ],
             [
                 'attribute' => 'Preço por Unidade',
@@ -59,6 +66,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]
     ]); ?>
-
-   
 </div>

@@ -33,7 +33,7 @@ class Sale extends \yii\db\ActiveRecord
     {
         return [
             [['sale_date'], 'safe'],
-            [['total_amount', 'id_user'], 'required'],
+            [['id_user'], 'required'],
             [['total_amount'], 'number'],
             [['sale_finished'], 'boolean'],
             [['id_user'], 'integer'],
@@ -49,7 +49,6 @@ class Sale extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'sale_date' => 'Sale Date',
-            'total_amount' => 'Total Amount',
             'sale_finished' => 'Sale Finished',
             'id_user' => 'Id User',
         ];

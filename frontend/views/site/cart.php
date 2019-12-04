@@ -6,6 +6,8 @@ use yii\helpers\Html;
 
 $this->title = 'Carrinho | TechPower';
 $this->registerJsFile('@web/js/script.js',['depends' => [\yii\web\JqueryAsset::className()]]);
+// Import Paypal API
+$this->registerJsFile('https://www.paypal.com/sdk/js?client-id=AaTG6AWmTKiOm3nUJ5VsAKcTxGDtijOr2y8X5jI2cGIHYMJOOQnzJ1IiGvAQznV0PMsxWEhFRf-WaqA9&currency=EUR');
 ?>
 
 <div class="site-cart">
@@ -65,7 +67,7 @@ $this->registerJsFile('@web/js/script.js',['depends' => [\yii\web\JqueryAsset::c
             <tr>
                 <td colspan="3" class="hidden-xs"></td>
                 <td class="hidden-xs text-center"><strong>Total <span class="total"><span>€</strong></td>
-                <td><a href="#" class="btn btn-success btn-block">Finalizar compra</a></td>
+                <td><div id="paypal-button-container"></div></td>
             </tr>
         </tfoot>
     </table>

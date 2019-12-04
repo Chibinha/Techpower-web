@@ -12,6 +12,10 @@ use common\models\SaleItem;
 use common\models\User;
 use common\models\Profile;
 
+use common\models\PayPalClient;
+use common\models\Product;
+use PayPalCheckoutSdk\Orders\OrdersGetRequest;
+
 /**
  * SaleController implements the CRUD actions for Sale model.
  */
@@ -78,15 +82,36 @@ class SaleController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Sale();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $session = Yii::$app->session;
+        if ($session->isActive) {
+            $cart = [];
+            if ($session->has('cart')) {
+                $cart = $session->get('cart');
+                Yii::debug($cart, "Cart");
+            }
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        try {
+            $sale = new Sale();
+            $sale->id_user = Yii::$app->user->getId();
+            $sale->sale_finished = 0;
+            $sale->save();
+
+            foreach ($cart as $product) {
+                $model = Product::find($product);
+
+                $saleItem = new SaleItem();
+                $saleItem->id_product = $product;
+                $saleItem->id_sale = 1;
+                $saleItem->unit_price = $model->unit_price;
+                $saleItem->quantity = 1;
+
+                $saleItem->save();
+            }
+        } catch (\Throwable $th) {
+            return $this->redirect(['site/cart']);
+        }
+        return $this->redirect(['site/index']);
     }
 
     /**
@@ -137,5 +162,34 @@ class SaleController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    // 2. Set up your server to receive a call from the client
+    /**
+    *You can use this function to retrieve an order by passing order ID as an argument.
+    */
+    public static function actionGetorder($orderId)
+    {
+        // 3. Call PayPal to get the transaction details
+        $client = PayPalClient::client();
+        $response = $client->execute(new OrdersGetRequest($orderId));
+        /**
+         *Enable the following line to print complete response as JSON.
+        */
+        print json_encode($response->result);
+        print "Status Code: {$response->statusCode}\n";
+        print "Status: {$response->result->status}\n";
+        print "Order ID: {$response->result->id}\n";
+        print "Intent: {$response->result->intent}\n";
+        print "Links:\n";
+        foreach($response->result->links as $link)
+        {
+            print "\t{$link->rel}: {$link->href}\tCall Type: {$link->method}\n";
+        }
+        // 4. Save the transaction in your database. Implement logic to save transaction to your database for future reference.
+        print "Gross Amount: {$response->result->purchase_units[0]->amount->currency_code} {$response->result->purchase_units[0]->amount->value}\n";
+
+        // To print the whole response body, uncomment the following line
+        //echo json_encode($response->result, JSON_PRETTY_PRINT);
     }
 }

@@ -276,9 +276,22 @@ class SiteController extends Controller
     {
         $user_id = Yii::$app->user->getId();
         $profile = Profile::findOne($user_id);
+        $cartId = [];
+
+        $session = Yii::$app->session;
+        $cart = [];
+        if ($session->isActive) {
+            
+            if ($session->has('cart')) {
+                $cartId = $session->get('cart');
+
+                $cart = Product::findAll($cartId);
+            }
+        }
 
         return $this->render('cart', [
             'profile' => $profile,
+            'cart' => $cart,
         ]);
     }
 

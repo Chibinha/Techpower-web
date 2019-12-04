@@ -5,12 +5,14 @@
 use yii\helpers\Html;
 
 $this->title = 'Carrinho | TechPower';
+$this->registerJsFile('@web/js/script.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>
 
 <div class="site-cart">
     <h1>Checkout</h1>
     <div class="container">
-        <hr>
+    <hr>
+    <h3>Morada de Entrega</h3>
     <p><?= $profile['firstName'], " " , $profile['lastName']?></p>
     <p><?= $profile['address']?></p>
     <p><?= $profile['city']?></p>
@@ -41,11 +43,11 @@ $this->title = 'Carrinho | TechPower';
                             </div>
                         </div>
                     </td>
-                    <td data-th="Preço"><?= $product->unit_price ?>€</td>
+                    <td data-th="Preço" name="preco"><?= $product->unit_price ?>€</td>
                     <td data-th="Quantidade">
-                        <input type="number" class="form-control text-center" value="1">
+                        <input name="quantidade" type="number" class="form-control text-center" value="1">
                     </td>
-                    <td data-th="Subtotal:" class="text-center"><?= $product->unit_price ?>€</td>
+                    <td id="subtotal" name ="subtotal" data-th="Subtotal:" class="text-center"><?= $product->unit_price ?>€</td>
                     <td class="remove">
                         <button class="btn btn-danger btn-sm">Remover Item <i class="glyphicon glyphicon-trash"></i></button>								
                     </td>               

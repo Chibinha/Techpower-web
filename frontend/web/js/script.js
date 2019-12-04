@@ -18,3 +18,16 @@ function total() {
     totalArray[0].textContent = total + '€';
     totalArray[1].textContent = total + '€';
 }
+
+
+//Previne que a quantidade de um item no carrinho fique a NULL
+const numInputs = document.querySelectorAll('input[type=number]')
+
+numInputs.forEach(function(input) {
+  input.addEventListener('change', function(e) {
+    if (e.target.value == '') {
+      e.target.value = 1
+      total();
+    }
+  })
+})

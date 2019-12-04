@@ -49,7 +49,7 @@ $this->registerJsFile('@web/js/script.js',['depends' => [\yii\web\JqueryAsset::c
                     </td>
                     <td data-th="Preço" class="preco"><?= $product->unit_price ?>€</td>
                     <td data-th="Quantidade">
-                        <input type="number" class="quantidade form-control text-center" min="0" value="1">
+                        <input type="number" class="quantidade form-control text-center" value="1" min="1" oninput="validity.valid||(value='1');">
                     </td>
                     <td id="subtotal" data-th="Subtotal:" class="subtotal text-center"><?= $product->unit_price ?>€</td>
                     <td class="remove">

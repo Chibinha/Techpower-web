@@ -47,11 +47,11 @@ $this->registerJsFile('@web/js/script.js',['depends' => [\yii\web\JqueryAsset::c
                             </div>
                         </div>
                     </td>
-                    <td data-th="Preço" name="preco"><?= $product->unit_price ?>€</td>
+                    <td data-th="Preço" class="preco"><?= $product->unit_price ?>€</td>
                     <td data-th="Quantidade">
-                        <input name="quantidade" type="number" class="form-control text-center" value="1">
+                        <input type="number" class="quantidade form-control text-center" value="1">
                     </td>
-                    <td id="subtotal" name ="subtotal" data-th="Subtotal:" class="text-center"><?= $product->unit_price ?>€</td>
+                    <td id="subtotal" data-th="Subtotal:" class="subtotal text-center"><?= $product->unit_price ?>€</td>
                     <td class="remove">
                         <?= Html::a('Remover Item', ['product/removecart', 'id' => $product->id], ['class' => 'btn btn-danger btn-sm']) ?>
                     </td>         
@@ -60,11 +60,11 @@ $this->registerJsFile('@web/js/script.js',['depends' => [\yii\web\JqueryAsset::c
         </tbody>
         <tfoot>
             <tr class="visible-xs">
-                <td class="text-center"><strong>Total: 596,90€</strong></td>
+                <td class="text-center"><strong>Total: <span class="total"><span>€</strong></td>
             </tr>
             <tr>
                 <td colspan="3" class="hidden-xs"></td>
-                <td class="hidden-xs text-center"><strong>Total 596,90€</strong></td>
+                <td class="hidden-xs text-center"><strong>Total <span class="total"><span>€</strong></td>
                 <td><a href="#" class="btn btn-success btn-block">Finalizar compra</a></td>
             </tr>
         </tfoot>

@@ -1,22 +1,20 @@
-let precoArray = Array.from( $('td[name ="preco"]'));
-let quantidadeArray = Array.from( $('input[name ="quantidade"]'));
-let subtotal = Array.from( $('td[name ="subtotal"]'));
+var precoArray = $('.preco');
+var quantidadeArray = $('.quantidade');
+var subtotal = $('.subtotal');
+var totalArray = $('.total');
 
-$(":input").bind('keyup mouseup', function () {
-             
-});
+total();
 
-let total = 0;
-for(i = 0; i < precoArray.length; i++) {
-    console.log(precoArray[i].innerHTML);
-    console.log(quantidadeArray[i].value);
-    $(":input").bind('keyup mouseup', function () {
-        total += precoArray.innerHTML * subtotal.innerHTML;
-    });
+for(pos = 0; pos < quantidadeArray.length; pos++) {
+    quantidadeArray[pos].addEventListener("change", total);
 }
 
-
-// console.log($('preco').text());
-// console.log([0].innerHTML);
-// console.log(td.innerHTML);
-//var total = parseInt($('#preco').text()) * parseInt($('#quantidade').text());
+function total() {
+    var total = 0;
+    for(i = 0; i < precoArray.length; i++) {
+        subtotal[i].textContent = parseFloat(parseFloat(precoArray[i].textContent) * parseInt(quantidadeArray[i].value)) + '€';
+        total += parseFloat(subtotal[i].textContent);
+    }
+    totalArray[0].textContent = total + '€';
+    totalArray[1].textContent = total + '€';
+}

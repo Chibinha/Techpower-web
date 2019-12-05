@@ -77,7 +77,7 @@ class Sale extends \yii\db\ActiveRecord
             echo"Encomenda expedida";
         }
         else{
-            echo "A aguardar pagamento";
+            echo "A preparar encomenda";
         }
     }
 }

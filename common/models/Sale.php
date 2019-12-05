@@ -9,7 +9,6 @@ use Yii;
  *
  * @property int $id
  * @property string $sale_date
- * @property string $total_amount
  * @property bool $sale_finished
  * @property int $id_user
  *
@@ -77,5 +76,10 @@ class Sale extends \yii\db\ActiveRecord
         else{
             echo "A aguardar pagamento";
         }
+    }
+
+    public static function calcTotalSale($sale_item){
+        $subTotal = $sale_item['unit_price'] * $sale_item['quantity'];
+        return $subTotal;
     }
 }

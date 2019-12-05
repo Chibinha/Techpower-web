@@ -42,10 +42,11 @@ class SaleController extends Controller
      */
     public function actionIndex()
     {
-        $orders = Sale::find()->orderBy(['id' => SORT_DESC])->asArray()->where(['id_user' => Yii::$app->user->id])->all();
-        
+        $sales = Sale::find()->orderBy(['id' => SORT_DESC])->asArray()->where(['id_user' => Yii::$app->user->id])->all();
+        $sale_items = SaleItem::find()->asArray()->all();
         return $this->render('index', [
-            'orders' =>$orders,
+            'sales' => $sales,
+            'sale_items' => $sale_items,
         ]);
     }
 

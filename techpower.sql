@@ -57,11 +57,10 @@ CREATE TABLE `product`(
  `product_name`    varchar(50) NOT NULL ,
  `unit_price`      decimal(12,2) NULL ,
  `is_discontinued` bit NOT NULL DEFAULT 0 ,
- `description`     varchar(5000) NOT NULL ,
+ `description`     TEXT NOT NULL ,
  `id_category`     int NOT NULL ,
 FOREIGN KEY (`id_category`) REFERENCES `category` (`id`)
 ) ENGINE = InnoDB;
-
 
 -- ********* Tabela Linha de Vendas ********* --
 CREATE TABLE `sale_item`(

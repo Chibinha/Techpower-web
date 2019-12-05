@@ -7,26 +7,42 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Signup';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Registar | TechPower';
 ?>
 <div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Registar nova conta</h1>
 
-    <p>Please fill out the following fields to signup:</p>
-
+    <p>Por favor preencha os seguintes campos:</p>
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Nome de Utilizador') ?>
 
-                <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'email')->label('E-mail') ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
+                <hr>
+                
+                <?= $form->field($model, 'firstName')->label('Nome') ?>
+
+                <?= $form->field($model, 'lastName')->label('Apelido') ?>
+
+                <?= $form->field($model, 'phone')->label('Telefone') ?>
+
+                <?= $form->field($model, 'address')->label('Morada') ?>
+
+                <?= $form->field($model, 'postal_code')->label('Código de Postal') ?>
+
+                <?= $form->field($model, 'city')->label('Cidade') ?>
+
+                <?= $form->field($model, 'country')->label('País') ?>
+
+                <?= $form->field($model, 'nif')->label('NIF') ?> 
+
                 <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                    <?= Html::submitButton('Registar', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

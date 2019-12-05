@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\SaleItem;
-use common\models\SaleItemSeach;
+use common\models\SaleItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,7 +35,7 @@ class SaleItemController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SaleItemSeach();
+        $searchModel = new SaleItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

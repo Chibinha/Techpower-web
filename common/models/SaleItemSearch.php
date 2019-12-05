@@ -1,28 +1,24 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Product;
+use common\models\SaleItem;
 
 /**
- * ProductSearch represents the model behind the search form of `common\models\Product`.
+ * SaleItemSearch represents the model behind the search form of `common\models\SaleItem`.
  */
-class ProductSearch extends Product
+class SaleItemSearch extends SaleItem
 {
-    public $productSearch;
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'id_category'], 'integer'],
-            [['product_name', 'description', 'productSearch'], 'safe'],
+            [['id', 'quantity', 'id_product', 'id_sale'], 'integer'],
             [['unit_price'], 'number'],
-            [['is_discontinued'], 'boolean'],
         ];
     }
 
@@ -44,7 +40,7 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-        $query = Product::find();
+        $query = SaleItem::find();
 
         // add conditions that should always apply here
 
@@ -60,7 +56,14 @@ class ProductSearch extends Product
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'product_name', $this->productSearch]);
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'unit_price' => $this->unit_price,
+            'quantity' => $this->quantity,
+            'id_product' => $this->id_product,
+            'id_sale' => $this->id_sale,
+        ]);
 
         return $dataProvider;
     }

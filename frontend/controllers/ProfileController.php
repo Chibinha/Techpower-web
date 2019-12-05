@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use common\models\Product;
-use app\models\ProductSearch;
+use common\models\Profile;
+use common\models\ProfileSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProductController implements the CRUD actions for Product model.
+ * ProfileController implements the CRUD actions for Profile model.
  */
-class ProductController extends Controller
+class ProfileController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Lists all Product models.
+     * Lists all Profile models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProductSearch();
+        $searchModel = new ProfileSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Displays a single Product model.
+     * Displays a single Profile model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class ProductController extends Controller
     }
 
     /**
-     * Creates a new Product model.
+     * Creates a new Profile model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Product();
+        $model = new Profile();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Updates an existing Product model.
+     * Updates an existing Profile model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Deletes an existing Product model.
+     * Deletes an existing Profile model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,64 +110,15 @@ class ProductController extends Controller
     }
 
     /**
-     * Adds Product to the cart.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionAddcart($id)
-    {
-        $product = Yii::$app->request->get('id');
-
-        $session = Yii::$app->session;
-        if ($session->isActive) {
-            $cart = [];
-            if ($session->has('cart')) {
-                $cart = $session->get('cart');
-            }
-            array_push($cart, $product);
-            $session->set('cart', $cart);
-            echo implode(" ", $session->get('cart'));
-        }
-
-        return $this->redirect(['site/index']);
-    }
-
-    /**
-     * Removes Product on the cart.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionRemovecart($id)
-    {
-        $product = Yii::$app->request->get('id');
-
-        $session = Yii::$app->session;
-        if ($session->isActive) {
-            $cart = [];
-            if ($session->has('cart')) {
-                $cart = $session->get('cart');
-                unset($cart[array_search($id, $cart)]);
-            }
-            $session->set('cart', $cart);
-            echo implode(" ", $session->get('cart'));
-        }
-
-        return $this->redirect(['site/cart']);
-    }
-
-
-    /**
-     * Finds the Product model based on its primary key value.
+     * Finds the Profile model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Product the loaded model
+     * @return Profile the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = Profile::findOne($id)) !== null) {
             return $model;
         }
 

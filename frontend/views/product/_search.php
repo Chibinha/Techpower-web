@@ -15,22 +15,7 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'product_name') ?>
-
-    <?= $form->field($model, 'unit_price') ?>
-
-    <?= $form->field($model, 'is_discontinued')->checkbox() ?>
-
-    <?= $form->field($model, 'description') ?>
-
-    <?php // echo $form->field($model, 'id_category') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
-    </div>
+    <?= $form->field($model, 'productSearch') ?>
 
     <?php ActiveForm::end(); ?>
 

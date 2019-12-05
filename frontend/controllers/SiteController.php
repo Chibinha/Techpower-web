@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\controllers;
 
 use frontend\models\ResendVerificationEmailForm;
@@ -14,6 +15,9 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Product;
+use common\models\ProductSearch;
+use common\models\Profile;
 
 /**
  * Site controller
@@ -74,7 +78,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $new_products = Product::find()->limit(12)->orderBy(['id' => SORT_DESC])->asArray()->all();
+
+        return $this->render('index', [
+            'pageName' => 'Novidades',
+            'new_products' => $new_products,
+        ]);
     }
 
     /**
@@ -154,7 +163,7 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+            Yii::$app->session->setFlash('success', 'Registo efetuado com sucesso.');
             return $this->goHome();
         }
 
@@ -255,6 +264,49 @@ class SiteController extends Controller
 
         return $this->render('resendVerificationEmail', [
             'model' => $model
+        ]);
+    }
+
+    /**
+     * Shopping cart.
+     *
+     * @return mixed
+     */
+    public function actionCart()
+    {
+        $user_id = Yii::$app->user->getId();
+        $profile = Profile::findOne($user_id);
+        $cartId = [];
+
+        $session = Yii::$app->session;
+        $cart = [];
+        if ($session->isActive) {
+            
+            if ($session->has('cart')) {
+                $cartId = $session->get('cart');
+
+                $cart = Product::findAll($cartId);
+            }
+        }
+
+        return $this->render('cart', [
+            'profile' => $profile,
+            'cart' => $cart,
+        ]);
+    }
+
+    /**
+     * Search products.
+     *
+     * @return mixed
+     */
+    public function actionSearch()
+    {
+        $query = Yii::$app->request->get('query');
+
+        return $this->render('index', [
+            'pageName' => 'Resultados da procura: ' . $query,
+            'new_products' => Product::find()->where(['like', 'product_name', $query])->limit(12)->orderBy(['id' => SORT_DESC])->asArray()->all(),
         ]);
     }
 }

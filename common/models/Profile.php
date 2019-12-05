@@ -34,14 +34,67 @@ class Profile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nif', 'id_user'], 'integer'],
+            [['id_user'], 'integer'],
             [['id_user'], 'required'],
-            [['phone'], 'string', 'max' => 20],
-            [['address'], 'string', 'max' => 255],
-            [['postal_code'], 'string', 'max' => 8],
-            [['city'], 'string', 'max' => 50],
-            [['country'], 'string', 'max' => 100],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
+            
+            ['firstName', 'trim'],
+            ['firstName', 'required', 'message' => 'Introduza um nome.'],
+            ['firstName', 'string', 'min' => 2, 'max' => 50, 
+            'tooShort' => 'O nome tem que ter no mínimo 2 digitos.',
+            'tooLong' => 'O nome não pode exceder os 50 digitos.'
+            ],
+
+            ['lastName', 'trim'],
+            ['lastName', 'required', 'message' => 'Introduza um apelido.'],
+            ['lastName', 'string', 'min' => 2, 'max' => 50, 
+            'tooShort' => 'O apelido tem que ter no mínimo 2 digitos.',
+            'tooLong' => 'O apelido não pode exceder os 50 digitos.'
+            ],
+
+            ['nif', 'trim'],
+            ['nif', 'integer', 'message' => 'NIF incorreto.'],
+            ['nif', 'required', 'message' => 'Introduza um NIF.'],
+            ['nif', 'unique', 'targetClass' => '\common\models\Profile', 'message' => 'NIF já registado.'],
+            ['nif', 'string', 'min' => 9, 'max' => 9, 
+                'tooShort' => 'O NIF tem que ter 9 dígitos.', 
+                'tooLong' => 'O NIF tem que ter 9 dígitos.'
+            ],
+            
+            ['phone', 'integer', 'message' => 'Número de telefone incorreto.'],
+            ['phone', 'required', 'message' => 'Introduza um número de telefone.'],
+            ['phone', 'string', 'min' => 9, 'max' => 9, 
+                'tooShort' => 'O número de telefone tem que ter 9 dígitos.', 
+                'tooLong' => 'O número de telefone tem que ter 9 dígitos.'
+            ],
+
+            ['address', 'trim'],
+            ['address', 'required', 'message' => 'Introduza uma morada.'],
+            ['address', 'string', 'min' => 2, 'max' => 255, 
+            'tooShort' => 'A morada tem que ter no mínimo 2 digitos.',
+            'tooLong' => 'A morada não pode exceder os 255 digitos.'
+            ],
+
+            ['postal_code', 'trim'],
+            ['postal_code', 'required', 'message' => 'Introduza um código de postal.'],
+            ['postal_code', 'string', 'min' => 4, 'max' => 8, 
+            'tooShort' => 'O código de postal tem que ter no mínimo 4 digitos.',
+            'tooLong' => 'O código de postal não pode exceder os 8 digitos.'
+            ],
+
+            ['city', 'trim'],
+            ['city', 'required', 'message' => 'Introduza uma cidade.'],
+            ['city', 'string', 'min' => 2, 'max' => 50, 
+            'tooShort' => 'O nome da cidade tem que ter no mínimo 2 digitos.',
+            'tooLong' => 'O nome da cidade não pode exceder os 50 digitos.'
+            ],
+
+            ['country', 'trim'],
+            ['country', 'required', 'message' => 'Introduza um país.'],
+            ['country', 'string', 'min' => 2, 'max' => 100, 
+            'tooShort' => 'O nome do país tem que ter no mínimo 2 digitos.',
+            'tooLong' => 'O nome do país não pode exceder os 100 digitos.'
+            ],
         ];
     }
 
@@ -52,6 +105,8 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'firstName' => 'First Name',
+            'lastName' => 'Last Name',
             'phone' => 'Phone',
             'address' => 'Address',
             'nif' => 'Nif',
@@ -61,6 +116,14 @@ class Profile extends \yii\db\ActiveRecord
             'id_user' => 'Id User',
         ];
     }
+
+    /**
+       * @inheritdoc$primaryKey
+       */
+      public static function primaryKey()
+      {
+          return ["id_user"];
+      }
 
     /**
      * @return \yii\db\ActiveQuery

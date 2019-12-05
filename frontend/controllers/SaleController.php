@@ -87,30 +87,37 @@ class SaleController extends Controller
             $cart = [];
             if ($session->has('cart')) {
                 $cart = $session->get('cart');
-                Yii::debug($cart, "Cart");
             }
         }
 
-        try {
-            $sale = new Sale();
-            $sale->id_user = Yii::$app->user->getId();
-            $sale->sale_finished = 0;
-            $sale->save();
+        $sale = new Sale();
+        $sale->id_user = 2;
+        $sale->sale_finished = 0;
 
-            foreach ($cart as $product) {
-                $model = Product::find($product);
+        $transaction = $sale->getDb()->beginTransaction();
+        $sale->save(false);
+        foreach($cart as $product) {
+            $model = Product::find($product)->one();
 
-                $saleItem = new SaleItem();
-                $saleItem->id_product = $product;
-                $saleItem->id_sale = 1;
-                $saleItem->unit_price = $model->unit_price;
-                $saleItem->quantity = 1;
-
-                $saleItem->save();
+            $orderItem = new SaleItem();
+            $orderItem->id_sale = $sale->id;
+            $orderItem->unit_price = $model->unit_price;
+            $orderItem->id_product = $product;
+            // TODO: Save quantity to session
+            $orderItem->quantity = 1;
+            if (!$orderItem->save(false)) {
+                $transaction->rollBack();
+                \Yii::$app->session->addFlash('error', 'Não foi possivel gravar a sua encomenda.');
+                return $this->redirect('site/cart');
             }
-        } catch (\Throwable $th) {
-            return $this->redirect(['site/cart']);
         }
+        $transaction->commit();
+        \Yii::$app->session->addFlash('success', 'Encomenda gravada com sucesso.');
+
+        // Delete cart
+        $cart = [];
+        $session->set('cart', $cart);
+
         return $this->redirect(['site/index']);
     }
 

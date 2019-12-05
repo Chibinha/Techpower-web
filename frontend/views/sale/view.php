@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use common\models\Product;
+use common\models\Sale;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
@@ -11,6 +12,7 @@ use common\models\Product;
 
 
 $this->title = 'Encomenda #' . $model->id . ' | TechPower';
+$Total = 0;
 ?>
 
 <div class="sale-view">
@@ -39,7 +41,7 @@ $this->title = 'Encomenda #' . $model->id . ' | TechPower';
             // **Needs refactoring** Procura os dados do produto através do id_product na tabela sale_item
             $product_id = $item['id_product'];
             $product_info = Product::find()->where(['id' => $product_id])->one();  ?>
-
+            <?php $Total += Sale::calcTotalSale($item); ?>
             <tr>
                 <td data-th="Item">
                     <div class="row">
@@ -57,11 +59,11 @@ $this->title = 'Encomenda #' . $model->id . ' | TechPower';
         </tbody>
         <tfoot>
             <tr class="visible-xs">
-                <td class="text-center"><strong>Total: <?= $model->total_amount?>€</strong></td>
+                <td class="text-center"><strong>Total: <?= $Total ?>€</strong></td>
             </tr>
             <tr>
                 <td colspan="3" class="hidden-xs"></td>
-                <td class="hidden-xs text-center"><strong>Total: <?= $model->total_amount?>€</strong></td>
+                <td class="hidden-xs text-center"><strong>Total: <?= $Total ?>€</strong></td>
             </tr>
         </tfoot>
     </table>

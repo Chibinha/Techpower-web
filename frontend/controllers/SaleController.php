@@ -12,6 +12,10 @@ use common\models\SaleItem;
 use common\models\User;
 use common\models\Profile;
 
+use common\models\PayPalClient;
+use common\models\Product;
+use PayPalCheckoutSdk\Orders\OrdersGetRequest;
+
 /**
  * SaleController implements the CRUD actions for Sale model.
  */
@@ -38,10 +42,11 @@ class SaleController extends Controller
      */
     public function actionIndex()
     {
-        $orders = Sale::find()->orderBy(['id' => SORT_DESC])->asArray()->where(['id_user' => Yii::$app->user->id])->all();
-        
+        $sales = Sale::find()->orderBy(['id' => SORT_DESC])->asArray()->where(['id_user' => Yii::$app->user->id])->all();
+        $sale_items = SaleItem::find()->asArray()->all();
         return $this->render('index', [
-            'orders' =>$orders,
+            'sales' => $sales,
+            'sale_items' => $sale_items,
         ]);
     }
 
@@ -78,15 +83,43 @@ class SaleController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Sale();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $session = Yii::$app->session;
+        if ($session->isActive) {
+            $cart = [];
+            if ($session->has('cart')) {
+                $cart = $session->get('cart');
+            }
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        $sale = new Sale();
+        $sale->id_user = 2;
+        $sale->sale_finished = 0;
+
+        $transaction = $sale->getDb()->beginTransaction();
+        $sale->save(false);
+        foreach($cart as $product) {
+            $model = Product::find($product)->one();
+
+            $orderItem = new SaleItem();
+            $orderItem->id_sale = $sale->id;
+            $orderItem->unit_price = $model->unit_price;
+            $orderItem->id_product = $product;
+            // TODO: Save quantity to session
+            $orderItem->quantity = 1;
+            if (!$orderItem->save(false)) {
+                $transaction->rollBack();
+                \Yii::$app->session->addFlash('error', 'Não foi possivel gravar a sua encomenda.');
+                return $this->redirect('site/cart');
+            }
+        }
+        $transaction->commit();
+        \Yii::$app->session->addFlash('success', 'Encomenda gravada com sucesso.');
+
+        // Delete cart
+        $cart = [];
+        $session->set('cart', $cart);
+
+        return $this->redirect(['site/index']);
     }
 
     /**

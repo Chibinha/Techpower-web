@@ -78,8 +78,15 @@ class Sale extends \yii\db\ActiveRecord
         }
     }
 
-    public static function calcTotalSale($sale_item){
-        $subTotal = $sale_item['unit_price'] * $sale_item['quantity'];
-        return $subTotal;
+    
+    public static function calcTotalSale($sale_id){
+        $sale_items = SaleItem::find()->asArray()->where(['id_sale' => $sale_id])->all();
+
+        $Total = 0;
+        foreach ($sale_items as $item){ 
+            $subTotal = $item['unit_price'] * $item['quantity'];
+            $Total += $subTotal;
+        }    
+        return $Total;   
     }
 }

@@ -41,14 +41,16 @@ class SaleController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {
+    {        
         $sales = Sale::find()->orderBy(['id' => SORT_DESC])->asArray()->where(['id_user' => Yii::$app->user->id])->all();
         $sale_items = SaleItem::find()->asArray()->all();
+
         return $this->render('index', [
             'sales' => $sales,
             'sale_items' => $sale_items,
         ]);
     }
+
 
     /**
      * Displays a single Sale model.
@@ -67,12 +69,16 @@ class SaleController extends Controller
         $get_profile = Profile::findOne($user_id);
 
         // Procura o nome do produto que está na linha de venda
-        
+        $product_info = [];
+        foreach($sale_item_model as $item){
+            array_push($product_info, Product::findOne(['id' => $item["id_product"]]));
+        }
 
         return $this->render('view', [
             'model' => $this->findModel($id),
             'sale_item_model' => $sale_item_model,
             'profile' => $get_profile,
+            'product_info' => $product_info,
         ]);
     }
 

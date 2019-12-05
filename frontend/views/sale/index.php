@@ -27,12 +27,7 @@ $this->title = 'Encomendas | TechPower';
             </tr>
         </thead>
         <tbody>
-            <?php foreach($sales as $sale){ 
-                $Total = 0;
-                foreach ($sale_items as $sale_item){ 
-                    if($sale_item['id_sale'] == $sale['id'])
-                        $Total += Sale::calcTotalSale($sale_item);
-                }?>
+            <?php foreach($sales as $sale){ ?>
             <tr>
                 <td data-th="Numero">
                     <div class="row">
@@ -42,7 +37,7 @@ $this->title = 'Encomendas | TechPower';
                     </div>
                 </td>
                 <td data-th="Data"><?= $sale['sale_date'] ?></td>
-                <td data-th="Total"><?= $Total ?>€</td>
+                <td data-th="Total"><?= Sale::calcTotalSale($sale["id"]); ?>€</td>
                 <td data-th="Estado"><?php Sale::getSaleState($sale)?>
                 </td>
                 <td class="view">

@@ -20,8 +20,7 @@ $this->registerJsFile('https://www.paypal.com/sdk/js?client-id=AaTG6AWmTKiOm3nUJ
     <?php } else {?>
     <p><?= $profile['firstName'], " " , $profile['lastName']?></p>
     <p><?= $profile['address']?></p>
-    <p><?= $profile['city']?></p>
-    <p><?= $profile['postal_code']?></p>
+    <p><?= $profile['postal_code'], ", ", $profile['city']?></p>
     <p><?= $profile['country']?></p>
     <?php } ?>
 

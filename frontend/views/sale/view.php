@@ -21,8 +21,7 @@ $Total = 0;
     <h4 style="font-weight: bold;">Morada de entrega</h4>
     <p><?= $profile['firstName'], " " , $profile['lastName']?></p>
     <p><?= $profile['address']?></p>
-    <p><?= $profile['city']?></p>
-    <p><?= $profile['postal_code']?></p>
+    <p><?= $profile['postal_code'], ", ", $profile['city']?></p>
     <p><?= $profile['country']?></p>
     <hr>
     <h4 style="font-weight: bold;">Resumo de compra</h4>

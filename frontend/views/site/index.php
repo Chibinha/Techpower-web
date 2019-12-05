@@ -17,11 +17,11 @@ $this->title = 'TechPower Online - Loja de Informática';
                         <div class="card col-sm-6 col-md-3">
                             <div class="card-content">
                                 <a href="<?=Url::to(['product/view', 'id' => $product["id"]]); ?>">
-                                <img src="https://d3ift91kaax4b9.cloudfront.net/media/catalog/product/cache/33ba37c1fda6d70c703e88ff79ea1021/p/r/product-p006949-517_1.jpg" class="card-img-top" alt="...">
+                                <?= Html::img('@web/img/'.$product['id'].'.jpg'); ?>                                                                                                                          
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= StringHelper::truncate(Html::encode($product['product_name']), 42) ?></h5>
-                                    <p class="card-text description"><?= StringHelper::truncate(Html::encode(($product['description'])), 58)?></p>
-                                    <p class="card-text price"><?= $product['unit_price'] ?>€</p>
+                                    <h5 class="card-title"><?= ($product['product_name']); ?></h5>
+                                    <p class="card-text description"><?= $product['description']; ?></p>
+                                    <p class="card-text price"><?= $product['unit_price']; ?>€</p>
                                 </div>
                                 </a>
                             </div>

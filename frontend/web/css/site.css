@@ -15,12 +15,6 @@ body {
 .pagination.center ul { left: -50%; }
 /* Centers Pagination */
 
-
-*{
-    font-family: inherit;
-    text-decoration: none;
-}
-
 .site-index h3{
     color: #E95420;
     font-weight: bold;
@@ -48,6 +42,10 @@ body {
     margin-top: 20px;
 }
 
+.card a{
+    text-decoration: none;
+}
+
 .card {
     min-height: 430px;
     padding: 15px;
@@ -57,43 +55,36 @@ body {
 .card-content {
     box-shadow: 0 5px 40px rgba(0, 0, 0, 0.280);
     padding: 15px;
-    min-height: 390px;
 }
 
 .card img{
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .card-title{
     font-size: 18px;
     color: black;
-    min-height: 57px;
+    overflow: hidden;
+    height: 40px;
+}
+.description{
+    font-size: 12px;
+    color: rgb(153, 153, 153);
+    overflow: hidden;
+    height: 48px;
+    margin-bottom: 20px;
+}
+
+.price {
+    color: #E95420;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 0px;
 }
 
 .card:hover .card-title{
     color: #E95420;
-    text-decoration: none;
-}
-
-.price {
-    text-align: left;
-    color: #E95420;
-    font-size: 25px;
-    font-weight: bold;
-}
-
-.description{
-    font-size: 12px;
-    color: rgb(153, 153, 153);
-}
-
-
-.wrap {
-    min-height: 100%;
-    height: auto;
-    margin: 0 auto -60px;
-    padding: 0 0 60px;
 }
 
 .wrap > .container {
@@ -188,6 +179,13 @@ a.desc:after {
 }
 
 @media(max-width:767px) {
+
+    .card {
+        min-height: 430px;
+        padding: 15px;
+        display: inline-block;
+    }
+    
     .nav li > form > button.logout {
         display:block;
         text-align: left;

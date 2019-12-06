@@ -70,7 +70,7 @@ class Sale extends \yii\db\ActiveRecord
     {
         return $this->hasMany(SaleItem::className(), ['id_sale' => 'id']);
     }
-
+ 
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -87,5 +87,13 @@ class Sale extends \yii\db\ActiveRecord
             $total += ($item->unit_price * $item->quantity);
         }
         return $total;
+    }
+
+    public function DeleteSaleItems()
+    {
+        $sale_items = SaleItem::find()->where(['id_sale' => $this->id])->all();
+        foreach ($sale_items as $item) {
+           $item->deleteInternal();
+        }
     }
 }

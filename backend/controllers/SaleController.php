@@ -36,35 +36,40 @@ class SaleController extends Controller
      */
     public function actionIndex()
     {
-       /*  $sale = $this->findModel(); */
+        $sales= Sale::find()->asArray()->all();
+        foreach ($sales as $sale)
+        {  
+            $final_sale = $sale->getTotal();
+            $sale->total_amount = $final_sale;
+            $sale->save();
+        };
+
         $searchModel = new SaleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        /* $final_sale = $sale->getTotal(); */
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            /* 'total' => $final_sale */
-        ]);
+
+        ]); 
     }
 
-    /**
-     * Displays a single Sale model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
+    //  * Displays a single Sale model.
+    //  * @param integer $id
+    //  * @return mixed
+    //  * @throws NotFoundHttpException if the model cannot be found
+
     public function actionView($id)
     {
-        $sale = $this->findModel($id);
         $searchModel = new SaleItemSeach();
-        $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id] ] );
+        $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id]]);
 
         $sale = Sale::findOne($id);
         $user_id=$sale['id_user'];
         $get_user = User::findOne($user_id);
         $final_sale = $sale->getTotal();
-        $sale->total_amount[$final_sale];
+        $sale->total_amount = $final_sale;
         $sale->save();
         
         return $this->render('view', [
@@ -104,17 +109,25 @@ class SaleController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $searchModel = new SaleSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new SaleItemSeach();
+        $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id]]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $sale = Sale::findOne($id);
+        $user_id=$sale['id_user'];
+        $get_user = User::findOne($user_id);
+
+        
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) 
+        {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
             'dataProvider' => $dataProvider,
-            'searchModel' => $searchModel
+            'searchModel' => $searchModel,
+            'user' => $get_user
         ]);
     }
 
@@ -127,7 +140,9 @@ class SaleController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $sale = $this->findModel($id);
+        $sale->DeleteSaleItems();     
+        $sale->delete();
 
         return $this->redirect(['index']);
     }

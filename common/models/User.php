@@ -27,7 +27,9 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
-
+    public $currentPassword;
+    public $newPassword;
+    public $newPasswordConfirm;
 
     /**
      * {@inheritdoc}
@@ -76,9 +78,27 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'email', 'message' => 'Introduza um e-mail válido.'],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este e-mail já está registado.'],
             ['email', 'string', 'max' => 255],
+
+            [['newPassword', 'currentPassword', 'newPasswordConfirm'], 'required', 'message' => 'Introduza uma password.'],
+            [['currentPassword'], 'validateCurrentPassword'],
+            [['newPassword', 'newPasswordConfirm'], 'string', 'min' => 6, 'tooShort' => 'A password tem que ter no mínimo 6 digitos.'],
+            [['newPassword', 'newPasswordConfirm'], 'filter', 'filter' => 'trim'],
+            [['newPasswordConfirm'], 'compare', 'compareAttribute' => 'newPassword', 'message' => 'As passwords não coincidem.'],
         ];
     }
     
+    public function validateCurrentPassword(){
+        if(!$this->verifyPassword($this->currentPassword)){
+            $this->addError("currentPassword", "Password Atual incorreta.");
+        }
+    }
+    
+    public function verifyPassword($password){
+        $dbpassword = static::findOne(['username' => Yii::$app->user->identity->username, 'status' => self::STATUS_ACTIVE])->password_hash;
+        return Yii::$app->security->validatePassword($password, $dbpassword);
+    }
+
+
     /**
      * @return \yii\db\ActiveQuery
      */

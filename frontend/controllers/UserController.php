@@ -157,4 +157,24 @@ class UserController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionChange_password()
+    {
+        //Vai buscar o utilizador logado
+        $user = Yii::$app->user->identity;
+
+        //Vai buscar os dados inseridos no form
+        $formData = $user->load(Yii::$app->request->post());
+
+        if ($formData && $user->validate()){
+            $user->password = $user->newPassword;
+            $user->save(false);
+            Yii::$app->session->setFlash('success', 'Password alterada com sucesso!');
+            return $this->redirect(['site/index']);
+        }
+        return $this->render("change_password", [
+        'user' => $user,
+        'formData' => $formData,
+        ]);
+    }
 }

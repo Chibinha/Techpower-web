@@ -53,7 +53,10 @@ return [
                     'controller' => [
                         'api/default',
                         'api/category',
-                        'api/product'
+                        'api/product',
+                    ],
+                    'extraPatterns' => [
+                        'GET {id}/' => 'products',
                     ],
                 ]
             ],

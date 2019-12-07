@@ -53,7 +53,7 @@ $this->registerJsFile('https://www.paypal.com/sdk/js?client-id=AaTG6AWmTKiOm3nUJ
                     <td data-th="Preço" class="preco"><?= $cart[$i]->unit_price ?>€</td>
                     <td data-th="Quantidade">
                         <?php $form = ActiveForm::begin(['action' => ['cart/quantity', 'id' => $cart[$i]->id],]) ?>
-                            <input onchange="this.form.submit()" name="quantity" type="number" class="quantidade form-control text-center" value="<?= $quantity[$i] ?>">
+                            <input onchange="this.form.submit()" name="quantity" type="number" class="quantidade form-control text-center" value="<?= $quantity[$i] ?>" min="1" oninput="validity.valid||(value='1');">
                         <?php ActiveForm::end() ?>
                     </td>
                     <td id="subtotal" data-th="Subtotal:" class="subtotal text-center"><?= $cart[$i]->unit_price ?>€</td>

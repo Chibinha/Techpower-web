@@ -69,17 +69,47 @@ class Sale extends \yii\db\ActiveRecord
     }
 
     
-    public static function getSaleState($order){
+    public function getSaleState($order){
         if ($order['sale_finished'] == 1){
             echo"Encomenda expedida";
         }
         else{
-            echo "A aguardar pagamento";
+            echo "A preparar encomenda";
         }
     }
 
     public static function calcTotalSale($sale_item){
         $subTotal = $sale_item['unit_price'] * $sale_item['quantity'];
         return $subTotal;
+    }
+
+    public function getTotal()
+    {
+        $sale_items = SaleItem::find()->where(['id_sale' => $this->id])->all();
+        $total = 0;
+        foreach ($sale_items as $item) {
+            $total += ($item->unit_price * $item->quantity);
+        }
+        return $total;
+    }
+
+    public function getSaleStateVenda(){
+        $sale = Sale::find()->where(['id' => $this->id])->asArray()->one();
+        
+      
+        if ($sale["sale_finished"] == "1"){
+            return "Encomenda expedida";
+        }
+        else{
+            return "A preparar encomenda";
+        }
+    }
+
+    public function DeleteSaleItems()
+    {
+        $sale_items = SaleItem::find()->where(['id_sale' => $this->id])->all();
+        foreach ($sale_items as $item) {
+           $item->deleteInternal();
+        }
     }
 }

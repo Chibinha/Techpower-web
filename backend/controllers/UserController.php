@@ -3,17 +3,17 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Sale;
-use common\models\SaleSearch;
-use common\models\SaleItemSearch;
+use common\models\User;
+use common\models\Profile;
+use common\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use common\models\User;
+
 /**
- * SaleController implements the CRUD actions for Sale model.
+ * UserController implements the CRUD actions for User model.
  */
-class SaleController extends Controller
+class UserController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -31,65 +31,41 @@ class SaleController extends Controller
     }
 
     /**
-     * Lists all Sale models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $sales= Sale::find()->all();
-        foreach ($sales as $sale)
-        {  
-            $final_sale = $sale->getTotal();
-            $sale_state = $sale->getSaleStateVenda();
-        };
-
-        // var_dump($final_sale);
-        // die();
-
-        $searchModel = new SaleSearch();
+        $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'total' => $final_sale,
-            'state' => $sale_state,
-        ]); 
-    }
-
-
-    //  * Displays a single Sale model.
-    //  * @param integer $id
-    //  * @return mixed
-    //  * @throws NotFoundHttpException if the model cannot be found
-
-    public function actionView($id)
-    {
-        $searchModel = new SaleItemSearch();
-        $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id]]);
-
-        $sale = Sale::findOne($id);
-        $user_id=$sale['id_user'];
-        $get_user = User::findOne($user_id);
-        $final_sale = $sale->getTotal();
-        
-        return $this->render('view', [
-            'model' => $sale,
-            'dataProvider' => $dataProvider,
-            'searchModel' => $searchModel,
-            'cliente' => $get_user,
-            'total' => $final_sale
         ]);
     }
 
     /**
-     * Creates a new Sale model.
+     * Displays a single User model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Sale();
+        $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -101,7 +77,7 @@ class SaleController extends Controller
     }
 
     /**
-     * Updates an existing Sale model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -110,30 +86,20 @@ class SaleController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $searchModel = new SaleItemSearch();
-        $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id]]);
+        $profile = $model->getProfiles();
 
-        $sale = Sale::findOne($id);
-        $user_id=$sale['id_user'];
-        $get_user = User::findOne($user_id);
-
-        
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) 
-        {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'dataProvider' => $dataProvider,
-            'searchModel' => $searchModel,
-            'user' => $get_user
+            'perfil' => $profile
         ]);
     }
 
     /**
-     * Deletes an existing Sale model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -141,23 +107,21 @@ class SaleController extends Controller
      */
     public function actionDelete($id)
     {
-        $sale = $this->findModel($id);
-        $sale->DeleteSaleItems();     
-        $sale->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Sale model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Sale the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Sale::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         }
 

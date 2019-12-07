@@ -1,7 +1,18 @@
 var precoArray = $('.preco');
 var quantidadeArray = $('.quantidade');
-var subtotal = $('.subtotal');
-var totalArray = $('.total');
+
+
+//Previne que a quantidade de um item no carrinho fique a NULL
+const numInputs = document.querySelectorAll('input[type=number]')
+
+numInputs.forEach(function(input) {
+  input.addEventListener('change', function(e) {
+    if (e.target.value == '') {
+      e.target.value = 1
+      total();
+    }
+  })
+})
 
 function getTotal() {
     var total = 0;

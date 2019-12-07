@@ -69,9 +69,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_INACTIVE],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            [['email'], 'unique'],
+            ['email', 'trim'],
+            ['email', 'required', 'message' => 'Introduza um e-mail.'],
+            ['email', 'email', 'message' => 'Introduza um e-mail válido.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este e-mail já está registado.'],
+            ['email', 'string', 'max' => 255],
         ];
     }
     

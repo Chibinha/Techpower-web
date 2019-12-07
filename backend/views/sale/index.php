@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use common\models\Sale;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\SaleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,19 +18,21 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Sale', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            'user.username',
             'sale_date',
-            'total_amount',
-            'sale_finished:boolean',
-
+            [
+                'attribute' => 'Total',
+                'value' => 'total',
+            ],
+            // [
+            //     'attribute' => 'Estado',
+            //     'value' => 'state',
+            // ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

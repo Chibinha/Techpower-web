@@ -18,7 +18,7 @@ $this->title = $model->product_name . ' | TechPower';
     
     <div class="product-bottom">
         <h4 class="product-price"><?= Html::encode($model->unit_price) ?>€</h4>
-        <?= Html::a('Add to cart', ['addcart', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add to cart', ['cart/addcart', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
     </div>
 
 </div>

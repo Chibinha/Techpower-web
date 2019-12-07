@@ -3,6 +3,8 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 $this->title = 'Carrinho | TechPower';
 $this->registerJsFile('@web/js/script.js',['depends' => [\yii\web\JqueryAsset::className()]]);
@@ -38,23 +40,25 @@ $this->registerJsFile('https://www.paypal.com/sdk/js?client-id=AaTG6AWmTKiOm3nUJ
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($cart as $product) { ?>
+            <?php for ($i = 0; $i < count($cart); $i++) { ?>
                 <tr>
                     <td data-th="Item">
                         <div class="row">
                             <div class="col-sm-2 hidden-xs"><img src="https://d3ift91kaax4b9.cloudfront.net/media/catalog/product/cache/33ba37c1fda6d70c703e88ff79ea1021/p/r/product-p015531-39574_1.jpg" alt="..." class="img-responsive"/></div>
                             <div class="col-sm-9">
-                                <h5><?= $product->product_name ?></h5>
+                                <h5><?= $cart[$i]->product_name ?></h5>
                             </div>
                         </div>
                     </td>
-                    <td data-th="Preço" class="preco"><?= $product->unit_price ?>€</td>
+                    <td data-th="Preço" class="preco"><?= $cart[$i]->unit_price ?>€</td>
                     <td data-th="Quantidade">
-                        <input type="number" class="quantidade form-control text-center" value="1">
+                        <?php $form = ActiveForm::begin(['action' => ['cart/quantity', 'id' => $cart[$i]->id],]) ?>
+                            <input onchange="this.form.submit()" name="quantity" type="number" class="quantidade form-control text-center" value="<?= $quantity[$i] ?>">
+                        <?php ActiveForm::end() ?>
                     </td>
-                    <td id="subtotal" data-th="Subtotal:" class="subtotal text-center"><?= $product->unit_price ?>€</td>
+                    <td id="subtotal" data-th="Subtotal:" class="subtotal text-center"><?= $cart[$i]->unit_price ?>€</td>
                     <td class="remove">
-                        <?= Html::a('Remover Item', ['product/removecart', 'id' => $product->id], ['class' => 'btn btn-danger btn-sm']) ?>
+                        <?= Html::a('Remover Item', ['cart/removecart', 'id' => $cart[$i]->id], ['class' => 'btn btn-danger btn-sm']) ?>
                     </td>         
                 </tr>
             <?php } ?>

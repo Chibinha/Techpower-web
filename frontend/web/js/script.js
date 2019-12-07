@@ -3,21 +3,6 @@ var quantidadeArray = $('.quantidade');
 var subtotal = $('.subtotal');
 var totalArray = $('.total');
 
-fillTotal();
-
-for(pos = 0; pos < quantidadeArray.length; pos++) {
-    quantidadeArray[pos].addEventListener("change", fillTotal());
-}
-
-function fillTotal() {
-    for(i = 0; i < precoArray.length; i++) {
-        subtotal[i].textContent = parseFloat(parseFloat(precoArray[i].textContent) * parseInt(quantidadeArray[i].value)) + '€';
-    }
-    let total = getTotal();
-    totalArray[0].textContent = total + '€';
-    totalArray[1].textContent = total + '€';
-}
-
 function getTotal() {
     var total = 0;
     for(i = 0; i < precoArray.length; i++) {

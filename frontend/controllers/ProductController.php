@@ -110,55 +110,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Adds Product to the cart.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionAddcart($id)
-    {
-        $product = Yii::$app->request->get('id');
-
-        $session = Yii::$app->session;
-        if ($session->isActive) {
-            $cart = [];
-            if ($session->has('cart')) {
-                $cart = $session->get('cart');
-            }
-            array_push($cart, $product);
-            $session->set('cart', $cart);
-            echo implode(" ", $session->get('cart'));
-        }
-
-        return $this->redirect(['site/index']);
-    }
-
-    /**
-     * Removes Product on the cart.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionRemovecart($id)
-    {
-        $product = Yii::$app->request->get('id');
-
-        $session = Yii::$app->session;
-        if ($session->isActive) {
-            $cart = [];
-            if ($session->has('cart')) {
-                $cart = $session->get('cart');
-                unset($cart[array_search($id, $cart)]);
-            }
-            $session->set('cart', $cart);
-            echo implode(" ", $session->get('cart'));
-        }
-
-        return $this->redirect(['site/cart']);
-    }
-
-
-    /**
      * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id

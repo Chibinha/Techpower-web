@@ -54,9 +54,11 @@ return [
                         'api/default',
                         'api/category',
                         'api/product',
+                        'api/user',
                     ],
                     'extraPatterns' => [
                         'GET {id}/' => 'products',
+                        'POST signup' => 'signup',
                     ],
                 ]
             ],

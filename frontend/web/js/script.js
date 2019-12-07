@@ -1,7 +1,3 @@
-var precoArray = $('.preco');
-var quantidadeArray = $('.quantidade');
-
-
 //Previne que a quantidade de um item no carrinho fique a NULL
 const numInputs = document.querySelectorAll('input[type=number]')
 
@@ -13,14 +9,6 @@ numInputs.forEach(function(input) {
     }
   })
 })
-
-function getTotal() {
-    var total = 0;
-    for(i = 0; i < precoArray.length; i++) {
-        total += parseFloat(precoArray[i].textContent) * parseInt(quantidadeArray[i].value);
-    }
-    return total;
-}
 
 // Open pay window for Paypal
 paypal.Buttons({

@@ -56,7 +56,7 @@ $this->registerJsFile('https://www.paypal.com/sdk/js?client-id=AaTG6AWmTKiOm3nUJ
                             <input onchange="this.form.submit()" name="quantity" type="number" class="quantidade form-control text-center" value="<?= $quantity[$i] ?>" min="1" oninput="validity.valid||(value='1');">
                         <?php ActiveForm::end() ?>
                     </td>
-                    <td id="subtotal" data-th="Subtotal:" class="subtotal text-center"><?= $cart[$i]->unit_price ?>€</td>
+                    <td id="subtotal" data-th="Subtotal:" class="subtotal text-center"><?= $subtotal[$i] ?>€</td>
                     <td class="remove">
                         <?= Html::a('Remover Item', ['cart/removecart', 'id' => $cart[$i]->id], ['class' => 'btn btn-danger btn-sm']) ?>
                     </td>         
@@ -65,11 +65,11 @@ $this->registerJsFile('https://www.paypal.com/sdk/js?client-id=AaTG6AWmTKiOm3nUJ
         </tbody>
         <tfoot>
             <tr class="visible-xs">
-                <td class="text-center"><strong>Total: <span class="total"><span>€</strong></td>
+                <td class="text-center"><strong>Total: <?= $total ?>€</strong></td>
             </tr>
             <tr>
                 <td colspan="3" class="hidden-xs"></td>
-                <td class="hidden-xs text-center"><strong>Total <span class="total"><span>€</strong></td>
+                <td class="hidden-xs text-center"><strong>Total <?= $total ?>€</strong></td>
                 <td><div id="paypal-button-container"></div></td>
             </tr>
         </tfoot>

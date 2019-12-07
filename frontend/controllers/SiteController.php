@@ -280,12 +280,25 @@ class SiteController extends Controller
         $session = Yii::$app->session;
         $cart = [];
         $cartArray = [];
+        $subtotalArray = [];
+        $total = 0;
         if ($session->isActive) {
             
             if ($session->has('cart')) {
                 $cartArray = $session->get('cart');
 
                 $cart = Product::findAll(array_keys($cartArray));
+
+                foreach ($cartArray as $key => $value) {
+                    $product = Product::findOne($key);
+
+                    // Calculate subtotal
+                    $subtotal = $product->unit_price * $value;
+                    array_push($subtotalArray, $subtotal);
+
+                    // Calculate total
+                    $total += $subtotal; 
+                }
             }
         }
 
@@ -293,6 +306,8 @@ class SiteController extends Controller
             'profile' => $profile,
             'cart' => $cart,
             'quantity' => array_values($cartArray),
+            'subtotal' => $subtotalArray,
+            'total' => $total,
         ]);
     }
 

@@ -16,18 +16,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($perfil, 'phone')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($perfil, 'address')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($perfil, 'nif')->textInput() ?>
-
-    <?= $form->field($perfil, 'postal_code')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($perfil, 'city')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($perfil, 'country')->textInput(['maxlength' => true]) ?>
-
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

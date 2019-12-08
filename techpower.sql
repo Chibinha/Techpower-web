@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `unit_price` decimal(12,2) DEFAULT NULL,
   `is_discontinued` bit(1) NOT NULL DEFAULT b'0',
   `description` TEXT NOT NULL,
+  `product_image` varchar(255) NOT NULL,
   `id_category` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_category` (`id_category`)

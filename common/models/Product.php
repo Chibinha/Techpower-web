@@ -38,7 +38,8 @@ class Product extends \yii\db\ActiveRecord
             [['is_discontinued'], 'boolean'],
             [['id_category'], 'integer'],
             [['product_name'], 'string', 'max' => 50],
-            [['description'], 'string', 'max' => 5000],
+            [['description'], 'string'],
+            [['product_image'], 'file', 'extensions' => 'jpeg,jpg,png'],
             [['id_category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['id_category' => 'id']],
         ];
     }
@@ -54,7 +55,8 @@ class Product extends \yii\db\ActiveRecord
             'unit_price' => 'Unit Price',
             'is_discontinued' => 'Is Discontinued',
             'description' => 'Description',
-            'id_category' => 'Id Category',
+            'id_category' => 'Category',
+            'product_image' => 'Product Image',
         ];
     }
 

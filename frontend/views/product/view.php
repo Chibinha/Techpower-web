@@ -11,7 +11,7 @@ $this->title = $model->product_name . ' | TechPower';
 
     <h2 class="product-name"><?= Html::encode($model->product_name) ?></h2>
     
-    <img class="product-image col-md-6 col-lg-5" src="https://d3ift91kaax4b9.cloudfront.net/media/catalog/product/cache/33ba37c1fda6d70c703e88ff79ea1021/p/r/product-p006949-517_1.jpg" alt="...">
+    <?= Html::img('@web' . $model->product_image, ['class'=>'product-image col-md-6 col-lg-5']); ?>
     
     <h4>Descrição</h4>
     <p><?= Html::encode($model->description) ?></p>

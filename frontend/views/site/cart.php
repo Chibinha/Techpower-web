@@ -44,7 +44,9 @@ $this->registerJsFile('https://www.paypal.com/sdk/js?client-id=AaTG6AWmTKiOm3nUJ
                 <tr>
                     <td data-th="Item">
                         <div class="row">
-                            <div class="col-sm-2 hidden-xs"><img src="https://d3ift91kaax4b9.cloudfront.net/media/catalog/product/cache/33ba37c1fda6d70c703e88ff79ea1021/p/r/product-p015531-39574_1.jpg" alt="..." class="img-responsive"/></div>
+                            <div class="col-sm-2 hidden-xs">
+                                <?= Html::img('@web' . $cart[$i]->product_image, ['class'=>'img-responsive']); ?>
+                            </div>
                             <div class="col-sm-9">
                                 <h5><?= $cart[$i]->product_name ?></h5>
                             </div>

@@ -44,7 +44,9 @@ $Total = 0;
             <tr>
                 <td data-th="Item">
                     <div class="row">
-                        <div class="col-sm-2 hidden-xs"><img src="https://d3ift91kaax4b9.cloudfront.net/media/catalog/product/cache/33ba37c1fda6d70c703e88ff79ea1021/p/r/product-p015531-39574_1.jpg" alt="..." class="img-responsive"/></div>
+                        <div class="col-sm-2 hidden-xs">
+                            <?= Html::img('@web' . $product_info['product_image'], ['class'=>'img-responsive']); ?>
+                        </div>
                         <div class="col-sm-9">
                             <h5><?= $product_info['product_name'] ?></h5>
                         </div>

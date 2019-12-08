@@ -104,7 +104,6 @@ class SaleController extends Controller
             $orderItem->id_sale = $sale->id;
             $orderItem->unit_price = $model->unit_price;
             $orderItem->id_product = $product;
-            // TODO: Save quantity to session
             $orderItem->quantity = $quantity;
             if (!$orderItem->save(false)) {
                 $transaction->rollBack();

@@ -97,7 +97,7 @@ class SaleController extends Controller
 
         $transaction = $sale->getDb()->beginTransaction();
         $sale->save(false);
-        foreach($cart as $product) {
+        foreach($cart as $product => $quantity) {
             $model = Product::find($product)->one();
 
             $orderItem = new SaleItem();
@@ -105,7 +105,7 @@ class SaleController extends Controller
             $orderItem->unit_price = $model->unit_price;
             $orderItem->id_product = $product;
             // TODO: Save quantity to session
-            $orderItem->quantity = 1;
+            $orderItem->quantity = $quantity;
             if (!$orderItem->save(false)) {
                 $transaction->rollBack();
                 \Yii::$app->session->addFlash('error', 'Não foi possivel gravar a sua encomenda.');

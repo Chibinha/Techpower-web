@@ -1,3 +1,5 @@
+var total = $('#total')[0];
+
 //Previne que a quantidade de um item no carrinho fique a NULL
 const numInputs = document.querySelectorAll('input[type=number]')
 
@@ -5,7 +7,6 @@ numInputs.forEach(function(input) {
   input.addEventListener('change', function(e) {
     if (e.target.value == '') {
       e.target.value = 1
-      total();
     }
   })
 })
@@ -17,7 +18,7 @@ paypal.Buttons({
         return actions.order.create({
             purchase_units: [{
                 amount: {
-                    value: getTotal()
+                    value: total.textContent
                 }
             }]
         });

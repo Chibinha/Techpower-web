@@ -65,7 +65,7 @@ $this->registerJsFile('https://www.paypal.com/sdk/js?client-id=AaTG6AWmTKiOm3nUJ
         </tbody>
         <tfoot>
             <tr class="visible-xs">
-                <td class="text-center"><strong>Total: <?= $total ?>€</strong></td>
+                <td class="text-center"><strong>Total: <span id="total"><?= $total ?></span>€</strong></td>
             </tr>
             <tr>
                 <td colspan="3" class="hidden-xs"></td>

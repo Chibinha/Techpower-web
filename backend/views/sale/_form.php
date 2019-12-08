@@ -29,10 +29,6 @@ $dataCategory = ['' => ' '] + ArrayHelper::map(\common\models\User::find()->asAr
 
     <?= $form->field($model, 'id_user')->dropDownList($dataCategory,['id','username']) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
-
     <?php ActiveForm::end(); ?>
 
 </div>

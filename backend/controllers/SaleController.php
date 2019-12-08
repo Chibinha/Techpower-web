@@ -1,9 +1,8 @@
 <?php
-
 namespace backend\controllers;
-
 use Yii;
 use common\models\Sale;
+use common\models\SaleItem;
 use common\models\SaleSearch;
 use common\models\SaleItemSearch;
 use yii\web\Controller;
@@ -29,7 +28,6 @@ class SaleController extends Controller
             ],
         ];
     }
-
     /**
      * Lists all Sale models.
      * @return mixed
@@ -42,13 +40,10 @@ class SaleController extends Controller
             $final_sale = $sale->getTotal();
             $sale_state = $sale->getSaleStateVenda();
         };
-
         // var_dump($final_sale);
         // die();
-
         $searchModel = new SaleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -56,50 +51,27 @@ class SaleController extends Controller
             'state' => $sale_state,
         ]); 
     }
-
-
     //  * Displays a single Sale model.
     //  * @param integer $id
     //  * @return mixed
     //  * @throws NotFoundHttpException if the model cannot be found
-
     public function actionView($id)
     {
+        $sale = Sale::findOne($id);
         $searchModel = new SaleItemSearch();
         $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id]]);
-
-        $sale = Sale::findOne($id);
         $user_id=$sale['id_user'];
         $get_user = User::findOne($user_id);
-        $final_sale = $sale->getTotal();
+        $total = $sale->getTotal();
         
         return $this->render('view', [
             'model' => $sale,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
             'cliente' => $get_user,
-            'total' => $final_sale
+            'total' => $total
         ]);
     }
-
-    /**
-     * Creates a new Sale model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Sale();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
     /**
      * Updates an existing Sale model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -109,29 +81,19 @@ class SaleController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $searchModel = new SaleItemSearch();
-        $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id]]);
-
         $sale = Sale::findOne($id);
+        // $sale_items = SaleItem::find()->where(['id_sale' => $this->id])->all();
         $user_id=$sale['id_user'];
         $get_user = User::findOne($user_id);
-
+        $total = $sale->getTotal();
         
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) 
-        {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
         return $this->render('update', [
-            'model' => $model,
-            'dataProvider' => $dataProvider,
-            'searchModel' => $searchModel,
-            'user' => $get_user
+            'model' => $sale,
+            // 'sale_items' => $sale_items,
+            'cliente' => $get_user,
+            'total' => $total
         ]);
     }
-
     /**
      * Deletes an existing Sale model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -144,10 +106,8 @@ class SaleController extends Controller
         $sale = $this->findModel($id);
         $sale->DeleteSaleItems();     
         $sale->delete();
-
         return $this->redirect(['index']);
     }
-
     /**
      * Finds the Sale model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -160,7 +120,6 @@ class SaleController extends Controller
         if (($model = Sale::findOne($id)) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

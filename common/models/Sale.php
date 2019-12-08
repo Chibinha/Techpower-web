@@ -90,7 +90,7 @@ class Sale extends \yii\db\ActiveRecord
         foreach ($sale_items as $item) {
             $total += ($item->unit_price * $item->quantity);
         }
-        return $total;
+            return $total;
     }
 
     public function getSaleStateVenda(){

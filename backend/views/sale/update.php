@@ -52,11 +52,9 @@ $this->params['breadcrumbs'][] = 'Update';
                 <td data-th="Quantidade" class="text-center"><?= $item['quantity'] ?></td>           
                 <td data-th="Subtotal" class="text-center"><?= $item['unit_price'] * $item['quantity'] ?>€</td>       
                 <td class="remove">
-                    <?= Html::a('Remover Item',  ['sale-item/delete', 'id' => $item->id],  ['class' => 'btn btn-danger btn-sm']) ?>
+                    <?= Html::a('Remover Item',  ['sale-item/removeitem', 'id' => $item->id],  ['class' => 'btn btn-danger btn-sm']) ?>
                 </td>  
             </tr>
         <?php } ?>
-<div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
+
 </div>

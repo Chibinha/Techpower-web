@@ -37,17 +37,18 @@ class SaleController extends Controller
         $sales= Sale::find()->all();
         foreach ($sales as $sale)
         {  
-            $final_sale = $sale->getTotal();
+            $total = $sale->getTotal();
             $sale_state = $sale->getSaleStateVenda();
-        };
-        // var_dump($final_sale);
+        }
+        //Perguntar ao professor qual é o problema do state porque o total funciona da mesma forma e não tá com problemas
+        // var_dump($sale_state);
         // die();
         $searchModel = new SaleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'total' => $final_sale,
+            'total' => $total,
             'state' => $sale_state,
         ]); 
     }
@@ -82,14 +83,12 @@ class SaleController extends Controller
     public function actionUpdate($id)
     {
         $sale = Sale::findOne($id);
-        // $sale_items = SaleItem::find()->where(['id_sale' => $this->id])->all();
         $user_id=$sale['id_user'];
         $get_user = User::findOne($user_id);
         $total = $sale->getTotal();
         
         return $this->render('update', [
             'model' => $sale,
-            // 'sale_items' => $sale_items,
             'cliente' => $get_user,
             'total' => $total
         ]);
@@ -108,6 +107,7 @@ class SaleController extends Controller
         $sale->delete();
         return $this->redirect(['index']);
     }
+    
     /**
      * Finds the Sale model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

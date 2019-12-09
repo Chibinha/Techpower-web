@@ -23,8 +23,8 @@ $this->title = $model->description . ' | TechPower';
                             <a href="<?=Url::to(['product/view', 'id' => $product["id"]]); ?>">
                             <?= Html::img('@web' . $product['product_image'], ['class'=>'card-img-top']); ?>
                             <div class="card-body">
-                                <h5 class="card-title"><?= StringHelper::truncate(Html::encode($product['product_name']), 42) ?></h5>
-                                <p class="card-text description"><?= StringHelper::truncate(Html::encode(($product['description'])), 58)?></p>
+                                <h5 class="card-title"><?= $product['product_name'] ?></h5>
+                                <p class="card-text description"><?= $product['description']?></p>
                                 <p class="card-text price"><?= $product['unit_price'] ?>€</p>
                             </div>
                             </a>

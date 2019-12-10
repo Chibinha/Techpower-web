@@ -4,8 +4,9 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\SaleSearch;
+use yii\filters\AccessControl;
 
 /**
  * Site controller
@@ -26,7 +27,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'vendas'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -60,7 +61,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->redirect(['sale/index']);
+        $searchModel = new SaleSearch();
+        $dataProvider = Sale::find()->where(['sale_finished' != 1])->all();
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]); 
     }
 
     /**

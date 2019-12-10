@@ -2,21 +2,40 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Sale;
 /* @var $this yii\web\View */
+/* @var $searchModel common\models\SaleSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Menu BackOffice';
+$this->title = 'Sales';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-index">
+<div class="sale-index">
 
-    <div class="titulo-menu">
-        <h1><?= Html::encode($this->title) ?></h1>
-    </div>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-      <div class="body-content">
-      <p>
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
+    <p>
+        <?= Html::a('Create Sale', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'user.username',
+            'sale_date',
+            [
+                'attribute' => 'Total',
+                'value' => 'total',
+            ],
+            [
+                'attribute' => 'Estado',
+                'value' => 'SaleState',
+            ],
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
 
-    </div>
+
 </div>

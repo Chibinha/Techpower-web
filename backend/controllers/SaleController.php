@@ -52,14 +52,12 @@ class SaleController extends Controller
         $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id]]);
         $user_id=$sale['id_user'];
         $get_user = User::findOne($user_id);
-        $total = $sale->getTotal();
         
         return $this->render('view', [
             'model' => $sale,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
             'cliente' => $get_user,
-            'total' => $total
         ]);
     }
     /**

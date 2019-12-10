@@ -92,11 +92,17 @@ class ProductController extends Controller
     {
         $model = $this->findModel($id);
 
+        $oldImage = $model->product_image;
+
         if ($model->load(Yii::$app->request->post())) {
             $model->product_image = UploadedFile::getInstance($model, 'product_image');
-            $image_name =  '/images/' . md5($model->product_name) . '.' . $model->product_image->extension;
-            $model->product_image->saveAs(Yii::getAlias('@frontend') . '/web' . $image_name);
-            $model->product_image = $image_name;
+            if (isset($model->product_image)) {
+                $image_name =  '/images/' . md5($model->product_name) . '.' . $model->product_image->extension;
+                $model->product_image->saveAs(Yii::getAlias('@frontend') . '/web' . $image_name);
+                $model->product_image = $image_name;
+            } else {
+                $model->product_image = $oldImage;
+            }
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }

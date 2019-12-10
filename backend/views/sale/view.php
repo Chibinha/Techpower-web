@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Sales', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+
 <div class="sale-view">
 
     <h1>Sale #<?= Html::encode($this->title) ?></h1>
@@ -41,10 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
             </tr>
         </thead>
         <tbody>
-                <td data-th="Cliente"><?= $cliente['username'] ?></td>
-                <td data-th="Data"><?= $model['sale_date'] ?></td>
-                <td data-th="Total"><?= $total ?>€</td>
-                <td data-th="Estado"><?php Sale::getSaleState($model)?></td> 
+                <td data-th="Cliente"><?= $cliente->username ?></td>
+                <td data-th="Data"><?= $model->sale_date ?></td>
+                <td data-th="Total"><?= $model->total ?></td>
+                <td data-th="Estado"><?php $model->SaleState ?></td> 
             </tr> 
         </tbody>
     </table>

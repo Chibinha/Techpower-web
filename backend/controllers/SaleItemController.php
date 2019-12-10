@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use common\models\Sale;
 use common\models\SaleItem;
 use common\models\SaleItemSearch;
 use yii\web\Controller;
@@ -107,6 +108,15 @@ class SaleItemController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionRemoveitem($id)
+    {
+        $sale_item = $this->findModel($id);
+        $id_sale = $sale_item->id_sale;
+        $sale_item->delete();
+        
+        return $this->redirect(['sale/update','id'=>$id_sale]);
     }
 
     /**

@@ -23,12 +23,12 @@ $dataCategory = ['' => ' '] + ArrayHelper::map(\common\models\User::find()->asAr
         ]
     ]); ?>
 
-    <?= $form->field($model, 'total')?>
+    <?= $form->field($model, 'total')->textInput(['readonly'=> true])?>
 
     <?= $form->field($model, 'sale_finished')->checkbox() ?>
 
     <?= $form->field($model, 'id_user')->dropDownList($dataCategory,['id','username']) ?>
-
+    
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use common\models\Sale;
+use common\models\SaleItem; 
 use common\models\Product;
 
 /* @var $this yii\web\View */
@@ -19,11 +21,25 @@ $this->params['breadcrumbs'][] = 'Update';
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-        <?php foreach($model as $item){ 
-            // **Needs refactoring** Procura os dados do produto através do id_product na tabela sale_item
-            $product_id = $item['id_product'];
-            $product_info = Product::find()->where(['id' => $product_id])->one();  ?>
 
+    <table class="table">
+    <thead>
+        <tr>
+            <th style="width:50%">Item</th>
+            <th style="width:10%">Preço</th>
+            <th style="width:8%">Quantidade</th>
+            <th style="width:22%" class="text-center">Subtotal</th>
+            <th style="width:10%"></th>
+        </tr>
+    </thead>
+
+        <?php 
+        $sale_items = SaleItem::find()->where(['id_sale' => $model->id])->all();
+        foreach($sale_items as $item)
+        { 
+            // **Needs refactoring** Procura os dados do produto através do id_product na tabela sale_item
+            $product_id = $item->id_product;
+            $product_info = Product::find()->where(['id' => $product_id])->one(); ?>
             <tr>
                 <td data-th="Item">
                     <div class="row">
@@ -32,9 +48,13 @@ $this->params['breadcrumbs'][] = 'Update';
                         </div>
                     </div>
                 </td>
-                <td data-th="Preço" class="text-center"><?= $item['unit_price'] ?>€</td>
-                <td data-th="Quantidade" class="text-center"><?= $item['quantity'] ?></td>           
-                <td data-th="Subtotal" class="text-center"><?= $item['unit_price'] * $item['quantity'] ?>€</td>           
+                <td data-th="Preço" class="text-center"><?= $item->unit_price ?>€</td>
+                <td data-th="Quantidade" class="text-center"><?= $item->quantity ?></td>           
+                <td data-th="Subtotal" class="text-center"><?= $item->unit_price * $item->quantity ?>€</td>       
+                <td class="remove">
+                    <?= Html::a('Remover Item',  ['sale-item/removeitem', 'id' => $item->id],  ['class' => 'btn btn-danger btn-sm']) ?>
+                </td>  
             </tr>
         <?php } ?>
+
 </div>

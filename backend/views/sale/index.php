@@ -29,10 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'Total',
                 'value' => 'total',
             ],
-            // [
-            //     'attribute' => 'Estado',
-            //     'value' => 'state',
-            // ],
+            [
+                'attribute' => 'Estado',
+                'value' => 'SaleState',
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

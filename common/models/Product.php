@@ -37,7 +37,7 @@ class Product extends \yii\db\ActiveRecord
             [['unit_price'], 'number'],
             [['is_discontinued'], 'boolean'],
             [['id_category'], 'integer'],
-            [['product_name'], 'string', 'max' => 50],
+            [['product_name'], 'string', 'max' => 150],
             [['description'], 'string'],
             [['product_image'], 'file', 'extensions' => 'jpeg,jpg,png'],
             [['id_category'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['id_category' => 'id']],

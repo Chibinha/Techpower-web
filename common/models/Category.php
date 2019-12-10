@@ -50,6 +50,11 @@ class Category extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getChildren()
+    {
+        return $this->hasMany(Category::className(), ['parent_id' => 'id']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -74,7 +79,29 @@ class Category extends \yii\db\ActiveRecord
         return $this->hasMany(Product::className(), ['id_category' => 'id']);
     }
 
-    public static function getProductsByCategory($id){
+    public static function getProductsByCategory($id)
+    {
         return Product::find()->where(['id_category' => $id]);
+    }
+
+    public static function getAllProducts($id)
+    {
+        $cat_ids = Category::find()->select('id')->where(['parent_id' => $id])->asArray()->all();
+        $ids = [];
+        foreach($cat_ids as $value)
+        {
+            $ids[] = $value['id'];
+        }
+        $ids = implode(',',$ids);
+
+        if ($ids != null)
+        {
+            return $categories = Product::find()->where('id_category IN ('.$ids.','.$id.')')->all();
+        }
+        else
+        {
+            $ids = 0;
+            return $categories = Product::find()->where('id_category IN ('.$ids.','.$id.')')->all();
+        }        
     }
 }

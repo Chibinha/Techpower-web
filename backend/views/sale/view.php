@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td data-th="Cliente"><?= $cliente->username ?></td>
                 <td data-th="Data"><?= $model->sale_date ?></td>
                 <td data-th="Total"><?= $model->total ?></td>
-                <td data-th="Estado"><?php $model->SaleState ?></td> 
+                <td data-th="Estado"><?= $model->SaleState ?></td> 
             </tr> 
         </tbody>
     </table>

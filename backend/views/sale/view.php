@@ -42,10 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
             </tr>
         </thead>
         <tbody>
-                <td data-th="Cliente"><?= $cliente['username'] ?></td>
-                <td data-th="Data"><?= $model['sale_date'] ?></td>
-                <td data-th="Total"><?= $total ?>€</td>
-                <td data-th="Estado"><?php $model->getSaleState($model)?></td> 
+                <td data-th="Cliente"><?= $cliente->username ?></td>
+                <td data-th="Data"><?= $model->sale_date ?></td>
+                <td data-th="Total"><?= $model->total ?></td>
+                <td data-th="Estado"><?php $model->SaleState ?></td> 
             </tr> 
         </tbody>
     </table>

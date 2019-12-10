@@ -48,9 +48,9 @@ $this->params['breadcrumbs'][] = 'Update';
                         </div>
                     </div>
                 </td>
-                <td data-th="Preço" class="text-center"><?= $item['unit_price'] ?>€</td>
-                <td data-th="Quantidade" class="text-center"><?= $item['quantity'] ?></td>           
-                <td data-th="Subtotal" class="text-center"><?= $item['unit_price'] * $item['quantity'] ?>€</td>       
+                <td data-th="Preço" class="text-center"><?= $item->unit_price ?>€</td>
+                <td data-th="Quantidade" class="text-center"><?= $item->quantity ?></td>           
+                <td data-th="Subtotal" class="text-center"><?= $item->unit_price * $item->quantity ?>€</td>       
                 <td class="remove">
                     <?= Html::a('Remover Item',  ['sale-item/removeitem', 'id' => $item->id],  ['class' => 'btn btn-danger btn-sm']) ?>
                 </td>  

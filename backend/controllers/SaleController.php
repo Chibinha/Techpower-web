@@ -34,22 +34,11 @@ class SaleController extends Controller
      */
     public function actionIndex()
     {
-        $sales= Sale::find()->all();
-        foreach ($sales as $sale)
-        {  
-            $total = $sale->getTotal();
-            $sale_state = $sale->getSaleStateVenda();
-        }
-        //Perguntar ao professor qual é o problema do state porque o total funciona da mesma forma e não tá com problemas
-        // var_dump($sale_state);
-        // die();
         $searchModel = new SaleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'total' => $total,
-            'state' => $sale_state,
         ]); 
     }
     //  * Displays a single Sale model.
@@ -83,14 +72,13 @@ class SaleController extends Controller
     public function actionUpdate($id)
     {
         $sale = Sale::findOne($id);
-        $user_id=$sale['id_user'];
-        $get_user = User::findOne($user_id);
-        $total = $sale->getTotal();
+        
+        if ($sale->load(Yii::$app->request->post()) && $sale->save()) {
+            return $this->redirect(['view', 'id' => $sale->id]);
+        }
         
         return $this->render('update', [
             'model' => $sale,
-            'cliente' => $get_user,
-            'total' => $total
         ]);
     }
     /**

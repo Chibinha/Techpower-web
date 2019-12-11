@@ -7,6 +7,11 @@ use yii\helpers\Html;
 
 $this->title = $pageName . ' | TechPower Online - Loja de Informática';
 ?>
+<?php if (Yii::$app->session->hasFlash('message')):?>
+        <div class="alert alert-success" role="alert">
+            <?php echo yii::$app->session->getFlash('message');?>
+        </div>
+<?php endif;?>
 <div class="site-index">
     <div class="body-content">
         <div class="row">

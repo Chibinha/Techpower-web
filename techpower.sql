@@ -126,6 +126,18 @@ ALTER TABLE `sale`
   ADD CONSTRAINT `sale_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --
+-- Constraints for table `profile`
+--
+ALTER TABLE `profile`
+  ADD CONSTRAINT `profile_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
+
+--
+-- Primary Key for table `profile`
+--
+ALTER TABLE profile
+ADD PRIMARY KEY (id_user);
+
+--
 -- Constraints for table `sale_item`
 --
 ALTER TABLE `sale_item`

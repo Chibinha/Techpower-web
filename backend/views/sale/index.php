@@ -7,7 +7,7 @@ use common\models\Sale;
 /* @var $searchModel common\models\SaleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Sales';
+$this->title = 'Sales for Shipping';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sale-index">

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use common\models\Sale;
+use common\models\User;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\SaleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,24 +19,33 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Sale', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'user.username',
-            'sale_date',
-            [
-                'attribute' => 'Total',
-                'value' => 'total',
-            ],
-            [
-                'attribute' => 'Estado',
-                'value' => 'SaleState',
-            ],
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width:15%">Cliente</th>
+                <th style="width:15%">Data</th>
+                <th style="width:15%">Total</th>
+                <th style="width:15%">Estado</th>
+                <th style="width:1%"></th>
+            </tr>
+        </thead>
+        
+        <?php 
+        $sale_not_finished = Sale::find()->where(['sale_finished' => 0])->all();
+        foreach($sale_not_finished as $sale)
+        { 
+            $cliente = User::find()->where(['id' => $sale->id_user])->one(); ?>
+
+            <tbody>
+                <td data-th="Cliente"><?= $cliente->username ?></td>
+                <td data-th="Data"><?= $sale->sale_date ?></td>
+                <td data-th="Total"><?= $sale->total ?></td>
+                <td data-th="Estado"><?= $sale->SaleState ?></td> 
+            </tbody>
+        <?php } ?>
+
+        </table>
+
 
 
 </div>

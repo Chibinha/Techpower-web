@@ -2,6 +2,7 @@
 namespace backend\controllers;
 
 use Yii;
+use common\models\Sale;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use common\models\LoginForm;
@@ -62,11 +63,12 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $searchModel = new SaleSearch();
-        $dataProvider = Sale::find()->where(['sale_finished' != 1])->all();
+        $dataProvider = $searchModel->search(['sale_finished' => 0]);        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]); 
+            
+        ]);
     }
 
     /**

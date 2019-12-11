@@ -54,6 +54,8 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {   
+        $category = Category::getAllProducts($id);
+
         /* Pagination */
         $query = Category::getProductsByCategory($id);
         $count = $query->count();
@@ -66,6 +68,7 @@ class CategoryController extends Controller
             'model' => $this->findModel($id),
             'products' => $products,
             'pages' => $pages,
+            'category' => $category,
         ]);
     }
 

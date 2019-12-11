@@ -43,4 +43,5 @@ phpunit.phar
 /backend/web/robots.txt
 
 # product images
-/frontend/web/images/
+/frontend/web/images/*
+!/frontend/web/images/no-image.jpg

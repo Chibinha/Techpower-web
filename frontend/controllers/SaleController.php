@@ -42,7 +42,7 @@ class SaleController extends Controller
      */
     public function actionIndex()
     {
-        $sales = Sale::find()->orderBy(['id' => SORT_DESC])->asArray()->where(['id_user' => Yii::$app->user->id])->all();
+        $sales = Sale::find()->orderBy(['id' => SORT_DESC])->where(['id_user' => Yii::$app->user->id])->all();
         $sale_items = SaleItem::find()->asArray()->all();
         return $this->render('index', [
             'sales' => $sales,
@@ -63,11 +63,11 @@ class SaleController extends Controller
 
         // Procura os dados do Profile através de relacionamentos de tabelas
         $sale = Sale::findOne($id);
-        $user_id=$sale['id_user'];
+        $user_id = $sale['id_user'];
         $get_profile = Profile::findOne($user_id);
 
         // Procura o nome do produto que está na linha de venda
-        
+
 
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -92,12 +92,12 @@ class SaleController extends Controller
         }
 
         $sale = new Sale();
-        $sale->id_user = 2;
+        $sale->id_user = Yii::$app->user->getId();
         $sale->sale_finished = 0;
 
         $transaction = $sale->getDb()->beginTransaction();
         $sale->save(false);
-        foreach($cart as $product => $quantity) {
+        foreach ($cart as $product => $quantity) {
             $model = Product::find($product)->one();
 
             $orderItem = new SaleItem();

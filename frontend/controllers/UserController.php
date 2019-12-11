@@ -138,6 +138,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
         $model->status = '0';
         $model->save();
+        Yii::$app->getSession()->setFlash('message', 'Conta removida com sucesso!');
         return $this->redirect(['site/index']);
     }
     

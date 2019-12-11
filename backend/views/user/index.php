@@ -11,7 +11,6 @@ $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= GridView::widget([
@@ -21,10 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'username',
             'email',
-            [
-                'attribute' => 'NIF',
-                'value' =>'UserStatus'
-            ],
+            'profile.nif',
             [
                 'attribute' => 'Status',
                 'value' =>'UserStatus'

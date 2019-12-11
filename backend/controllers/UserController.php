@@ -53,8 +53,11 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        $user = $this->findModel($id);
+        $profile = $user->getProfiles();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $user,
+            'profile' => $profile,
         ]);
     }
 

@@ -11,10 +11,8 @@ use yii\filters\VerbFilter;
 use common\models\SaleItem;
 use common\models\User;
 use common\models\Profile;
-
-use common\models\PayPalClient;
 use common\models\Product;
-use PayPalCheckoutSdk\Orders\OrdersGetRequest;
+use yii\filters\AccessControl;
 
 /**
  * SaleController implements the CRUD actions for Sale model.
@@ -27,6 +25,16 @@ class SaleController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

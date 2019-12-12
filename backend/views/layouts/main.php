@@ -36,6 +36,13 @@ AppAsset::register($this);
         ],
     ]);
     
+    $menuItems = [
+        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Sales', 'url' => ['/sale/index']],
+        ['label' => 'Products', 'url' => ['/product/index']],
+        ['label' => 'Categories', 'url' => ['/category/index']],
+        ['label' => 'Users', 'url' => ['/user/index']],
+    ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {

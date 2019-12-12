@@ -34,8 +34,7 @@ class Profile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_user'], 'integer'],
-            [['id_user'], 'required'],
+            [['id_user'], 'unique'],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
             
             ['firstName', 'trim'],

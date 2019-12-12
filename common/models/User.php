@@ -87,6 +87,11 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Profile::className(), ['id_user' => 'id']);
     }
 
+    public function getProfile()
+    {
+        return $this->hasOne(Profile::className(), ['id_user' => 'id']);
+    }
+
     /**
      * {@inheritdoc}
      */

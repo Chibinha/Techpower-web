@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
 /* @var $form yii\widgets\ActiveForm */
-$dataCategory = ['' => ' '] + ArrayHelper::map(\common\models\User::find()->asArray()->all(), 'id', 'username');
+$dataUsers = ['' => ' '] + ArrayHelper::map(\common\models\User::find()->asArray()->all(), 'id', 'username');
 
 ?>
 
@@ -27,7 +27,7 @@ $dataCategory = ['' => ' '] + ArrayHelper::map(\common\models\User::find()->asAr
 
     <?= $form->field($model, 'sale_finished')->checkbox() ?>
 
-    <?= $form->field($model, 'id_user')->dropDownList($dataCategory,['id','username']) ?>
+    <?= $form->field($model, 'id_user')->dropDownList($dataUsers,['id','username']) ?>
     
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

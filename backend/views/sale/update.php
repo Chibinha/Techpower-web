@@ -35,26 +35,32 @@ $this->params['breadcrumbs'][] = 'Update';
 
         <?php 
         $sale_items = SaleItem::find()->where(['id_sale' => $model->id])->all();
-        foreach($sale_items as $item)
-        { 
-            // **Needs refactoring** Procura os dados do produto através do id_product na tabela sale_item
-            $product_id = $item->id_product;
-            $product_info = Product::find()->where(['id' => $product_id])->one(); ?>
-            <tr>
-                <td data-th="Item">
-                    <div class="row">
-                        <div class="col-sm-9">
-                            <h5><?= $product_info['product_name'] ?></h5>
+        if (sizeof($sale_items) == 0)
+        {?>
+            <td><h4><b>Esta venda não contem nenhuns produtos.</td>
+        <?php }
+       else
+        {
+            foreach($sale_items as $item)
+            { 
+                // **Needs refactoring** Procura os dados do produto através do id_product na tabela sale_item
+                $product_id = $item->id_product;
+                $product_info = Product::find()->where(['id' => $product_id])->one(); ?>
+                <tr>
+                    <td data-th="Item">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h5><?= $product_info['product_name'] ?></h5>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td data-th="Preço" class="text-center"><?= $item->unit_price ?>€</td>
-                <td data-th="Quantidade" class="text-center"><?= $item->quantity ?></td>           
-                <td data-th="Subtotal" class="text-center"><?= $item->unit_price * $item->quantity ?>€</td>       
-                <td class="remove">
-                    <?= Html::a('Remover Item',  ['sale-item/removeitem', 'id' => $item->id],  ['class' => 'btn btn-danger btn-sm']) ?>
-                </td>  
-            </tr>
-        <?php } ?>
-
+                    </td>
+                    <td data-th="Preço" class="text-center"><?= $item->unit_price ?>€</td>
+                    <td data-th="Quantidade" class="text-center"><?= $item->quantity ?></td>           
+                    <td data-th="Subtotal" class="text-center"><?= $item->unit_price * $item->quantity ?>€</td>       
+                    <td class="remove">
+                        <?= Html::a('Remover Item',  ['sale-item/removeitem', 'id' => $item->id],  ['class' => 'btn btn-danger btn-sm']) ?>
+                    </td>  
+                </tr>
+            <?php } 
+        };?>
 </div>

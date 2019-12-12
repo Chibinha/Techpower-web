@@ -58,8 +58,6 @@ class SignupForm extends Model
             'tooLong' => 'O apelido não pode exceder os 50 digitos.'],
 
             ['phone', 'trim'],
-
-
             ['phone', 'integer', 'message' => 'Número de telefone incorreto.'],
             ['phone', 'required', 'message' => 'Introduza um número de telefone.'],
             ['phone', 'string', 'min' => 9, 'max' => 9, 

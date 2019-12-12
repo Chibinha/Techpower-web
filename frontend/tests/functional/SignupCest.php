@@ -16,12 +16,12 @@ class SignupCest
 
     public function signupWithEmptyFields(FunctionalTester $I)
     {
-        $I->see('Signup', 'h1');
-        $I->see('Please fill out the following fields to signup:');
+        $I->see('Registar', 'h1');
+        $I->see('Por favor preencha os seguintes campos:');
         $I->submitForm($this->formId, []);
-        $I->seeValidationError('Username cannot be blank.');
-        $I->seeValidationError('Email cannot be blank.');
-        $I->seeValidationError('Password cannot be blank.');
+        $I->seeValidationError('Introduza um nome de utilizador.');
+        $I->seeValidationError('Introduza um e-mail.');
+        $I->seeValidationError('Introduza uma password.');
 
     }
 
@@ -34,26 +34,44 @@ class SignupCest
             'SignupForm[password]'  => 'tester_password',
         ]
         );
-        $I->dontSee('Username cannot be blank.', '.help-block');
-        $I->dontSee('Password cannot be blank.', '.help-block');
-        $I->see('Email is not a valid email address.', '.help-block');
+        $I->dontSee('Introduza um nome de utilizador.', '.help-block');
+        $I->dontSee('Introduza uma password.', '.help-block');
+        $I->see('Introduza um e-mail válido.', '.help-block');
     }
 
     public function signupSuccessfully(FunctionalTester $I)
     {
-        $I->submitForm($this->formId, [
+        $I->submitForm('$this->formId', [
             'SignupForm[username]' => 'tester',
             'SignupForm[email]' => 'tester.email@example.com',
             'SignupForm[password]' => 'tester_password',
+            'SignupForm[firstName]' => 'Unit', 
+            'SignupForm[lastName]' => 'Test', 
+            'SignupForm[phone]' => '000000000', 
+            'SignupForm[address]' => 'Unit test address', 
+            'SignupForm[postal_code]' => '1234-123', 
+            'SignupForm[city]' => 'Unit City', 
+            'SignupForm[country]' => 'Unit Country', 
+            'SignupForm[nif]' => '123456789', 
         ]);
 
         $I->seeRecord('common\models\User', [
             'username' => 'tester',
             'email' => 'tester.email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
+        ]);
+
+        $I->seeRecord('common\models\Profile', [
+            'firstName' => 'Unit', 
+            'lastName' => 'Test', 
+            'phone' => '000000000', 
+            'address' => 'Unit test address', 
+            'postal_code' => '1234-123', 
+            'city' => 'Unit City', 
+            'country' => 'Unit Country', 
+            'nif' => '123456789', 
         ]);
 
         $I->seeEmailIsSent();
-        $I->see('Thank you for registration. Please check your inbox for verification email.');
+        $I->see('Registo efetuado com sucesso.');
     }
 }

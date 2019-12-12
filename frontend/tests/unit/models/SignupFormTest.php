@@ -30,15 +30,39 @@ class SignupFormTest extends \Codeception\Test\Unit
             'password' => 'some_password',
         ]);
 
+        $cenas = new SignupForm([
+            'firstName' => 'Unit', 
+            'lastName' => 'Test', 
+            'phone' => '000000000', 
+            'address' => 'Unit test address', 
+            'postal_code' => '1234-123', 
+            'city' => 'Unit City', 
+            'country' => 'Unit Country', 
+            'nif' => '123456789',
+        ]);
+
+        $profile = $cenas->signup();
         $user = $model->signup();
         expect($user)->true();
+        expect($profile)->true();
 
         /** @var \common\models\User $user */
         $user = $this->tester->grabRecord('common\models\User', [
             'username' => 'some_username',
             'email' => 'some_email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
+            'status' => \common\models\User::STATUS_ACTIVE,
         ]);
+
+        $cenas = $this->tester->grabRecord('common\models\Profile', [
+            'firstName' => 'Unit', 
+            'lastName' => 'Test', 
+            'phone' => '000000000', 
+            'address' => 'Unit test address', 
+            'postal_code' => '1234-123', 
+            'city' => 'Unit City', 
+            'country' => 'Unit Country', 
+            'nif' => '123456789',
+            ]);
 
         $this->tester->seeEmailIsSent();
 
@@ -64,8 +88,8 @@ class SignupFormTest extends \Codeception\Test\Unit
         expect_that($model->getErrors('email'));
 
         expect($model->getFirstError('username'))
-            ->equals('This username has already been taken.');
+            ->equals('Este nome de utilizador já está registado.');
         expect($model->getFirstError('email'))
-            ->equals('This email address has already been taken.');
+            ->equals('Este e-mail já está registado.');
     }
 }

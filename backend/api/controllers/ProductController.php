@@ -10,10 +10,12 @@ class ProductController extends ActiveController
 {
     public $modelClass = 'common\models\Product';
 
-    //http://localhost:8081/api/products/{name}
-    public function actionProductsByName($id){
-
-        $productsmodel = Product::find()->where("product_name=".)->all();
-        return ['products' => $productsmodel];
+    //http://localhost:8081/api/products/name/{name}
+    public function actionTeste($value)
+    {
+         var_dump($value);
+         die();
+        $productmodel = Product::find()->where(['id' => $id]);
+        return ['product' => $productmodel];
     }
 }

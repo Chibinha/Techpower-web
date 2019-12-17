@@ -41,7 +41,7 @@ class SignupCest
 
     public function signupSuccessfully(FunctionalTester $I)
     {
-        $I->submitForm('$this->formId', [
+        $I->submitForm($this->formId, [
             'SignupForm[username]' => 'tester',
             'SignupForm[email]' => 'tester.email@example.com',
             'SignupForm[password]' => 'tester_password',

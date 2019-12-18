@@ -60,8 +60,7 @@ class LoginCest
     {
         $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
         $I->see('A minha conta');
-        // TODO: Click navbar before checks for login/signup 
         $I->dontSeeLink('Login');
-        $I->dontSeeLink('Signup');
+        $I->dontSeeLink('Registar');
     }
 }

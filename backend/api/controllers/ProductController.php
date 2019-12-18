@@ -11,11 +11,9 @@ class ProductController extends ActiveController
     public $modelClass = 'common\models\Product';
 
     //http://localhost:8081/api/products/name/{name}
-    public function actionTeste($value)
+    public function actionTeste($name)
     {
-         var_dump($value);
-         die();
-        $productmodel = Product::find()->where(['id' => $id]);
+        $productmodel = Product::find()->where(['like', 'product_name', $name])->limit(12)->orderBy(['id' => SORT_DESC])->asArray()->all();
         return ['product' => $productmodel];
     }
 }

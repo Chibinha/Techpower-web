@@ -65,10 +65,15 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule', 
                     'controller' => 'api/product', 
+                    'tokens'=> 
+                    [
+                        '{id}'=> '<id:\\d+>',
+                        '{name}'=> '<name:\\w+>'
+                    ],
                     'extraPatterns' => 
                     [
-                        'GET teste/{value}/' => 'teste'
-                    ],
+                        'GET nome/{name}' => 'teste'
+                    ]
                 ]
             ],
         ],

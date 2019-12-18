@@ -57,7 +57,7 @@ return [
                         'api/user',
                     ],
                     'extraPatterns' => [
-                        'GET {id}/' => 'products',
+                        'GET products/{id}/' => 'products',
                         'POST signup' => 'signup',
                     ],
                 ],

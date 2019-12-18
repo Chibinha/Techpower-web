@@ -10,10 +10,11 @@ class CategoryController extends ActiveController
 {
     public $modelClass = 'common\models\Category';
 
-    //http://localhost:8080/api/categories/{id}
-    public function actionProducts($id){
+    //http://localhost:8080/api/categories/products/{id}
+    public function actionProducts($id)
+    {
         $catmodel = new $this->modelClass;
-        $productsmodel = Product::find()->where("id_category=".$id)->all();
+        $productsmodel = Product::find()->where("id_category=" . $id)->all();
         return ['products' => $productsmodel];
     }
 }

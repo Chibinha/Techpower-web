@@ -14,27 +14,20 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'username',
-            //'profile.email',
-            //'profile.nif',
+            'email',
+            'nif',
             [
                 'attribute' => 'Status',
                 'value' =>'UserStatus'
             ],
-            'created_at',
-            'updated_at',
-
+            'created_at:date',
+            'updated_at:date',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

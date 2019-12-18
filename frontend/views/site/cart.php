@@ -18,7 +18,7 @@ $this->registerJsFile('https://www.paypal.com/sdk/js?client-id=AaTG6AWmTKiOm3nUJ
     <hr>
     <h3>Morada de Entrega</h3>
     <?php if(Yii::$app->user->isGuest){ ?>
-    <a href="login">Inicie Sessão</a>
+    <a href="login">Iniciar Sessão</a>
     <?php } else {?>
     <p><?= $profile['firstName'], " " , $profile['lastName']?></p>
     <p><?= $profile['address']?></p>
@@ -72,7 +72,11 @@ $this->registerJsFile('https://www.paypal.com/sdk/js?client-id=AaTG6AWmTKiOm3nUJ
             <tr>
                 <td colspan="3" class="hidden-xs"></td>
                 <td class="hidden-xs text-center"><strong>Total <?= $total ?>€</strong></td>
-                <td><div id="paypal-button-container"></div></td>
+                <?php if(!Yii::$app->user->isGuest) { ?>
+                    <td><div id="paypal-button-container"></div></td>
+                <?php } else { ?>
+                    <td><a href="login" class="btn btn-success btn-block">Iniciar Sessão</a></td>
+                <?php } ?>
             </tr>
         </tfoot>
     </table>

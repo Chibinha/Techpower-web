@@ -54,13 +54,26 @@ return [
                     'controller' => [
                         'api/default',
                         'api/category',
-                        'api/product',
                         'api/user',
                     ],
                     'extraPatterns' => [
                         'GET {id}/' => 'products',
                         'POST signup' => 'signup',
                     ],
+                ],
+
+                [
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => 'api/product', 
+                    'tokens'=> 
+                    [
+                        '{id}'=> '<id:\\d+>',
+                        '{name}'=> '<name:\\w+>'
+                    ],
+                    'extraPatterns' => 
+                    [
+                        'GET nome/{name}' => 'teste'
+                    ]
                 ]
             ],
         ],

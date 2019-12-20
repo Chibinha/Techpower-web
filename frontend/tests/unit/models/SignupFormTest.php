@@ -28,9 +28,6 @@ class SignupFormTest extends \Codeception\Test\Unit
             'username' => 'some_username',
             'email' => 'some_email@example.com',
             'password' => 'some_password',
-        ]);
-
-        $cenas = new SignupForm([
             'firstName' => 'Unit', 
             'lastName' => 'Test', 
             'phone' => '000000000', 
@@ -41,10 +38,8 @@ class SignupFormTest extends \Codeception\Test\Unit
             'nif' => '123456789',
         ]);
 
-        $profile = $cenas->signup();
         $user = $model->signup();
         expect($user)->true();
-        expect($profile)->true();
 
         /** @var \common\models\User $user */
         $user = $this->tester->grabRecord('common\models\User', [
@@ -52,17 +47,6 @@ class SignupFormTest extends \Codeception\Test\Unit
             'email' => 'some_email@example.com',
             'status' => \common\models\User::STATUS_ACTIVE,
         ]);
-
-        $cenas = $this->tester->grabRecord('common\models\Profile', [
-            'firstName' => 'Unit', 
-            'lastName' => 'Test', 
-            'phone' => '000000000', 
-            'address' => 'Unit test address', 
-            'postal_code' => '1234-123', 
-            'city' => 'Unit City', 
-            'country' => 'Unit Country', 
-            'nif' => '123456789',
-            ]);
 
         $this->tester->seeEmailIsSent();
 

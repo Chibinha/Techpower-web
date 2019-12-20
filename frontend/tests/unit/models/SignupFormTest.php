@@ -48,6 +48,12 @@ class SignupFormTest extends \Codeception\Test\Unit
             'status' => \common\models\User::STATUS_ACTIVE,
         ]);
 
+        $profile = $this->tester->grabRecord('common\models\Profile', [
+            'firstName' => 'Unit',
+            'city' => 'Unit City',
+            'nif' => '123456789'
+        ]);
+
         $this->tester->seeEmailIsSent();
 
         $mail = $this->tester->grabLastSentEmail();
@@ -57,6 +63,8 @@ class SignupFormTest extends \Codeception\Test\Unit
         expect($mail->getFrom())->hasKey(\Yii::$app->params['supportEmail']);
         expect($mail->getSubject())->equals('Account registration at ' . \Yii::$app->name);
         expect($mail->toString())->stringContainsString($user->verification_token);
+
+        $profile->delete();
     }
 
     public function testNotCorrectSignup()

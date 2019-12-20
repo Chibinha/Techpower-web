@@ -116,7 +116,6 @@ class SignupForm extends Model
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
         $user->save();
-        $getlast = Yii::$app->db->getLastInsertId();
 
         $profile = new Profile();
         $profile->firstName = $this->firstName;
@@ -127,7 +126,7 @@ class SignupForm extends Model
         $profile->postal_code = $this->postal_code;
         $profile->city = $this->city;
         $profile->country = $this->country;
-        $profile->id_user = $getlast;
+        $profile->id_user = $user->id;
         $profile->save();
 
         return $this->sendEmail($user);

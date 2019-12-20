@@ -75,4 +75,36 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasMany(SaleItem::className(), ['id_product' => 'id']);
     }
+
+    public function publish($channel, $msg)
+    {
+        $server = "127.0.0.1";
+        $port = 1883;
+        $username = "";
+        $password = "";
+        $clientId = "phpMQTT-publisher";
+        $mqtt = new \app\mosquito\phpMQTT($server, $port, $clientId);
+        if ($mqtt->connect(true, null, $username, $password)) {
+            $mqtt->publish($channel, $msg, 0);
+            $mqtt->close();
+        } else {
+            file_put_contents("debug.output", "Time out!");
+        }
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        $msg = new \stdClass();
+        $msg->id = $this->id;
+        $msg->product_name = $this->product_name;
+        $jsonMsg = json_encode($msg);
+
+        if ($insert) {
+            $this->publish("INSERT", $jsonMsg);
+        } else {
+            $this->publish("UPDATE", $jsonMsg);
+        }
+    }
 }

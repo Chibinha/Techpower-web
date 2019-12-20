@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
+    'name' => 'TechPower',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
@@ -53,13 +54,26 @@ return [
                     'controller' => [
                         'api/default',
                         'api/category',
-                        'api/product',
                         'api/user',
                     ],
                     'extraPatterns' => [
-                        'GET {id}/' => 'products',
+                        'GET products/{id}/' => 'products',
                         'POST signup' => 'signup',
                     ],
+                ],
+
+                [
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => 'api/product', 
+                    'tokens'=> 
+                    [
+                        '{id}'=> '<id:\\d+>',
+                        '{name}'=> '<name:\\w+>'
+                    ],
+                    'extraPatterns' => 
+                    [
+                        'GET nome/{name}' => 'teste'
+                    ]
                 ]
             ],
         ],

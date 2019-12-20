@@ -41,10 +41,10 @@ AppAsset::register($this);
     } else {
         $menuItems = [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Vendas', 'url' => ['/sale/index']],
-            ['label' => 'Produtos', 'url' => ['/product/index']],
-            ['label' => 'Categorias', 'url' => ['/category/index']],
-            ['label' => 'Utilizadores', 'url' => ['/user/index']],
+            ['label' => 'Sales', 'url' => ['/sale/index']],
+            ['label' => 'Products', 'url' => ['/product/index']],
+            ['label' => 'Categories', 'url' => ['/category/index']],
+            ['label' => 'Users', 'url' => ['/user/index']],
         ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

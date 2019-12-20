@@ -5,13 +5,30 @@ namespace app\api\controllers;
 use Yii;
 use yii\rest\ActiveController;
 use common\models\User;
-use common\models\Profile;
-use yii\base\Model;
 use frontend\models\SignupForm;
+use yii\filters\auth\HttpBasicAuth;
 
 class UserController extends ActiveController
 {
     public $modelClass = 'common\models\User';
+    
+    
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => HttpBasicAuth::className(),
+            'auth' => function ($username, $password)
+            {
+                $user = User::findByUsername($username);
+                if ($user && $user->validatePassword($password))
+                {
+                    return $user;
+                }
+            }
+        ];
+        return $behaviors;      
+    }
 
     //http://localhost:8080/user/signup
     public function actionSignup() {

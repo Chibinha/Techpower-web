@@ -7,7 +7,7 @@ use common\models\Sale;
 /* @var $searchModel common\models\SaleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Sales for Shipping';
+$this->title = 'Sales';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sale-index">
@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'user.username',

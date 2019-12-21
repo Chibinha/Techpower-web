@@ -12,13 +12,7 @@ $this->title = 'Sales for Shipping';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sale-index">
-
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Sale', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <table class="table">
         <thead>
             <tr>
@@ -54,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php } 
         }?>
 
-        </table>
+    </table>
 
 
 

@@ -18,6 +18,7 @@ class UserController extends ActiveController
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => HttpBasicAuth::className(),
+            'except' => ['signup'],
             'auth' => function ($username, $password)
             {
                 $user = User::findByUsername($username);
@@ -30,9 +31,8 @@ class UserController extends ActiveController
         return $behaviors;      
     }
 
-    //http://localhost:8080/user/signup
+    //http://localhost:8080/api/user/signup
     public function actionSignup() {
-
         $model = new SignupForm();
         $params = Yii::$app->request->post();
         $model->username = $params['username'];

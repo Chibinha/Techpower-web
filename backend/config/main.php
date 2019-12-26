@@ -48,20 +48,21 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
+            'rules' =>
+            [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
                         'api/default',
                         'api/category',
                         'api/user',
+                        
                     ],
                     'extraPatterns' => [
                         'GET products/{id}/' => 'products',
                         'POST signup' => 'signup',
                     ],
                 ],
-
                 [
                     'class' => 'yii\rest\UrlRule', 
                     'controller' => 'api/product', 
@@ -74,6 +75,14 @@ return [
                     [
                         'GET name/{name}' => 'productsbyname'
                     ]
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => 'api/sale', 
+                    'tokens'=> 
+                    [
+                        '{id}'=> '<id:\\d+>',
+                    ],
                 ]
             ],
         ],

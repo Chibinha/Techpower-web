@@ -16,7 +16,7 @@ class ProductController extends ActiveController
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => QueryParamAuth::className(),
-            'except' => ['index', 'view'],
+            'except' => ['index', 'view', 'productsbyname'],
         ];
         return $behaviors;
     }

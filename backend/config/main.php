@@ -83,10 +83,6 @@ return [
                     [
                         '{id}'=> '<id:\\d+>',
                     ],
-                    'extraPatterns' => 
-                    [
-                        'POST createsale' => 'createsale' 
-                    ]
                 ]
             ],
         ],

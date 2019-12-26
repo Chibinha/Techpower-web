@@ -59,7 +59,7 @@ return [
                         
                     ],
                     'extraPatterns' => [
-                        'GET {id}/' => 'products',
+                        'GET products/{id}/' => 'products',
                         'POST signup' => 'signup',
                     ],
                 ],
@@ -73,7 +73,7 @@ return [
                     ],
                     'extraPatterns' => 
                     [
-                        'GET name/{name}' => 'teste'
+                        'GET name/{name}' => 'productsbyname'
                     ]
                 ],
                 [

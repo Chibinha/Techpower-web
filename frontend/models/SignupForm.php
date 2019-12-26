@@ -58,8 +58,6 @@ class SignupForm extends Model
             'tooLong' => 'O apelido não pode exceder os 50 digitos.'],
 
             ['phone', 'trim'],
-
-
             ['phone', 'integer', 'message' => 'Número de telefone incorreto.'],
             ['phone', 'required', 'message' => 'Introduza um número de telefone.'],
             ['phone', 'string', 'min' => 9, 'max' => 9, 
@@ -118,7 +116,6 @@ class SignupForm extends Model
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
         $user->save();
-        $getlast = Yii::$app->db->getLastInsertId();
 
         $profile = new Profile();
         $profile->firstName = $this->firstName;
@@ -129,7 +126,7 @@ class SignupForm extends Model
         $profile->postal_code = $this->postal_code;
         $profile->city = $this->city;
         $profile->country = $this->country;
-        $profile->id_user = $getlast;
+        $profile->id_user = $user->id;
         $profile->save();
 
         return $this->sendEmail($user);

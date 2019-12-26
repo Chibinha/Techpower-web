@@ -93,11 +93,11 @@ class Sale extends \yii\db\ActiveRecord
         }
     }
 
-    public function DeleteSaleItems()
+    public function beforeDelete()
     {
-        $sale_items = SaleItem::find()->where(['id_sale' => $this->id])->all();
-        foreach ($sale_items as $item) {
+        foreach (SaleItem::findAll(['id_sale' => $this->id]) as $item) {
            $item->deleteInternal();
         }
+        return parent::beforeDelete();
     }
 }

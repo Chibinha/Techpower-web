@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `product` (
 
 DROP TABLE IF EXISTS `profile`;
 CREATE TABLE IF NOT EXISTS `profile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
@@ -70,7 +71,8 @@ CREATE TABLE IF NOT EXISTS `profile` (
   `postal_code` varchar(8) DEFAULT NULL,
   `city` varchar(50) DEFAULT NULL,
   `country` varchar(100) DEFAULT NULL,
-  `id_user` int(11) NOT NULL
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -130,12 +132,6 @@ ALTER TABLE `sale`
 --
 ALTER TABLE `profile`
   ADD CONSTRAINT `profile_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
-
---
--- Primary Key for table `profile`
---
-ALTER TABLE profile
-ADD PRIMARY KEY (id_user);
 
 --
 -- Constraints for table `sale_item`

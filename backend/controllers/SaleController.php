@@ -100,8 +100,7 @@ class SaleController extends Controller
      */
     public function actionDelete($id)
     {
-        $sale = $this->findModel($id);
-        $sale->DeleteSaleItems();     
+        $sale = $this->findModel($id);   
         $sale->delete();
         return $this->redirect(['index']);
     }

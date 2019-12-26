@@ -28,6 +28,14 @@ class SignupFormTest extends \Codeception\Test\Unit
             'username' => 'some_username',
             'email' => 'some_email@example.com',
             'password' => 'some_password',
+            'firstName' => 'Unit', 
+            'lastName' => 'Test', 
+            'phone' => '000000000', 
+            'address' => 'Unit test address', 
+            'postal_code' => '1234-123', 
+            'city' => 'Unit City', 
+            'country' => 'Unit Country', 
+            'nif' => '123456789',
         ]);
 
         $user = $model->signup();
@@ -37,7 +45,13 @@ class SignupFormTest extends \Codeception\Test\Unit
         $user = $this->tester->grabRecord('common\models\User', [
             'username' => 'some_username',
             'email' => 'some_email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
+            'status' => \common\models\User::STATUS_ACTIVE,
+        ]);
+
+        $profile = $this->tester->grabRecord('common\models\Profile', [
+            'firstName' => 'Unit',
+            'city' => 'Unit City',
+            'nif' => '123456789'
         ]);
 
         $this->tester->seeEmailIsSent();
@@ -49,6 +63,8 @@ class SignupFormTest extends \Codeception\Test\Unit
         expect($mail->getFrom())->hasKey(\Yii::$app->params['supportEmail']);
         expect($mail->getSubject())->equals('Account registration at ' . \Yii::$app->name);
         expect($mail->toString())->stringContainsString($user->verification_token);
+
+        $profile->delete();
     }
 
     public function testNotCorrectSignup()
@@ -64,8 +80,8 @@ class SignupFormTest extends \Codeception\Test\Unit
         expect_that($model->getErrors('email'));
 
         expect($model->getFirstError('username'))
-            ->equals('This username has already been taken.');
+            ->equals('Este nome de utilizador já está registado.');
         expect($model->getFirstError('email'))
-            ->equals('This email address has already been taken.');
+            ->equals('Este e-mail já está registado.');
     }
 }

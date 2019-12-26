@@ -4,6 +4,9 @@ modules:
     enabled:
         - WebDriver:
             url: http://localhost:8080
-            browser: firefox
+            browser: chrome
+            window_size: 'maximize'
         - Yii2:
             part: init
+            cleanup: false # don't wrap test in transaction
+            entryScript: index.php

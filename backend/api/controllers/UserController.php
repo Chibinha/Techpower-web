@@ -6,7 +6,9 @@ use Yii;
 use yii\rest\ActiveController;
 use common\models\User;
 use frontend\models\SignupForm;
+use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\QueryParamAuth;
 
 class UserController extends ActiveController
 {
@@ -17,18 +19,26 @@ class UserController extends ActiveController
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
-            'class' => HttpBasicAuth::className(),
-            'except' => ['signup'],
-            'auth' => function ($username, $password)
-            {
-                $user = User::findByUsername($username);
-                if ($user && $user->validatePassword($password))
-                {
-                    return $user;
-                }
-            }
+            'class' => CompositeAuth::className(),
+            'except' => ['login', 'signup'],
+            'authMethods' => [
+                HttpBasicAuth::className(),
+                QueryParamAuth::className(),
+            ],
         ];
         return $behaviors;      
+    }
+
+    public function actionLogin()
+    {
+        $post = Yii::$app->request->post();
+
+        $user = User::findByUsername($post['username']);
+        if ($user && $user->validatePassword($post['password']))
+        {
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return array('auth-key' => $user->auth_key);
+        }
     }
 
     //http://localhost:8080/api/user/signup

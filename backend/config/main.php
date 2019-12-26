@@ -60,6 +60,7 @@ return [
                     ],
                     'extraPatterns' => [
                         'GET products/{id}/' => 'products',
+                        'POST login' => 'login',
                         'POST signup' => 'signup',
                     ],
                 ],

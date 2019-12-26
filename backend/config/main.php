@@ -72,7 +72,7 @@ return [
                     ],
                     'extraPatterns' => 
                     [
-                        'GET nome/{name}' => 'teste'
+                        'GET name/{name}' => 'productsbyname'
                     ]
                 ]
             ],

@@ -78,17 +78,21 @@ class Product extends \yii\db\ActiveRecord
 
     public function publish($channel, $msg)
     {
-        $server = "127.0.0.1";
-        $port = 1883;
-        $username = "";
-        $password = "";
-        $clientId = "phpMQTT-publisher";
-        $mqtt = new \app\mosquito\phpMQTT($server, $port, $clientId);
-        if ($mqtt->connect(true, null, $username, $password)) {
-            $mqtt->publish($channel, $msg, 0);
-            $mqtt->close();
-        } else {
-            file_put_contents("debug.output", "Time out!");
+        try {
+            $server = "127.0.0.1";
+            $port = 1883;
+            $username = "";
+            $password = "";
+            $clientId = "phpMQTT-publisher";
+            $mqtt = new \app\mosquito\phpMQTT($server, $port, $clientId);
+            if ($mqtt->connect(true, null, $username, $password)) {
+                $mqtt->publish($channel, $msg, 0);
+                $mqtt->close();
+            } else {
+                file_put_contents("debug.output", "Time out!");
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
     }
 

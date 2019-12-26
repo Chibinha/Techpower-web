@@ -40,7 +40,10 @@ class SaleController extends ActiveController
                 throw new \yii\web\ForbiddenHttpException('Your request was made with invalid credentials.');
         }
     }
-
+    /**
+     * To create pass product id as key and quantity as value
+     * Ex: { "3": "1" }
+     */
     public function actionCreate()
     {
         $params = Yii::$app->request->post();

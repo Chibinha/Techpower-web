@@ -19,7 +19,7 @@ class CategoryController extends ActiveController
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::className(),
-            'except' => ['index', 'view'],
+            'except' => ['index', 'view', 'products'],
             'authMethods' => [
                 [
                     'class' => HttpBasicAuth::className(),
@@ -48,11 +48,10 @@ class CategoryController extends ActiveController
         }
     }
 
-    //http://localhost:8080/api/categories/products/{id}
+    //http://localhost:8080/api/categories/{id}/products
     public function actionProducts($id)
     {
-        $catmodel = new $this->modelClass;
-        $productsmodel = Product::find()->where("id_category=" . $id)->all();
-        return ['products' => $productsmodel];
+        $products = Product::find()->where("id_category=" . $id)->all();
+        return ['products' => $products];
     }
 }

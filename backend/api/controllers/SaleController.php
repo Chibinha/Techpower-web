@@ -27,19 +27,32 @@ class SaleController extends ActiveController
     public function actions()
     {
         $actions = parent::actions();
+        unset($actions['index']);
+        unset($actions['view']);
         unset($actions['create']);
         return $actions;
     }
-
+    
     public function checkAccess($action, $model = null, $params = [])
     {
         // check if the user can access $action and $model
         // throw ForbiddenHttpException if access should be denied
         if ($action === 'create' || $action === 'update' || $action === 'delete') {
             if(\Yii::$app->user->isGuest)
-                throw new \yii\web\ForbiddenHttpException('Your request was made with invalid credentials.');
+            throw new \yii\web\ForbiddenHttpException('Your request was made with invalid credentials.');
         }
     }
+    
+    public function actionIndex()
+    {
+  
+    }
+
+    public function actionView()
+    {
+  
+    }
+
     /**
      * To create pass product id as key and quantity as value
      * Ex: { "3": "1" }
@@ -76,5 +89,6 @@ class SaleController extends ActiveController
         return $response;   
     }
 
+    
     
 }

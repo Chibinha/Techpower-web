@@ -22,7 +22,17 @@ class UserController extends ActiveController
             'class' => CompositeAuth::className(),
             'except' => ['login', 'signup'],
             'authMethods' => [
-                HttpBasicAuth::className(),
+                [
+                    'class' => HttpBasicAuth::className(),
+                    'auth' => function ($username, $password)
+                    {
+                        $user = User::findByUsername($username);
+                        if ($user && $user->validatePassword($password))
+                        {
+                            return $user;
+                        }
+                    }
+                ],
                 QueryParamAuth::className(),
             ],
         ];

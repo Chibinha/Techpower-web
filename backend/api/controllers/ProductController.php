@@ -2,6 +2,9 @@
 
 namespace app\api\controllers;
 use common\models\Product;
+use common\models\User;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
 
 use Yii;
@@ -15,8 +18,22 @@ class ProductController extends ActiveController
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
-            'class' => QueryParamAuth::className(),
+            'class' => CompositeAuth::className(),
             'except' => ['index', 'view', 'productsbyname'],
+            'authMethods' => [
+                [
+                    'class' => HttpBasicAuth::className(),
+                    'auth' => function ($username, $password)
+                    {
+                        $user = User::findByUsername($username);
+                        if ($user && $user->validatePassword($password))
+                        {
+                            return $user;
+                        }
+                    }
+                ],
+                QueryParamAuth::className(),
+            ],
         ];
         return $behaviors;
     }

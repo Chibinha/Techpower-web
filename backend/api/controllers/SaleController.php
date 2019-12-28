@@ -27,7 +27,6 @@ class SaleController extends ActiveController
     public function actions()
     {
         $actions = parent::actions();
-        unset($actions['index']);
         unset($actions['view']);
         unset($actions['create']);
         return $actions;
@@ -42,16 +41,17 @@ class SaleController extends ActiveController
             throw new \yii\web\ForbiddenHttpException('Your request was made with invalid credentials.');
         }
     }
-    
-    public function actionIndex()
-    {
-  
-    }
 
-    public function actionView()
+    public function actionView($id)
     {
-  
-    }
+        $sale = Sale::find($id)->asArray()->one();
+        $products = SaleItem::find()->where(['id_sale' => $id])->asArray()->all();
+
+        
+        //return array());
+        return array_merge($sale, array('products' => $products));
+        
+    } 
 
     /**
      * To create pass product id as key and quantity as value
@@ -88,7 +88,4 @@ class SaleController extends ActiveController
         $response['message'] = 'Venda Registada com sucesso!';
         return $response;   
     }
-
-    
-    
 }

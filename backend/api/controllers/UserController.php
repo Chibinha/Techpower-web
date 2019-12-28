@@ -20,7 +20,7 @@ class UserController extends ActiveController
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::className(),
-            'except' => ['login', 'signup'],
+            'except' => ['login', 'create'],
             'authMethods' => [
                 [
                     'class' => HttpBasicAuth::className(),
@@ -39,6 +39,13 @@ class UserController extends ActiveController
         return $behaviors;      
     }
 
+    public function actions()
+    {
+        $actions = parent::actions();
+        unset($actions['create']);
+        return $actions;
+    }
+
     public function actionLogin()
     {
         $post = Yii::$app->request->post();
@@ -51,8 +58,7 @@ class UserController extends ActiveController
         }
     }
 
-    //http://localhost:8080/api/user/signup
-    public function actionSignup() {
+    public function actionCreate() {
         $model = new SignupForm();
         $params = Yii::$app->request->post();
         $model->username = $params['username'];

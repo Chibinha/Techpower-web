@@ -2,10 +2,10 @@
 
 namespace app\api\controllers;
 
-use common\models\Profile;
 use Yii;
 use yii\rest\ActiveController;
 use common\models\User;
+use common\models\Profile;
 use frontend\models\SignupForm;
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
@@ -45,6 +45,7 @@ class UserController extends ActiveController
         $actions = parent::actions();
         unset($actions['create']);
         unset($actions['view']);
+        unset($actions['update']);
         return $actions;
     }
 
@@ -95,5 +96,51 @@ class UserController extends ActiveController
             $response['errors'] = $model->getErrors();
             return $response;
         }
+    }
+
+    public function actionUpdate($id){
+
+        $user = User::findOne($id);
+        if (!$user) {
+            throw new \yii\web\NotFoundHttpException("The user was not found.");
+        }
+
+        $profile = Profile::findOne($user->id);
+        if (!$profile) {
+            throw new \yii\web\NotFoundHttpException("The user has no profile.");
+        }
+
+        $username =\Yii::$app->request->post('username');
+        $email =\Yii::$app->request->post('email');
+        $firstName =\Yii::$app->request->post('firstName');
+        $lastName =\Yii::$app->request->post('lastName');
+        $phone =\Yii::$app->request->post('phone');
+        $address =\Yii::$app->request->post('address');
+        $nif =\Yii::$app->request->post('nif');
+        $postal_code =\Yii::$app->request->post('postal_code');
+        $city =\Yii::$app->request->post('city');
+        $country =\Yii::$app->request->post('country');
+
+        $user->username = $username;
+        $user->email = $email;
+        $profile->firstName = $firstName;
+        $profile->lastName = $lastName;
+        $profile->phone = $phone;
+        $profile->address = $address;
+        $profile->nif = $nif;
+        $profile->postal_code = $postal_code;
+        $profile->city = $city;
+        $profile->country = $country;
+
+        if($user->validate() && $profile->validate()) {
+            $profile->save();
+            $user->save();
+            $response['isSuccess'] = 201;
+            $response['message'] = 'Dados do utilizador alterados com sucesso!';
+            return $response;
+        }
+        else {
+            throw new \yii\web\BadRequestHttpException("The request could not be understood by the server due to malformed syntax.");
+        }       
     }
 }

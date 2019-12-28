@@ -2,6 +2,7 @@
 
 namespace app\api\controllers;
 
+use common\models\Profile;
 use Yii;
 use yii\rest\ActiveController;
 use common\models\User;
@@ -43,6 +44,7 @@ class UserController extends ActiveController
     {
         $actions = parent::actions();
         unset($actions['create']);
+        unset($actions['view']);
         return $actions;
     }
 
@@ -56,6 +58,14 @@ class UserController extends ActiveController
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return array('auth-key' => $user->auth_key);
         }
+    }
+
+    public function actionView($id)
+    {
+        $user = User::find($id)->asArray()->one();
+        $profile = Profile::find()->where(['id_user' => $id])->asArray()->one();
+
+        return array_merge($user, $profile);
     }
 
     public function actionCreate() {

@@ -58,6 +58,8 @@ class UserController extends ActiveController
         {
             \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return array('auth-key' => $user->auth_key);
+        } else {
+            throw new \yii\web\NotAcceptableHttpException();
         }
     }
 

@@ -54,12 +54,27 @@ class UserController extends ActiveController
         $post = Yii::$app->request->post();
 
         $user = User::findByUsername($post['username']);
-        if ($user && $user->validatePassword($post['password']))
-        {
-            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return array('auth-key' => $user->auth_key);
+        if ($user && $user->validatePassword($post['password'])) {
+            $userData = User::find()->where(['id' => $user->id])->select([
+                "id",
+                "username",
+                "auth_key",
+                "email"
+            ])->asArray()->one();
+            $profile = Profile::find()->where(['id_user' => $user->id])->select([
+                "firstName",
+                "lastName",
+                "phone",
+                "address",
+                "nif",
+                "postal_code",
+                "city",
+                "country"
+            ])->asArray()->one();
+    
+            return array_merge($userData, $profile);
         } else {
-            throw new \yii\web\NotAcceptableHttpException();
+            return ['Error' => 'Incorrect username or password'];
         }
     }
 

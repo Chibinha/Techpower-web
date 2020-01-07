@@ -52,6 +52,6 @@ class CategoryController extends ActiveController
     public function actionProducts($id)
     {
         $products = Product::find()->where("id_category=" . $id)->all();
-        return ['products' => $products];
+        return $products;
     }
 }

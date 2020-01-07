@@ -52,6 +52,6 @@ class ProductController extends ActiveController
     public function actionProductsbyname($name)
     {
         $productmodel = Product::find()->where(['like', 'product_name', $name])->limit(12)->orderBy(['id' => SORT_DESC])->asArray()->all();
-        return ['product' => $productmodel];
+        return $productmodel;
     }
 }

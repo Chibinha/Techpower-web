@@ -5,6 +5,9 @@ namespace app\api\controllers;
 use Yii;
 use yii\rest\ActiveController;
 use common\models\Product;
+use common\models\User;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\QueryParamAuth;
 
 class CategoryController extends ActiveController
@@ -15,8 +18,22 @@ class CategoryController extends ActiveController
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
-            'class' => QueryParamAuth::className(),
-            'except' => ['index', 'view'],
+            'class' => CompositeAuth::className(),
+            'except' => ['index', 'view', 'products'],
+            'authMethods' => [
+                [
+                    'class' => HttpBasicAuth::className(),
+                    'auth' => function ($username, $password)
+                    {
+                        $user = User::findByUsername($username);
+                        if ($user && $user->validatePassword($password))
+                        {
+                            return $user;
+                        }
+                    }
+                ],
+                QueryParamAuth::className(),
+            ],
         ];
         return $behaviors;
     }
@@ -31,11 +48,10 @@ class CategoryController extends ActiveController
         }
     }
 
-    //http://localhost:8080/api/categories/products/{id}
+    //http://localhost:8080/api/categories/{id}/products
     public function actionProducts($id)
     {
-        $catmodel = new $this->modelClass;
-        $productsmodel = Product::find()->where("id_category=" . $id)->all();
-        return ['products' => $productsmodel];
+        $products = Product::find()->where("id_category=" . $id)->all();
+        return ['products' => $products];
     }
 }

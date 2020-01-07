@@ -54,14 +54,21 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
                         'api/default',
-                        'api/category',
                         'api/user',
                         
                     ],
                     'extraPatterns' => [
-                        'GET products/{id}/' => 'products',
+                        'POST login' => 'login',
                         'POST signup' => 'signup',
                     ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule', 
+                    'controller' => 'api/category',
+                    'extraPatterns' => 
+                    [
+                        'GET {id}/products' => 'products',
+                    ]
                 ],
                 [
                     'class' => 'yii\rest\UrlRule', 

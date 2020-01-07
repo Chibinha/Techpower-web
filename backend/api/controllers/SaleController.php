@@ -21,7 +21,6 @@ class SaleController extends ActiveController
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::className(),
-            'except' => ['index', 'view'],
             'authMethods' => [
                 [
                     'class' => HttpBasicAuth::className(),
@@ -60,7 +59,7 @@ class SaleController extends ActiveController
 
     public function actionView($id)
     {
-        $sale = Sale::find($id)->asArray()->one();
+        $sale = Sale::find()->where(['id' => $id])->asArray()->one();
         $products = SaleItem::find()->where(['id_sale' => $id])->asArray()->all();
 
         

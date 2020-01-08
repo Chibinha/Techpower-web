@@ -42,6 +42,7 @@ class SaleController extends ActiveController
     public function actions()
     {
         $actions = parent::actions();
+        unset($actions['index']);
         unset($actions['view']);
         unset($actions['create']);
         return $actions;
@@ -57,16 +58,23 @@ class SaleController extends ActiveController
         }
     }
 
+    public function actionIndex()
+    {
+        return Sale::find()->where(['id_user' => Yii::$app->user->id])->asArray()->all();
+    }
+
     public function actionView($id)
     {
-        $sale = Sale::find()->where(['id' => $id])->asArray()->one();
-        $products = SaleItem::find()->where(['id_sale' => $id])->asArray()->all();
-
-        
-        //return array());
-        return array_merge($sale, array('products' => $products));
-        
-    } 
+        $sale_object = Sale::findOne($id);
+        if ($sale_object->id_user == Yii::$app->user->id)
+        {
+            $sale_array = Sale::find()->where(['id' => $id])->asArray()->one();
+            $products = SaleItem::find()->where(['id_sale' => $id])->asArray()->all();
+            
+            //return array());
+            return array_merge($sale_array, array('products' => $products));
+        }
+    }
 
     /**
      * To create pass product id as key and quantity as value

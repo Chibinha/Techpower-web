@@ -55,7 +55,7 @@ return [
                     'controller' => [
                         'api/default',
                         'api/user',
-                        
+
                     ],
                     'extraPatterns' => [
                         'POST login' => 'login',
@@ -63,32 +63,40 @@ return [
                     ],
                 ],
                 [
-                    'class' => 'yii\rest\UrlRule', 
+                    'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/category',
-                    'extraPatterns' => 
+                    'extraPatterns' =>
                     [
                         'GET {id}/products' => 'products',
                     ]
                 ],
                 [
-                    'class' => 'yii\rest\UrlRule', 
-                    'controller' => 'api/product', 
-                    'tokens'=> 
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/product',
+                    'tokens' =>
                     [
-                        '{id}'=> '<id:\\d+>',
-                        '{name}'=> '<name:\\w+>'
+                        '{id}' => '<id:\\d+>',
+                        '{name}' => '<name:\\w+>'
                     ],
-                    'extraPatterns' => 
+                    'extraPatterns' =>
                     [
                         'GET name/{name}' => 'productsbyname'
                     ]
                 ],
                 [
-                    'class' => 'yii\rest\UrlRule', 
-                    'controller' => 'api/sale', 
-                    'tokens'=> 
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/sale',
+                    'tokens' =>
                     [
-                        '{id}'=> '<id:\\d+>',
+                        '{id}' => '<id:\\d+>',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/image',
+                    'tokens' =>
+                    [
+                        '{name}' => '<name:\\d+>',
                     ],
                 ]
             ],

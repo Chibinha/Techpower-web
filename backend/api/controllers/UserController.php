@@ -21,7 +21,7 @@ class UserController extends ActiveController
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::className(),
-            'except' => ['login', 'create'],
+            'except' => ['create'],
             'authMethods' => [
                 [
                     'class' => HttpBasicAuth::className(),
@@ -49,31 +49,24 @@ class UserController extends ActiveController
 
     public function actionLogin()
     {
-        $post = Yii::$app->request->post();
+        $userData = User::find()->where(['id' => Yii::$app->user->getId()])->select([
+            "id",
+            "username",
+            "auth_key",
+            "email"
+        ])->asArray()->one();
+        $profile = Profile::find()->where(['id_user' => Yii::$app->user->getId()])->select([
+            "firstName",
+            "lastName",
+            "phone",
+            "address",
+            "nif",
+            "postal_code",
+            "city",
+            "country"
+        ])->asArray()->one();
 
-        $user = User::findByUsername($post['username']);
-        if ($user && $user->validatePassword($post['password'])) {
-            $userData = User::find()->where(['id' => $user->id])->select([
-                "id",
-                "username",
-                "auth_key",
-                "email"
-            ])->asArray()->one();
-            $profile = Profile::find()->where(['id_user' => $user->id])->select([
-                "firstName",
-                "lastName",
-                "phone",
-                "address",
-                "nif",
-                "postal_code",
-                "city",
-                "country"
-            ])->asArray()->one();
-    
-            return array_merge($userData, $profile);
-        } else {
-            return ['Error' => 'Incorrect username or password'];
-        }
+        return array_merge($userData, $profile);
     }
 
     public function actionView($id)

@@ -85,7 +85,7 @@ class ProductController extends Controller
                 $model->product_image->saveAs(Yii::getAlias('@frontend') . '/web/images/' . $image_name);
                 $model->product_image = $image_name;
             } else {
-                $model->product_image = '/images/no-image.jpg';
+                $model->product_image = 'no-image.jpg';
             }
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);

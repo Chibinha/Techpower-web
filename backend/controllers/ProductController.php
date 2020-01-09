@@ -81,8 +81,8 @@ class ProductController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->product_image = UploadedFile::getInstance($model, 'product_image');
             if (isset($model->product_image)) {
-                $image_name =  '/images/' . md5($model->product_name) . '.' . $model->product_image->extension;
-                $model->product_image->saveAs(Yii::getAlias('@frontend') . '/web' . $image_name);
+                $image_name =  md5($model->product_name) . '.' . $model->product_image->extension;
+                $model->product_image->saveAs(Yii::getAlias('@frontend') . '/web/images/' . $image_name);
                 $model->product_image = $image_name;
             } else {
                 $model->product_image = '/images/no-image.jpg';
@@ -112,8 +112,8 @@ class ProductController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->product_image = UploadedFile::getInstance($model, 'product_image');
             if (isset($model->product_image)) {
-                $image_name =  '/images/' . md5($model->product_name) . '.' . $model->product_image->extension;
-                $model->product_image->saveAs(Yii::getAlias('@frontend') . '/web' . $image_name);
+                $image_name = md5($model->product_name) . '.' . $model->product_image->extension;
+                $model->product_image->saveAs(Yii::getAlias('@frontend') . '/web/images/' . $image_name);
                 $model->product_image = $image_name;
             } else {
                 $model->product_image = $oldImage;

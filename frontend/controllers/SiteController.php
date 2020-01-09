@@ -283,7 +283,7 @@ class SiteController extends Controller
         $subtotalArray = [];
         $total = 0;
         if ($session->isActive) {
-            
+
             if ($session->has('cart')) {
                 $cartArray = $session->get('cart');
 
@@ -297,7 +297,7 @@ class SiteController extends Controller
                     array_push($subtotalArray, $subtotal);
 
                     // Calculate total
-                    $total += $subtotal; 
+                    $total += $subtotal;
                 }
             }
         }

@@ -62,7 +62,22 @@ class CategoryController extends ActiveController
     //http://localhost:8080/api/categories/{id}/products
     public function actionProducts($id)
     {
-        $products = Product::find()->where("id_category=" . $id)->all();
-        return $products;
+        $cat_ids = Category::find()->select('id')->where(['parent_id' => $id])->asArray()->all();
+        $ids = [];
+        foreach($cat_ids as $value)
+        {
+            $ids[] = $value['id'];
+        }
+        $ids = implode(',',$ids);
+
+        if ($ids != null)
+        {
+            return $categories = Product::find()->where('id_category IN ('.$ids.','.$id.')')->all();
+        }
+        else
+        {
+            $ids = 0;
+            return $categories = Product::find()->where('id_category IN ('.$ids.','.$id.')')->all();
+        }        
     }
 }

@@ -83,21 +83,21 @@ class SaleController extends ActiveController
     public function actionCreate()
     {
         $params = Yii::$app->request->post();
-        
+
         $sale = new Sale();
         $sale->id_user = Yii::$app->user->getId();
         $sale->sale_finished = 0;
         $sale->save();
 
         $transaction = $sale->getDb()->beginTransaction();
-        foreach ($params as $id => $quantity) {
-            $model = Product::findOne($id);
-
+        foreach ($params as $product)
+        {
+            $model = Product::findOne($product['id']);
             $orderItem = new SaleItem();
             $orderItem->id_sale = $sale->id;
             $orderItem->unit_price = $model->unit_price;
             $orderItem->id_product = $model->id;
-            $orderItem->quantity = $quantity;
+            $orderItem->quantity = $product['quantity'];
             if (!$orderItem->save(false)) {
                 $transaction->rollBack();
                 $sale->getErrors();

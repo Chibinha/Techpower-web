@@ -80,7 +80,7 @@ return [
                     ],
                     'extraPatterns' =>
                     [
-                        'GET name/{name}' => 'productsbyname'
+                        'POST name' => 'productsbyname'
                     ]
                 ],
                 [

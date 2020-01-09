@@ -38,6 +38,16 @@ class ProductController extends ActiveController
         return $behaviors;
     }
 
+    public function actions() {
+        $actions = parent::actions();
+        unset($actions['index']);
+        return $actions;
+    }
+
+    public function actionIndex() {
+        return Product::find()->all();
+    }
+
     public function checkAccess($action, $model = null, $params = [])
     {
         // check if the user can access $action and $model

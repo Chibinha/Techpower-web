@@ -2,6 +2,7 @@
 
 namespace app\api\controllers;
 
+use common\models\Category;
 use Yii;
 use yii\rest\ActiveController;
 use common\models\Product;
@@ -36,6 +37,16 @@ class CategoryController extends ActiveController
             ],
         ];
         return $behaviors;
+    }
+
+    public function actions() {
+        $actions = parent::actions();
+        unset($actions['index']);
+        return $actions;
+    }
+
+    public function actionIndex() {
+        return Category::find()->all();
     }
 
     public function checkAccess($action, $model = null, $params = [])

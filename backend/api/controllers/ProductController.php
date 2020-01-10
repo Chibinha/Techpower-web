@@ -48,10 +48,12 @@ class ProductController extends ActiveController
         }
     }
 
-    //http://localhost:8081/api/products/name/{name}
-    public function actionProductsbyname($name)
+    //http://localhost:8081/api/products/name
+    public function actionProductsbyname()
     {
-        $productmodel = Product::find()->where(['like', 'product_name', $name])->limit(12)->orderBy(['id' => SORT_DESC])->asArray()->all();
+        $params = Yii::$app->request->post();
+
+        $productmodel = Product::find()->where(['like', 'product_name', $params["name"]])->limit(12)->orderBy(['id' => SORT_DESC])->asArray()->all();
         return ['product' => $productmodel];
     }
 }

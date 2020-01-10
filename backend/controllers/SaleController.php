@@ -1,5 +1,7 @@
 <?php
 namespace backend\controllers;
+
+use common\models\Profile;
 use Yii;
 use common\models\Sale;
 use common\models\SaleItem;
@@ -63,13 +65,13 @@ class SaleController extends Controller
         $searchModel = new SaleItemSearch();
         $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id]]);
         $user_id=$sale['id_user'];
-        $get_user = User::findOne($user_id);
+        $get_profile = Profile::findOne($user_id);
         
         return $this->render('view', [
             'model' => $sale,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
-            'cliente' => $get_user,
+            'cliente' => $get_profile,
         ]);
     }
     /**

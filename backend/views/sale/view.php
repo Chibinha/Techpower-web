@@ -42,10 +42,33 @@ $this->params['breadcrumbs'][] = $this->title;
             </tr>
         </thead>
         <tbody>
-                <td data-th="Cliente"><?= $cliente->username ?></td>
+                <td data-th="Cliente"><?= $cliente->firstName ?></td>
                 <td data-th="Data"><?= $model->sale_date ?></td>
                 <td data-th="Total"><?= $model->total ?></td>
                 <td data-th="Estado"><?= $model->SaleState ?></td> 
+            </tr> 
+        </tbody>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width:15%">Cliente</th>
+                <th style="width:15%">Telefone</th>
+                <th style="width:15%">Endereço</th>
+                <th style="width:15%">Codigo Postal</th>
+                <th style="width:15%">Cidade</th>
+                <th style="width:15%">País</th>
+                <th style="width:1%"></th>
+            </tr>
+        </thead>
+        <tbody>
+                <td data-th="Cliente"><?= $cliente->firstName ?></td>
+                <td data-th="Telefone"><?= $cliente->phone ?></td>
+                <td data-th="Endereço"><?= $cliente->address ?></td>
+                <td data-th="Codigo Postal"><?= $cliente->postal_code ?></td> 
+                <td data-th="Cidade"><?= $cliente->city ?></td> 
+                <td data-th="País"><?= $cliente->country ?></td> 
             </tr> 
         </tbody>
     </table>

@@ -21,7 +21,7 @@ $this->title = $model->description . ' | TechPower';
                     <div class="card col-sm-6 col-md-3">
                         <div class="card-content">
                             <a href="<?=Url::to(['product/view', 'id' => $product["id"]]); ?>">
-                            <?= Html::img('@web' . $product['product_image'], ['class'=>'card-img-top']); ?>
+                            <?= Html::img('@web/images/' . $product['product_image'], ['class'=>'card-img-top']); ?>
                             <div class="card-body">
                                 <h5 class="card-title"><?= $product['product_name'] ?></h5>
                                 <p class="card-text description"><?= $product['description']?></p>

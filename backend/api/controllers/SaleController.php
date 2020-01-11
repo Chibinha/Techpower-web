@@ -60,7 +60,18 @@ class SaleController extends ActiveController
 
     public function actionIndex()
     {
-        return Sale::find()->where(['id_user' => Yii::$app->user->id])->asArray()->all();
+        $sales = Sale::find()->where(['id_user' => Yii::$app->user->id])->all();
+
+        $sales_array = [];
+
+        foreach ($sales as $sale)
+        {
+            $sale_array = Sale::find()->where(['id' => $sale->id])->asArray()->one();
+            $products_array = SaleItem::find()->where(['id_sale' => $sale->id])->asArray()->all();
+
+            array_push($sales_array, array_merge($sale_array, array('products' => $products_array)));
+        }
+        return $sales_array;
     }
 
     public function actionView($id)
@@ -69,16 +80,14 @@ class SaleController extends ActiveController
         if ($sale_object->id_user == Yii::$app->user->id)
         {
             $sale_array = Sale::find()->where(['id' => $id])->asArray()->one();
-            $products = SaleItem::find()->where(['id_sale' => $id])->asArray()->all();
+            $products_array = SaleItem::find()->where(['id_sale' => $id])->asArray()->all();
             
-            //return array());
-            return array_merge($sale_array, array('products' => $products));
+            return array_merge($sale_array, array('products' => $products_array));
         }
     }
 
     /**
      * To create pass product id as key and quantity as value
-     * Ex: { "3": "1" }
      */
     public function actionCreate()
     {

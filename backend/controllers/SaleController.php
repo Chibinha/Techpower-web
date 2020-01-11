@@ -64,8 +64,7 @@ class SaleController extends Controller
         $sale = Sale::findOne($id);
         $searchModel = new SaleItemSearch();
         $dataProvider = $searchModel->search( [ $searchModel->formName() => ['id_sale' => $id]]);
-        $user_id=$sale['id_user'];
-        $get_profile = Profile::findOne($user_id);
+        $get_profile = Profile::findOne($sale['id_user']);
         
         return $this->render('view', [
             'model' => $sale,
@@ -84,7 +83,7 @@ class SaleController extends Controller
     public function actionUpdate($id)
     {
         $sale = Sale::findOne($id);
-        
+                
         if ($sale->load(Yii::$app->request->post()) && $sale->save()) {
             return $this->redirect(['view', 'id' => $sale->id]);
         }

@@ -1,5 +1,6 @@
 <?php
 
+use common\models\User;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
@@ -8,8 +9,7 @@ use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
 /* @var $form yii\widgets\ActiveForm */
-$dataUsers = ['' => ' '] + ArrayHelper::map(\common\models\User::find()->asArray()->all(), 'id', 'username');
-
+$user =  User::find()->where(['id' => $model->id_user])->One();
 ?>
 
 <div class="sale-form">
@@ -27,7 +27,7 @@ $dataUsers = ['' => ' '] + ArrayHelper::map(\common\models\User::find()->asArray
 
     <?= $form->field($model, 'sale_finished')->checkbox() ?>
 
-    <?= $form->field($model, 'id_user')->dropDownList($dataUsers,['id','username']) ?>
+    <?= $form->field($user, 'username')->textInput(['readonly'=> true]) ?>
     
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

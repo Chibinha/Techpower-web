@@ -45,6 +45,7 @@ class SaleController extends ActiveController
         unset($actions['index']);
         unset($actions['view']);
         unset($actions['create']);
+        unset($actions['update']);
         return $actions;
     }
     
@@ -109,6 +110,22 @@ class SaleController extends ActiveController
         $transaction->commit();
         $response['isSuccess'] = 201;
         $response['message'] = 'Venda Registada com sucesso!';
+        return $response;   
+    }
+
+    public function actionUpdate($id){
+
+        $params = Yii::$app->request->post();
+
+        $sale = Sale::findOne($id);
+        if (!$sale) {
+            throw new \yii\web\NotFoundHttpException("The sale was not found.");
+        }
+
+        $sale->sale_finished = $params['sale_finished'];
+        $sale->save();
+        $response['isSuccess'] = 200;
+        $response['message'] = 'Venda atualizada com sucesso!';
         return $response;   
     }
 }

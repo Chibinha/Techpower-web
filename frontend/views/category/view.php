@@ -17,7 +17,7 @@ $this->title = $model->description . ' | TechPower';
             <div class="panel panel-default">
                 <p class="title"><span class="special">| </span><?= Html::encode($model->description) ?></p>
                 <div class="panel-body">
-                    <?php foreach($category as $product){ ?>
+                    <?php foreach($products as $product){ ?>
                     <div class="card col-sm-6 col-md-3">
                         <div class="card-content">
                             <a href="<?=Url::to(['product/view', 'id' => $product["id"]]); ?>">
@@ -30,10 +30,10 @@ $this->title = $model->description . ' | TechPower';
                             </a>
                         </div>
                     </div>
-                    <?php } ?>
-                    <div class="pagination center">
-                        <?php echo LinkPager::widget(['pagination' => $pages,]); ?>
-                    </div>                 
+                    <?php } ?>                 
+                </div>
+                <div class="pagination center">
+                    <?php echo LinkPager::widget(['pagination' => $pages,]); ?>
                 </div>
             </div>
         </div>

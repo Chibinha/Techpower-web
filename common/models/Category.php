@@ -79,29 +79,28 @@ class Category extends \yii\db\ActiveRecord
         return $this->hasMany(Product::className(), ['id_category' => 'id']);
     }
 
-    public static function getProductsByCategory($id)
+    public static function getProductsByCategories($id)
     {
-        return Product::find()->where(['id_category' => $id]);
-    }
-
-    public static function getAllProducts($id)
-    {
+        //Vai buscar todas as sub-categorias com o id da categoria principal
         $cat_ids = Category::find()->select('id')->where(['parent_id' => $id])->asArray()->all();
         $ids = [];
         foreach($cat_ids as $value)
         {
             $ids[] = $value['id'];
         }
+
         $ids = implode(',',$ids);
 
         if ($ids != null)
         {
-            return $categories = Product::find()->where('id_category IN ('.$ids.','.$id.')')->all();
+            //Se for uma categoria
+            return Product::find()->where('id_category IN ('.$ids.','.$id.')');
         }
         else
         {
+            //Se for uma sub-categoria
             $ids = 0;
-            return $categories = Product::find()->where('id_category IN ('.$ids.','.$id.')')->all();
+            return Product::find()->where('id_category IN ('.$ids.','.$id.')');
         }        
     }
 }

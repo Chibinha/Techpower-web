@@ -54,10 +54,8 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {   
-        $category = Category::getAllProducts($id);
-
         /* Pagination */
-        $query = Category::getProductsByCategory($id);
+        $query = Category::getProductsByCategories($id);
         $count = $query->count();
         $pages = new Pagination(['totalCount' => $count]);
         $products = $query->offset($pages->offset)
@@ -66,9 +64,8 @@ class CategoryController extends Controller
         
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'products' => $products,
             'pages' => $pages,
-            'category' => $category,
+            'products' => $products,
         ]);
     }
 

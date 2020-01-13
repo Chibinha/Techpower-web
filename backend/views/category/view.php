@@ -10,6 +10,8 @@ $this->title = "Category: " . $model->description;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
+if ($parent != null) { $parent_name = $parent->description; }
+else { $parent_name = "(not set)"; }
 ?>
 <div class="category-view">
 

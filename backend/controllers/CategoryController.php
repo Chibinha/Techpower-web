@@ -63,11 +63,11 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {
-        $category = Category::findOne($id)->parent_id;
-        $parent_name = Category::findOne($category)->description;
+        $parent_id = Category::findOne($id)->parent_id;
+        $parent = Category::findOne($parent_id);
 
         return $this->render('view', [
-            'parent_name' => $parent_name,
+            'parent' => $parent,
             'model' => $this->findModel($id),
         ]);
     }

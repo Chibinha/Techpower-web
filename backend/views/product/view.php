@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'unit_price',
             'is_discontinued:boolean',
             'description',
-            'id_category',
+            'category.description',
         ],
     ]) ?>
 

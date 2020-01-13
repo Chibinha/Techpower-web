@@ -10,9 +10,9 @@ class CartCest
     {
         $I->amOnPage(Url::toRoute('/'));
         $I->see("Novidades");
-        $I->click("Asus VivoBook 15");
+        $I->click("Placa Gráfica Gigabyte Aorus GeForce RTX 2080 Ti W");
         
-        $I->see("Asus VivoBook 15");
+        $I->see("Placa Gráfica Gigabyte Aorus GeForce RTX 2080 Ti W");
         $I->see('Add to cart');
         // Need to reload because of bug
         // https://stackoverflow.com/questions/54264398/codeception-webdriver-acceptance-test-cant-click-on-an-element-it-can-see
@@ -24,6 +24,6 @@ class CartCest
         $I->click("Carrinho");
         $I->amOnPage(Url::toRoute('/site/cart'));
         $I->see('Checkout');
-        $I->see('Asus VivoBook 15');
+        $I->see('Placa Gráfica Gigabyte Aorus GeForce RTX 2080 Ti W');
     }
 }

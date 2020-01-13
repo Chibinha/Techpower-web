@@ -84,6 +84,14 @@ class SignupCest
             'status' => \common\models\User::STATUS_ACTIVE
         ]);
 
+        $profile = $I->grabRecord('common\models\Profile', [
+            'firstName' => 'Unit',
+            'city' => 'Unit City',
+            'nif' => '123456789'
+        ]);
+
         $I->see('Registo efetuado com sucesso.');
+
+        $profile->delete();
     }
 }

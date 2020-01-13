@@ -11,8 +11,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
 
-$user = User::find()->where(['id' => $model->id_user])->One();
-$this->title = "Sale #" . $model->id . " by " . $user->username;
+$this->title = "Sale #" . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Sales', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

@@ -11,15 +11,14 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
 
-$this->title = $model->id;
+$this->title = 'Sale: ' . '#'.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Sales', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-
 <div class="sale-view">
 
-    <h1>Sale #<?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -31,39 +30,23 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    <br>
+    
+    <h3>User information</h3>
     <table class="table">
         <thead>
             <tr>
                 <th style="width:15%">Cliente</th>
-                <th style="width:15%">Data</th>
-                <th style="width:15%">Total</th>
-                <th style="width:15%">Estado</th>
-                <th style="width:1%"></th>
-            </tr>
-        </thead>
-        <tbody>
-                <td data-th="Cliente"><?= $cliente->firstName ?></td>
-                <td data-th="Data"><?= $model->sale_date ?></td>
-                <td data-th="Total"><?= $model->total ?></td>
-                <td data-th="Estado"><?= $model->SaleState ?></td> 
-            </tr> 
-        </tbody>
-    </table>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th style="width:15%">Cliente</th>
-                <th style="width:15%">Telefone</th>
-                <th style="width:15%">Endereço</th>
+                <th style="width:10%">Telefone</th>
+                <th style="width:30%">Endereço</th>
                 <th style="width:15%">Codigo Postal</th>
-                <th style="width:15%">Cidade</th>
-                <th style="width:15%">País</th>
+                <th style="width:10%">Cidade</th>
+                <th style="width:10%">País</th>
                 <th style="width:1%"></th>
             </tr>
         </thead>
         <tbody>
-                <td data-th="Cliente"><?= $cliente->firstName ?></td>
+                <td data-th="Cliente"><?= $cliente->firstName ." ". $cliente->lastName?></td>
                 <td data-th="Telefone"><?= $cliente->phone ?></td>
                 <td data-th="Endereço"><?= $cliente->address ?></td>
                 <td data-th="Codigo Postal"><?= $cliente->postal_code ?></td> 
@@ -72,7 +55,26 @@ $this->params['breadcrumbs'][] = $this->title;
             </tr> 
         </tbody>
     </table>
-    
+
+    <h3>Sale information</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width:25%">Data</th>
+                <th style="width:25%">Total</th>
+                <th style="width:25%">Estado</th>
+                <th style="width:1%"></th>
+            </tr>
+        </thead>
+        <tbody>
+                <td data-th="Data"><?= $model->sale_date ?></td>
+                <td data-th="Total"><?= $model->total ?></td>
+                <td data-th="Estado"><?= $model->SaleState ?></td> 
+            </tr> 
+        </tbody>
+    </table>
+
+    <h3>Sale products</h3>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [

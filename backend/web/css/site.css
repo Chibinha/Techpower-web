@@ -123,3 +123,8 @@ a.desc:after {
 .titulo-menu {
     text-align: center;
 }
+
+/* Sale */
+.sale-view h3{
+    font-weight: bold;
+}

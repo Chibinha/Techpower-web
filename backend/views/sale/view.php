@@ -11,7 +11,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
 
-$this->title = $model->id;
+$user = User::find()->where(['id' => $model->id_user])->One();
+$this->title = "Sale #" . $model->id . " by " . $user->username;
 $this->params['breadcrumbs'][] = ['label' => 'Sales', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -19,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="sale-view">
 
-    <h1>Sale #<?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -76,7 +77,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
             [
                 'attribute' => 'Produto',
                 'value' => 'product.product_name'

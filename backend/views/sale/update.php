@@ -3,13 +3,15 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use common\models\Sale;
+use common\models\User;
 use common\models\SaleItem; 
 use common\models\Product;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Sale */
 
-$this->title = 'Update Sale: ' . $model->id;
+$user =  User::find()->where(['id' => $model->id_user])->One();
+$this->title = 'Update Sale: #'.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Sales', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

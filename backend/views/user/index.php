@@ -17,10 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
             'username',
             'email',
-            'profile.nif',
             [
                 'attribute' => 'Status',
                 'value' =>'UserStatus'

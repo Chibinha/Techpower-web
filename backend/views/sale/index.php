@@ -3,9 +3,11 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use common\models\Sale;
+use common\models\User;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\SaleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
 
 $this->title = 'Sales';
 $this->params['breadcrumbs'][] = $this->title;
@@ -17,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
             'user.username',
             'sale_date',
             [

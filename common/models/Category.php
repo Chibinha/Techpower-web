@@ -63,6 +63,13 @@ class Category extends \yii\db\ActiveRecord
         return $this->hasOne(Category::className(), ['id' => 'parent_id']);
     }
 
+    public function getParentName()
+    {
+        if ($this->parent_id != null){
+        return Category::find()->where(['id' => $this->parent_id])->One()->description;
+        }
+    } 
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -70,7 +77,8 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Category::className(), ['parent_id' => 'id']);
     }
-
+    
+    
     /**
      * @return \yii\db\ActiveQuery
      */

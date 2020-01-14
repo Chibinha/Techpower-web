@@ -3,9 +3,10 @@
 namespace backend\tests\functional;
 
 use backend\tests\FunctionalTester;
+use common\fixtures\CategoryFixture;
 use common\fixtures\UserFixture;
 
-class CategoryCest
+class ProductCest
 {
     /**
      * Load fixtures before db transaction begin
@@ -20,6 +21,10 @@ class CategoryCest
             'user' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'login_data.php'
+            ],
+            'category' => [
+                'class' => CategoryFixture::className(),
+                'dataFile' => codecept_data_dir() . 'category_data.php'
             ]
         ];
     }
@@ -31,27 +36,18 @@ class CategoryCest
         $I->fillField('Password', 'password_0');
         $I->click('login-button');
 
-        $I->amOnPage('/category/index');
+        $I->amOnPage('/product/index');
     }
 
-    public function addCategory(FunctionalTester $I)
+    public function addProduct(FunctionalTester $I)
     {
-        
-        $I->see('Categories', 'h1');
-        $I->click('Create Category');
-        $I->see('Create Category');
-        $I->fillField('Description', 'test category');
+        $I->see('Products', 'h1');
+        $I->click('Create Product');
+        $I->see('Create Product');
+        $I->fillField('Product Name', 'test product');
+        $I->fillField('Unit Price', '1.11');
+        $I->fillField('Description', 'test product');
         $I->click('Save');
-        $I->see('Category: test category');
-    }
-
-    public function editCategory(FunctionalTester $I)
-    {
-        $I->see('Categories', 'h1');
-        $I->click('Update', 'a');
-        $I->see('Update Category');
-        $I->fillField('Description', 'test category');
-        $I->click('Save');
-        $I->see('Category: test category');
+        $I->see('Product: test product');
     }
 }

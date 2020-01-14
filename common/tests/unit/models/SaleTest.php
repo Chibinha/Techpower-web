@@ -2,9 +2,7 @@
 
 namespace frontend\tests\unit\models;
 
-use common\models\Category;
 use common\models\Sale;
-use common\models\SaleItem;
 
 class SaleTest extends \Codeception\Test\Unit
 {

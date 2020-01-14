@@ -32,7 +32,7 @@ class Sale extends \yii\db\ActiveRecord
     {
         return [
             [['sale_date'], 'safe'],
-            [['id_user'], 'required'],
+            [['id_user', 'sale_date'], 'required'],
             [['sale_finished'], 'boolean'],
             [['id_user'], 'integer'],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],

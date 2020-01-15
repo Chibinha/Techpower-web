@@ -6,5 +6,6 @@ return [
         'is_discontinued' => 0,
         'description' => 'description',
         'id_category' => 1,
+        'product_image' => 'someimage.jpeg',
     ],
 ];

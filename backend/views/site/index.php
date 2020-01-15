@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td data-th="Data"><?= $sale->sale_date ?></td>
                     <td data-th="Total"><?= $sale->total ?></td>
                     <td data-th="Estado"><?= $sale->SaleState ?></td> 
-                    <td class="update">
+                    <td class="ver">
                         <?= Html::a('Ver',  ['sale/view', 'id' => $sale->id],  ['class' => 'btn btn-primary']) ?>
                     </td>  
                 </tbody>

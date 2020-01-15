@@ -31,6 +31,21 @@ class SaleTest extends \Codeception\Test\Unit
         $this->assertTrue($sale->validate(['sale_date']));
     }
 
+    public function testSaleStateNull(){        
+        $sale = new Sale();
+        $sale->sale_finished = 3;
+        $this->assertFalse($sale->validate(['sale_finished']));
+    }
+
+    public function testSaleStateCorrect(){        
+        $sale = new Sale();
+        $sale->sale_finished = 1;
+        $sale2 = new Sale();
+        $sale2->sale_finished = 0;
+        $this->assertTrue($sale->validate(['sale_finished']));
+        $this->assertTrue($sale2->validate(['sale_finished']));
+    }
+
     public function testSaleState(){  
         $sale = new Sale(); 
         $sale->sale_finished = 1;

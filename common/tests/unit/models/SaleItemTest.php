@@ -25,18 +25,6 @@ class SaleItemTest extends \Codeception\Test\Unit
         $this->assertFalse($saleItem->validate(['id']));
     }
 
-    public function testSaleItemIdNull(){        
-        $saleItem = new SaleItem();
-        $saleItem->id = null;
-        $this->assertFalse($saleItem->validate(['id']));
-    }
-
-    public function testSaleItemIdCorrect(){        
-        $saleItem = new SaleItem();
-        $saleItem->id = 1;
-        $this->assertTrue($saleItem->validate(['id']));
-    }
-
     public function testSaleItemPriceNotNumber(){        
         $saleItem = new SaleItem();
         $saleItem->unit_price = "Not Number";

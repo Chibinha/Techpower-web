@@ -44,14 +44,4 @@ class CategoryCest
         $I->click('Save');
         $I->see('Category: test category');
     }
-
-    public function editCategory(FunctionalTester $I)
-    {
-        $I->see('Categories', 'h1');
-        $I->click('Update', 'a');
-        $I->see('Update Category');
-        $I->fillField('Description', 'test category');
-        $I->click('Save');
-        $I->see('Category: test category');
-    }
 }

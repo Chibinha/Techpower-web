@@ -1,7 +1,7 @@
 <?php
 return [
     [
-        'product_name' => 'Category',
+        'product_name' => 'Processador',
         'unit_price' => 1,
         'is_discontinued' => 0,
         'description' => 'description',

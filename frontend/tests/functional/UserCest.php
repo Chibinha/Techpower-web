@@ -55,7 +55,7 @@ class UserCest
         $I->seeInField('Rua', 'Rua test');
     }
 
-    public function updateUserWithInvalidNif(FunctionalTester $I)
+    /*public function updateUserWithInvalidNif(FunctionalTester $I)
     {
         $I->see('A minha conta');
         $I->click('A minha conta');
@@ -77,5 +77,5 @@ class UserCest
         $I->fillField('Telefone', '123');
         $I->click('Alterar dados');
         $I->see('O número de telefone tem que ter 9 dígitos.');
-    }
+    }*/
 }

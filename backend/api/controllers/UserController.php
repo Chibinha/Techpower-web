@@ -157,9 +157,25 @@ class UserController extends ActiveController
         if($user->validate() && $profile->validate()) {
             $profile->save();
             $user->save();
-            $response['isSuccess'] = 201;
-            $response['message'] = 'Dados do utilizador alterados com sucesso!';
-            return $response;
+            
+            $user = User::find()->where(['id' => $id])->select([
+                "id",
+                "username",
+                "auth_key",
+                "email"
+            ])->asArray()->one();
+            $profile = Profile::find()->where(['id_user' => $id])->select([
+                "firstName",
+                "lastName",
+                "phone",
+                "address",
+                "nif",
+                "postal_code",
+                "city",
+                "country"
+            ])->asArray()->one();
+    
+            return array_merge($user, $profile);
         }
         else {
             throw new \yii\web\BadRequestHttpException("The request could not be understood by the server due to malformed syntax.");

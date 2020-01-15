@@ -14,22 +14,20 @@ use yii\filters\auth\QueryParamAuth;
 class UserController extends ActiveController
 {
     public $modelClass = 'common\models\User';
-    
-    
+
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::className(),
-            'except' => ['login', 'create'],
+            'except' => ['create'],
             'authMethods' => [
                 [
                     'class' => HttpBasicAuth::className(),
-                    'auth' => function ($username, $password)
-                    {
+                    'auth' => function ($username, $password) {
                         $user = User::findByUsername($username);
-                        if ($user && $user->validatePassword($password))
-                        {
+                        if ($user && $user->validatePassword($password)) {
                             return $user;
                         }
                     }
@@ -37,7 +35,7 @@ class UserController extends ActiveController
                 QueryParamAuth::className(),
             ],
         ];
-        return $behaviors;      
+        return $behaviors;
     }
 
     public function actions()
@@ -51,25 +49,50 @@ class UserController extends ActiveController
 
     public function actionLogin()
     {
-        $post = Yii::$app->request->post();
+        $userData = User::find()->where(['id' => Yii::$app->user->getId()])->select([
+            "id",
+            "username",
+            "auth_key",
+            "email"
+        ])->asArray()->one();
+        $profile = Profile::find()->where(['id_user' => Yii::$app->user->getId()])->select([
+            "firstName",
+            "lastName",
+            "phone",
+            "address",
+            "nif",
+            "postal_code",
+            "city",
+            "country"
+        ])->asArray()->one();
 
-        $user = User::findByUsername($post['username']);
-        if ($user && $user->validatePassword($post['password']))
-        {
-            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return array('auth-key' => $user->auth_key);
-        }
+        return array_merge($userData, $profile);
     }
 
     public function actionView($id)
     {
-        $user = User::find($id)->asArray()->one();
-        $profile = Profile::find()->where(['id_user' => $id])->asArray()->one();
+        $user = User::find()->where(['id' => $id])->select([
+            "id",
+            "username",
+            "auth_key",
+            "email"
+        ])->asArray()->one();
+        $profile = Profile::find()->where(['id_user' => $id])->select([
+            "firstName",
+            "lastName",
+            "phone",
+            "address",
+            "nif",
+            "postal_code",
+            "city",
+            "country"
+        ])->asArray()->one();
 
         return array_merge($user, $profile);
     }
 
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $model = new SignupForm();
         $params = Yii::$app->request->post();
         $model->username = $params['username'];
@@ -88,9 +111,8 @@ class UserController extends ActiveController
         if ($model->signup()) {
             $response['isSuccess'] = 201;
             $response['message'] = 'Utilizador registado com sucesso!';
-            return $response;   
-        }
-        else {
+            return $response;
+        } else {
             $model->getErrors();
             $response['hasErrors'] = $model->hasErrors();
             $response['errors'] = $model->getErrors();
@@ -135,9 +157,25 @@ class UserController extends ActiveController
         if($user->validate() && $profile->validate()) {
             $profile->save();
             $user->save();
-            $response['isSuccess'] = 201;
-            $response['message'] = 'Dados do utilizador alterados com sucesso!';
-            return $response;
+            
+            $user = User::find()->where(['id' => $id])->select([
+                "id",
+                "username",
+                "auth_key",
+                "email"
+            ])->asArray()->one();
+            $profile = Profile::find()->where(['id_user' => $id])->select([
+                "firstName",
+                "lastName",
+                "phone",
+                "address",
+                "nif",
+                "postal_code",
+                "city",
+                "country"
+            ])->asArray()->one();
+    
+            return array_merge($user, $profile);
         }
         else {
             throw new \yii\web\BadRequestHttpException("The request could not be understood by the server due to malformed syntax.");

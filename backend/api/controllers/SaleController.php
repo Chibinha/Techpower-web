@@ -97,7 +97,7 @@ class SaleController extends ActiveController
         $sale = new Sale();
         $sale->id_user = Yii::$app->user->getId();
         $sale->sale_finished = 0;
-        $sale->save();
+        $sale->save(false);
 
         $transaction = $sale->getDb()->beginTransaction();
         foreach ($params as $product)
@@ -119,7 +119,7 @@ class SaleController extends ActiveController
         $transaction->commit();
         $response['isSuccess'] = 201;
         $response['message'] = 'Venda Registada com sucesso!';
-        return $response;   
+        return $response;
     }
 
     public function actionUpdate($id){

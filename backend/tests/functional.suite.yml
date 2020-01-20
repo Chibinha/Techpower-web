@@ -3,3 +3,8 @@ actor: FunctionalTester
 modules:
     enabled:
         - Yii2
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=techpower_test'
+            user: 'root'
+            password: ''
+        

@@ -3,6 +3,7 @@
 namespace frontend\tests\unit\models;
 
 use common\fixtures\CategoryFixture;
+use common\fixtures\ProductFixture;
 use common\models\Category;
 use common\models\Product;
 
@@ -19,6 +20,19 @@ class ProductTest extends \Codeception\Test\Unit
 
     protected function _after()
     {
+    }
+
+    /**
+     * @return array
+     */
+    public function _fixtures()
+    {
+        return [
+            'user' => [
+                'class' => CategoryFixture::className(),
+                'dataFile' => codecept_data_dir() . 'category_data.php'
+            ]
+        ];
     }
 
     public function testProductNameTooLong(){        
@@ -62,5 +76,16 @@ class ProductTest extends \Codeception\Test\Unit
         $products->unit_price = "129.99";
         expect($products->hasErrors())->false();
         $this->assertTrue($products->validate(['unit_price']));
+    }
+
+    function testSavingProduct(){
+        $product = new Product();
+        $product->product_name = 'prodd2';
+        $product->unit_price = 1;
+        $product->description = 'desc22';
+        $product->id_category = 1;
+        $product->save();
+        $this->assertEquals('prodd2', $product->product_name);
+        $this->tester->seeRecord('common\models\Product', ['product_name' => 'prodd2', 'description' => 'desc22']);
     }
 }

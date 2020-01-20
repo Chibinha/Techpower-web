@@ -1,8 +1,11 @@
 <?php
 namespace frontend\tests\unit\models;
 
+use common\fixtures\CategoryFixture;
 use common\fixtures\UserFixture;
 use frontend\models\SignupForm;
+use common\models\Category;
+use common\models\Product;
 
 class SignupFormTest extends \Codeception\Test\Unit
 {
@@ -18,6 +21,10 @@ class SignupFormTest extends \Codeception\Test\Unit
             'user' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'user.php'
+            ],
+            'category' => [
+                'class' => CategoryFixture::className(),
+                'dataFile' => codecept_data_dir() . 'category_data.php'
             ]
         ]);
     }
@@ -73,5 +80,16 @@ class SignupFormTest extends \Codeception\Test\Unit
             ->equals('Este nome de utilizador já está registado.');
         expect($model->getFirstError('email'))
             ->equals('Este e-mail já está registado.');
+    }
+
+    function testSavingProduct(){
+        $product = new Product();
+        $product->product_name = "prod1";
+        $product->unit_price = 1;
+        $product->description = "desc";
+        $product->id_category = 1;
+        $product->save();
+        $this->assertEquals('prod1', $product->product_name);
+        $this->tester->seeRecord('common\models\Product', ['product_name' => 'prod1']);
     }
 }

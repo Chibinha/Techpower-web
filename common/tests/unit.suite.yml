@@ -4,4 +4,9 @@ bootstrap: false
 modules:
     enabled:
         - Yii2:
-            part: fixtures
+            part: [orm, email, fixtures]
+        - Asserts
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=techpower_test'
+            user: 'root'
+            password: ''

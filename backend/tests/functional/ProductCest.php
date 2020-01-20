@@ -44,10 +44,11 @@ class ProductCest
         $I->see('Products', 'h1');
         $I->click('Create Product');
         $I->see('Create Product');
-        $I->fillField('Product Name', 'test product');
+        $I->fillField('Product Name', 'test');
         $I->fillField('Unit Price', '1.11');
         $I->fillField('Description', 'test product');
         $I->click('Save');
-        $I->see('Product: test product');
+        $I->see('Product: test');
+        $I->seeRecord('common\models\Product', ['Description' => 'test product']);
     }
 }

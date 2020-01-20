@@ -5,3 +5,8 @@ modules:
         - Yii2:
             part: [orm, email, fixtures]
         - Asserts
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=techpower_test'
+            user: 'root'
+            password: ''
+            cleanup: true # reload dump between tests

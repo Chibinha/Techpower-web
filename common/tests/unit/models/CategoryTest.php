@@ -45,6 +45,14 @@ class CategoryTest extends Unit
         expect($category1->hasErrors())->true();
         expect($category2->hasErrors())->true();
     }
+
+    function testSavingProduct(){
+        $cat = new Category();
+        $cat->id = 1;
+        $cat->description = "descc2";
+        $cat->save();
+        $this->tester->seeRecord('common\models\Category', ['description' => 'descc2']);
+    }
 }
 
 

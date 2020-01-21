@@ -4,6 +4,7 @@ namespace backend\tests\functional;
 
 use backend\tests\FunctionalTester;
 use common\fixtures\CategoryFixture;
+use common\fixtures\ProductFixture;
 use common\fixtures\UserFixture;
 
 class ProductCest
@@ -25,12 +26,17 @@ class ProductCest
             'category' => [
                 'class' => CategoryFixture::className(),
                 'dataFile' => codecept_data_dir() . 'category_data.php'
+            ],
+            'product' => [
+                'class' => ProductFixture::className(),
+                'dataFile' => codecept_data_dir() . 'product_data.php'
             ]
         ];
     }
 
     public function _before(FunctionalTester $I)
     {
+
         $I->amOnPage('/site/login');
         $I->fillField('Username', 'erau');
         $I->fillField('Password', 'password_0');
@@ -50,5 +56,19 @@ class ProductCest
         $I->click('Save');
         $I->see('Product: test');
         $I->seeRecord('common\models\Product', ['Description' => 'test product']);
+    }
+
+    public function updateProduct(FunctionalTester $I)
+    {
+        $I->seeRecord('common\models\Product', ['product_name' => 'TESTE']);
+        $I->amOnPage('/product/view?id=1');
+        $I->see('Update');
+        $I->click('Update');
+        $I->fillField('Product Name', 'Updated_Product');
+        $I->fillField('Unit Price', '999.99');
+        $I->fillField('Description', 'updated test product');
+        $I->click('Save');
+        $I->see('Product: Updated_Product');
+        $I->seeRecord('common\models\Product', ['Description' => 'updated test product']);
     }
 }

@@ -8,7 +8,8 @@ use Yii;
 class Helper
 {
     public static function getCategories(){
-        $cats = Category::find()->all();
+        //Gets only categories and not subcategories
+        $cats = Category::find()->where(['parent_id' => null])->all();
 
         $menu_item = [];
         foreach ($cats as $uma_cat) {

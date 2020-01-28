@@ -54,6 +54,8 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {   
+        $subcategories = Category::find()->where(['parent_id' => $id])->asArray()->all();
+
         /* Pagination */
         $query = Category::getProductsByCategories($id);
         $count = $query->count();
@@ -66,6 +68,7 @@ class CategoryController extends Controller
             'model' => $this->findModel($id),
             'pages' => $pages,
             'products' => $products,
+            'sub_categories' => $subcategories,
         ]);
     }
 

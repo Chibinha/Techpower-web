@@ -35,10 +35,33 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
+    } else if (!Yii::$app->user->can('admin') && !Yii::$app->user->can('worker')) {
+        $menuItems[] = '<li>'
+            . Html::beginForm(['/site/logout'], 'post')
+            . Html::submitButton(
+                'Logout (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+            . '</li>';
+    } else if (Yii::$app->user->can('worker')){
+        $menuItems = [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Sales', 'url' => ['/sale/index']],
+            ['label' => 'Products', 'url' => ['/product/index']],
+            ['label' => 'Categories', 'url' => ['/category/index']],
+        ];
+        $menuItems[] = '<li>'
+            . Html::beginForm(['/site/logout'], 'post')
+            . Html::submitButton(
+                'Logout (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+            . '</li>';
+    } else if (Yii::$app->user->can('admin')){
         $menuItems = [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Sales', 'url' => ['/sale/index']],

@@ -27,7 +27,7 @@ class ProfileController extends Controller
                     [
                         'actions' => ['index', 'view', 'create', 'update', 'delete'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin' , 'worker'],
                     ],
                 ],
             ],

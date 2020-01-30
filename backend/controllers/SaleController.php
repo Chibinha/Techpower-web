@@ -30,10 +30,11 @@ class SaleController extends Controller
                     [
                         'actions' => ['index', 'view', 'create', 'update', 'delete'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin' , 'worker'],
                     ],
                 ],
             ],
+            
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

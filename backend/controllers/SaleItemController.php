@@ -28,7 +28,7 @@ class SaleItemController extends Controller
                     [
                         'actions' => ['index', 'view', 'create', 'update', 'delete', 'removeitem'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin' , 'worker'],
                     ],
                 ],
             ],

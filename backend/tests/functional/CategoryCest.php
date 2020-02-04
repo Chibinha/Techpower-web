@@ -26,17 +26,12 @@ class CategoryCest
 
     public function _before(FunctionalTester $I)
     {
-        $I->amOnPage('/site/login');
-        $I->fillField('Username', 'erau');
-        $I->fillField('Password', 'password_0');
-        $I->click('login-button');
-
-        $I->amOnPage('/category/index');
     }
 
     public function addCategory(FunctionalTester $I)
     {
-        
+        $I->amLoggedInAs(6);
+        $I->amOnPage('/category/index');
         $I->see('Categories', 'h1');
         $I->click('Create Category');
         $I->see('Create Category');

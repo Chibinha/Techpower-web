@@ -19,12 +19,6 @@ class LoginCest
      */
     public function _fixtures()
     {
-        return [
-            'user' => [
-                'class' => UserFixture::className(),
-                'dataFile' => codecept_data_dir() . 'login_data.php'
-            ]
-        ];
     }
     
     /**
@@ -34,12 +28,12 @@ class LoginCest
     {
         $I->amOnPage('/site/login');
         $I->submitForm('#login-form', [
-            'LoginForm[username]' => 'erau',
-            'LoginForm[password]' => 'password_0',
+            'LoginForm[username]' => 'admin',
+            'LoginForm[password]' => '111111',
         ], 'login-button');
 
         $I->dontSee('Login');
-        $I->see('Logout (erau)');
+        $I->see('Logout (admin)');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
     }

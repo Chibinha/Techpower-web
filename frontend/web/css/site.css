@@ -304,6 +304,15 @@ a.desc:after {
     }
 }
 
+/* View das categorias */
+.category-view .btn-success{
+    background-color: #E95420;
+    border-color: floralwhite;
+    font-weight: bold;
+}
+
+
+
 /* NAVBAR BREAKPOINT */
 @media (max-width: 1200px) {
     .navbar-header {

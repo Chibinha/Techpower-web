@@ -24,6 +24,10 @@ return [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guest'],
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,

@@ -3,13 +3,31 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use common\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Category */
 /* @var $form yii\widgets\ActiveForm */
 
-$dataCategory = ['' => ' '] + ArrayHelper::map(\common\models\Category::find()->asArray()->all(), 'id', 'description');
-?>
+$subcats = Category::find()->where(['parent_id' => $model->id])->all();
+if(!empty($subcats) && $model->id != null){
+    $dataCategory = ['' => 'THIS CATEGORY IS A PARENT CATEGORY'];
+} else {
+    $dataCategory = ['' => ' '] + ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'description');
+    if($model->id != '' && $model->id != null)
+    {
+        unset($dataCategory[$model->id]);
+    }
+
+    $all_categories = Category::find()->all();
+    foreach ($all_categories as $category){
+        if($category->parent_id != '' && $category->parent_id != null)
+        {
+            unset($dataCategory[$category->id]);
+
+        }
+    }
+}?>
 
 <div class="category-form">
 

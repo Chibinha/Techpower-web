@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -85,8 +86,11 @@ class CategoryController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+       $categories = $this->getCategories($model);
+
         return $this->render('create', [
             'model' => $model,
+            'categories' => $categories,
         ]);
     }
 
@@ -101,12 +105,15 @@ class CategoryController extends Controller
     {
         $model = $this->findModel($id);
 
+        $categories = $this->getCategories($model);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'categories' => $categories,
         ]);
     }
 
@@ -138,5 +145,31 @@ class CategoryController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    private function getCategories ($model) {
+        $subcats = Category::find()->where(['parent_id' => $model->id])->all();
+
+        $dataCategory = [];
+
+        if(!empty($subcats) && $model->id != null){
+            $dataCategory = ['' => 'This category is a parent and cannot have a parent!'];
+        } else {
+            $dataCategory = ['' => ' '] + ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'description');
+            if($model->id != '' && $model->id != null)
+            {
+                unset($dataCategory[$model->id]);
+            }
+
+            $all_categories = Category::find()->all();
+            foreach ($all_categories as $category){
+                if($category->parent_id != '' && $category->parent_id != null)
+                {
+                    unset($dataCategory[$category->id]);
+
+                }
+            }
+        }
+        return $dataCategory;
     }
 }

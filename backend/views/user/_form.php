@@ -22,4 +22,10 @@ use yii\widgets\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
+    <?php if ($role) { ?>
+        <?= Html::a('Revoke Worker role', ['/user/revokeworker?id=' . $model->id], ['class'=>'btn btn-primary']) ?>
+    <?php } else { ?>
+        <?= Html::a('Assign Worker role', ['/user/assignworker?id=' . $model->id], ['class'=>'btn btn-primary']) ?>
+    <?php } ?>
+
 </div>

@@ -26,7 +26,7 @@ class UserController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'actions' => ['index', 'view', 'create', 'update', 'delete', 'assignworker', 'revokeworker'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
@@ -106,9 +106,12 @@ class UserController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $role = \Yii::$app->authManager->checkAccess($id, 'worker');
+
         return $this->render('update', [
             'model' => $model,
-            'perfil' => $profile
+            'perfil' => $profile,
+            'role' => $role,
         ]);
     }
 
@@ -125,6 +128,36 @@ class UserController extends Controller
         $model->status = '0';
         $model->save();
         return $this->redirect(['index']);
+    }
+
+    public function actionAssignworker($id)
+    {
+        $model = $this->findModel($id);
+        if ($model) {
+            $auth = \Yii::$app->authManager;
+            $authorRole = $auth->getRole('worker');
+            $auth->assign($authorRole, $model->getId());
+            \Yii::$app->session->addFlash('success', 'Role Assigned.');
+        } else {
+            \Yii::$app->session->addFlash('error', 'Error Assigning role.');
+        }
+
+        return $this->redirect(['view', 'id' => $model->id]);
+    }
+    
+    public function actionRevokeworker($id)
+    {
+        $model = $this->findModel($id);
+        if ($model) {
+            $auth = \Yii::$app->authManager;
+            $authorRole = $auth->getRole('worker');
+            $auth->revoke($authorRole, $model->getId());
+            \Yii::$app->session->addFlash('success', 'Role revoked.');
+        } else {
+            \Yii::$app->session->addFlash('error', 'Error Revoking role.');
+        }
+
+        return $this->redirect(['view', 'id' => $model->id]);
     }
 
     /**

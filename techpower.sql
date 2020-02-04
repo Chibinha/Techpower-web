@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Jan-2020 às 23:23
--- Versão do servidor: 10.4.8-MariaDB
--- versão do PHP: 7.3.11
+-- Generation Time: 04-Fev-2020 às 03:07
+-- Versão do servidor: 10.1.39-MariaDB
+-- versão do PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `techpower`
+-- Database: `techpower`
 --
 
 -- --------------------------------------------------------
@@ -51,9 +51,9 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 CREATE TABLE `auth_item` (
   `name` varchar(64) NOT NULL,
   `type` int(11) NOT NULL,
-  `description` text DEFAULT NULL,
+  `description` text,
   `rule_name` varchar(64) DEFAULT NULL,
-  `data` text DEFAULT NULL,
+  `data` text,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -85,7 +85,7 @@ CREATE TABLE `auth_item_child` (
 
 CREATE TABLE `auth_rule` (
   `name` varchar(64) NOT NULL,
-  `data` text DEFAULT NULL,
+  `data` text,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -200,8 +200,7 @@ INSERT INTO `product` (`id`, `product_name`, `unit_price`, `is_discontinued`, `d
 (44, 'Placa Gráfica PNY Quadro P5000 16GB GDDR5', '1890.00', b'0', 'A placa gráfica NVIDIA Quadro P5000, alimentada pela tecnologia NVIDIA Pascal™, possui capacidade de memória de 16 GB e permite um espaço de trabalho visual amplo com saídas quad-display. Trabalhe com modelos maiores, efeitos visuais complexos e simulações, tarefas de renderização maiores e experiências de VR mais realistas no seu fluxo de trabalho hoje e esteja bem preparado para os desafios de amanhã.\r\n\r\n \r\n\r\nNúcleos CUDA: 2560\r\nMemória: 16GB GDDR5X\r\nInterface de Memória: 256 bits\r\nLargura de banda memória: 288 GB/s\r\nBus: PCI Express 3.0 x16\r\nConsumo energético máx: 180 W\r\nFormato: 4.40” H x 10.50” L, Dual Slot\r\nConectores display: DP 1.4 (4) + DVI-D DL (1) + Stereo\r\nDisplayPort 1.4: Sim\r\nDisplayPort com áudio: Sim\r\nResolução máxima DP 1.4: 7680 x 4320 a 30Hz (30-bit color)\r\nSuporte 5K: 5120 x 2880 aa 60Hz (30-bit color)\r\nSuporte 4K: 4096 x 2160 a 60Hz ou 3840 x 2160 aa 60Hz (30-bit color)\r\nResolução máxima DVI-D DL: 2560 x 1600 a 60Hz\r\nResolução máxima DVI-D SL: 1920 x 1200 a 60Hz', 'fc5c0e0b25f34df09757ca730d2e5760.jpg', 6),
 (45, 'Placa Gráfica Asus ROG Strix GeForce RTX 2080 Ti G', '1569.90', b'0', 'A GeForce RTX proporciona uma experiência de jogo de PC completamente renovada. Com o design de GPU NVIDIA Turing e a inovadora plataforma RTX, as placas gráficas RTX combinam real-time ray tracing, inteligência artificial e sombreamento programável. Apresentando TBD GPU boost e clock de memória em modo OC, oferece excelente desempenho em jogos.\r\n\r\nARQUITETURA DE GPU NVIDIA TURING - DESEMPENHO ATÉ 6 VEZES MAIS RÁPIDO\r\nOs GPUs RTX são alimentados pela arquitetura Turing, o que proporciona um desempenho 6x mais rápido do que as placas gráficas de geração anterior. Turing usa um novo processo de fabricação de 12nm e também traz o poder do real-time ray tracing e inteligência artificial para os seus jogos.\r\n\r\nTECNOLOGIA RAY TRACING E MEMÓRIA GDDR6\r\nA GeForce RTX oferece tecnologias verdadeiramente exclusivas de real-time ray tracing para gráficos de ponta e hiper-realistas. Isso significa que a RTX está anos-luz à frente de outras placas e oferece a experiência de jogo mais realista de todos os tempos. As placas RTX também são as primeiras placas gráficas a apresentar memória GDDR6.\r\n\r\nGEFORCE EXPERIENCE\r\nCapta e partilha vídeos, capturas de ecrã e livestreams com amigos. Mantém os controladores atualizados e otimiza as definições de jogo. O GeForce Experience™ permite-te fazer tudo. É o companheiro fundamental da tua placa gráfica GeForce.\r\n\r\nCONTROLADORES GAME READY\r\nObtém os níveis mais elevados de desempenho e a experiência mais suave possível, desde o momento em que começas a jogar.\r\n\r\nNVIDIA SHADOWPLAY™\r\nGrava e partilha vídeos de jogo, capturas de ecrã e livestreams de alta qualidade com os teus amigos.\r\n\r\nNVIDIA ANSEL\r\nTransforma as tuas capturas de ecrã em obras de arte com este poderoso modo de fotografia no jogo que capta fotografias 360, HDR e com elevada resolução\r\n\r\nREALIDADE VIRTUAL\r\nAo combinar a composição (rendering) de VR avançada, o ray-tracing em tempo real e a IA, a GeForce RTX levará a VR para um novo nível de realismo.\r\n\r\nNVIDIA G-SYNC™ E HDR\r\nDesfruta de uma experiência de jogo suave e sem \"tearing\", a taxas de atualização de até 240 Hz, com HDR e muito mais. Este é o derradeiro ecrã de gaming e o equipamento de eleição para os entusiastas de jogos.\r\n\r\nDIRECTX 12\r\nProporciona novos efeitos visuais e técnicas de composição (rendering) para uma experiência de jogo mais realista.\r\n\r\n4K\r\nEntra na derradeira experiência de jogo 4K com a GeForce RTX e desfruta dos grandes jogos da atualidade com detalhes fantásticos.\r\n\r\n \r\n\r\nMotor Gráfico: NVIDIA® GeForce® RTX 2080 Ti\r\nBus: PCI Express x16 3.0\r\nNúcleos CUDA: 4352\r\nMemória: 11GB GDDR6\r\nClock GPU:\r\nOC Mode - 1770 MHz (Boost Clock)\r\nGaming Mode (Default) - GPU Boost Clock : 1740 MHz , GPU Base Clock : 1350 MHz\r\nInterface de Memória: 352 Bits\r\nInterface I/O:\r\n2 x DisplayPort (v1.4)\r\n2 x HDMI 2.0b\r\n1 x USB Type-C\r\nSuporte HDCP 2.2\r\nVersão DirectX: 12\r\nVersão OpenGL: 4.6\r\nDimensões do produto: 30.5 x 13 x 5.4 cm', '6fc8fbb248fb648169b9ca15b16ed8c9.jpg', 6);
 INSERT INTO `product` (`id`, `product_name`, `unit_price`, `is_discontinued`, `description`, `product_image`, `id_category`) VALUES
-(46, 'Placa Gráfica Gigabyte Aorus GeForce RTX 2080 Ti W', '1454.00', b'0', 'SISTEMA DE REFRIGERAÇÃO WATERFORCE\r\nA AORUS fornece a solução de refrigeração completa para todos os principais componentes da placa gráfica. Cuida não só do GPU, como também dos VRAM e dos MOSFET, para garantir um funcionamento estável em overclock e maior durabilidade. A AORUS garante que a placa gráfica WATERFORCE tenha a excelente qualidade de montagem e maior desempenho.\r\n\r\nRGB FUSION\r\nCom 16.7 Milhões de opções de cores personalizáveis e inúmeros efeitos de iluminação, agora você pode escolher o esquema certo para o seu equipamento de jogo através do AORUS engine.\r\n\r\n2 X HDMI EXTRA\r\nA AORUS fornece um total de 7 saídas de vídeo em comparação com as 5 saídas de vídeo da placa de referência. Um adicional de 2 portas HDMI permite que os consumidores tenham maior flexibilidade.\r\n\r\nCONSTRUÇÃO PREMIUM EM TODOS OS ASPECTOS\r\nOs gráficos AORUS são dedicados a uma qualidade perfeita. Excelente design de circuito com os materiais de alta qualidade, não só maximiza o desempenho do GPU, como também mantém uma operação estável e duradoura.\r\n\r\n4 ANOS DE GARANTIA\r\nA Gigabyte quer que você usufrua do melhor serviço que você já teve. É por isso que, além da garantia padrão de 3 anos da Gigabyte, você pode ter um ano adicional de proteção à sua placa gráfica gratuitamente. Você pode desfrutar de uma garantia de 4 anos, registando o seu produto no site gigabyte até 30 dias após a compra.\r\n\r\n \r\n\r\nMotor Gráfico: NVIDIA® GeForce® RTX 2080 Ti\r\nBus: PCI Express x16 3.0\r\nNúcleos CUDA: 4352\r\nClock GPU: 1770 MHz (Placa de referência: 1545 MHz)\r\nMemória: 11GB GDDR6\r\nClock de memória: 14140 MHz\r\nInterface de Memória: 352 Bits\r\nInterface I/O:\r\n3 x DisplayPort (v1.4)\r\n3 x HDMI 2.0b\r\n1 x USB Type-C\r\nSuporte HDCP 2.2\r\nVersão DirectX: 12\r\nVersão OpenGL: 4.5\r\nDimensões do produto: L=291.29 W=159.05 H=28.7 mm', '4aa04315d316a04244a18940d3eb8295.png', 6),
-(47, 'teste', '1.00', b'0', 'teste', '698dc19d489c4e4db73e28a713eab07b.png', 1);
+(46, 'Placa Gráfica Gigabyte Aorus GeForce RTX 2080 Ti W', '1454.00', b'0', 'SISTEMA DE REFRIGERAÇÃO WATERFORCE\r\nA AORUS fornece a solução de refrigeração completa para todos os principais componentes da placa gráfica. Cuida não só do GPU, como também dos VRAM e dos MOSFET, para garantir um funcionamento estável em overclock e maior durabilidade. A AORUS garante que a placa gráfica WATERFORCE tenha a excelente qualidade de montagem e maior desempenho.\r\n\r\nRGB FUSION\r\nCom 16.7 Milhões de opções de cores personalizáveis e inúmeros efeitos de iluminação, agora você pode escolher o esquema certo para o seu equipamento de jogo através do AORUS engine.\r\n\r\n2 X HDMI EXTRA\r\nA AORUS fornece um total de 7 saídas de vídeo em comparação com as 5 saídas de vídeo da placa de referência. Um adicional de 2 portas HDMI permite que os consumidores tenham maior flexibilidade.\r\n\r\nCONSTRUÇÃO PREMIUM EM TODOS OS ASPECTOS\r\nOs gráficos AORUS são dedicados a uma qualidade perfeita. Excelente design de circuito com os materiais de alta qualidade, não só maximiza o desempenho do GPU, como também mantém uma operação estável e duradoura.\r\n\r\n4 ANOS DE GARANTIA\r\nA Gigabyte quer que você usufrua do melhor serviço que você já teve. É por isso que, além da garantia padrão de 3 anos da Gigabyte, você pode ter um ano adicional de proteção à sua placa gráfica gratuitamente. Você pode desfrutar de uma garantia de 4 anos, registando o seu produto no site gigabyte até 30 dias após a compra.\r\n\r\n \r\n\r\nMotor Gráfico: NVIDIA® GeForce® RTX 2080 Ti\r\nBus: PCI Express x16 3.0\r\nNúcleos CUDA: 4352\r\nClock GPU: 1770 MHz (Placa de referência: 1545 MHz)\r\nMemória: 11GB GDDR6\r\nClock de memória: 14140 MHz\r\nInterface de Memória: 352 Bits\r\nInterface I/O:\r\n3 x DisplayPort (v1.4)\r\n3 x HDMI 2.0b\r\n1 x USB Type-C\r\nSuporte HDCP 2.2\r\nVersão DirectX: 12\r\nVersão OpenGL: 4.5\r\nDimensões do produto: L=291.29 W=159.05 H=28.7 mm', '4aa04315d316a04244a18940d3eb8295.png', 6);
 
 -- --------------------------------------------------------
 
@@ -243,7 +242,7 @@ INSERT INTO `profile` (`id`, `firstName`, `lastName`, `phone`, `address`, `nif`,
 
 CREATE TABLE `sale` (
   `id` int(11) NOT NULL,
-  `sale_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `sale_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `sale_finished` bit(1) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -256,14 +255,7 @@ INSERT INTO `sale` (`id`, `sale_date`, `sale_finished`, `id_user`) VALUES
 (1, '2020-01-10 16:54:54', b'1', 8),
 (2, '2020-01-10 16:55:03', b'1', 8),
 (3, '2020-01-10 16:55:13', b'0', 8),
-(4, '2020-01-10 16:55:27', b'1', 6),
-(5, '2020-01-10 16:55:32', b'0', 6),
-(13, '2020-01-15 12:15:51', b'0', 10),
-(14, '2020-01-19 14:01:44', b'0', 6),
-(15, '2020-01-19 14:25:09', b'0', 6),
-(16, '2020-01-19 23:43:15', b'0', 6),
-(17, '2020-01-20 00:20:32', b'0', 6),
-(18, '2020-01-20 04:53:09', b'0', 6);
+(4, '2020-01-10 16:55:27', b'1', 6);
 
 -- --------------------------------------------------------
 
@@ -289,17 +281,7 @@ INSERT INTO `sale_item` (`id`, `unit_price`, `quantity`, `id_product`, `id_sale`
 (3, '89.90', 1, 31, 3),
 (4, '599.99', 1, 11, 3),
 (5, '497.90', 1, 16, 4),
-(6, '119.90', 1, 33, 4),
-(7, '97.90', 2, 30, 5),
-(8, '31.90', 1, 28, 5),
-(9, '599.00', 1, 46, 13),
-(10, '599.00', 3, 31, 13),
-(11, '999.00', 1, 10, 14),
-(12, '899.00', 1, 9, 15),
-(13, '999.00', 1, 10, 17),
-(14, '182.90', 2, 22, 18),
-(15, '1.00', 1, 47, 18),
-(16, '499.90', 1, 15, 18);
+(6, '119.90', 1, 33, 4);
 
 -- --------------------------------------------------------
 
@@ -314,7 +296,7 @@ CREATE TABLE `user` (
   `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `status` smallint(6) NOT NULL DEFAULT 10,
+  `status` smallint(6) NOT NULL DEFAULT '10',
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
   `verification_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
@@ -329,22 +311,22 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (7, 'martim', 'Rm8Xpr1hYRf9mp_ZMuffejh4sA6TT0WO', '$2y$13$2/h3c8DxoPC7yfBOMPaPUevllo3zJF4LmC6OGtWYO0ytn7zQkW8S2', NULL, 'martimtsilva@hotmail.com', 10, 1578481942, 1578481942, '9eYFNgNLzkyTO_Q6Z0RalQXBqL8RtMhx_1578481942'),
 (8, 'micael', 'yi6mZXuCFh_bt47TmwNnsI61bugWqInx', '$2y$13$Bbhuh9xNlWSyy.Gt1trJIOUCV1GFo/Sc02xN76v2fuRZQY7eIrgwa', NULL, 'micael96@gmail.com', 10, 1578482035, 1578482035, 'YFL8rk4MjMr0Fg50Gp-r2WcCjFds4w1h_1578482035'),
 (9, 'bruno', 'HksHq_nLuJqwaPw8jXQHTgzQcSJfo1iI', '$2y$13$7C00fTBjB69cncQdPmzrRe2Z9iCE17zKlee0Q8A4qeiUPEqcOHQam', NULL, 'brumeco62@hotmail.com', 10, 1578482206, 1578482206, 'JeLnV6JJel8Xf-NLqW5BqdmOy5BJ1tp2_1578482206'),
-(10, 'teste', 'MuiTujXh3lAe8HrPgcHe_73gMRTTgUrs', '$2y$13$nHSHWxVcdC6EVxssOQXYzOdQyXITCLUWjE.4OW8nIg131mUjk0.Wm', NULL, 'user1@gmail.com', 10, 1579090453, 1579090453, 'mZaChWFZc_Dcw8H1u_xDJSuEl23O4UE2_1579090453'),
+(10, 'teste', 'MuiTujXh3lAe8HrPgcHe_73gMRTTgUrs', '$2y$13$nHSHWxVcdC6EVxssOQXYzOdQyXITCLUWjE.4OW8nIg131mUjk0.Wm', NULL, 'user1@gmail.com', 0, 1579090453, 1580777957, 'mZaChWFZc_Dcw8H1u_xDJSuEl23O4UE2_1579090453'),
 (13, 'bruh', 'qcDdnopoCpvNnzBIwaMEvyMIGPq143fj', '$2y$13$tJo5htEvZX/vZTR1gc9tR.0uPKs/iFoPenNN4uRdZo9g.ZYETkN/2', NULL, 'bru@gma.com', 10, 1580262110, 1580262110, 'YhfFWgq9Q68xjNKGXRfsoi81qgMG3q0n_1580262110'),
 (14, 'guest', 'AyjmrbnYe5XH8juzTNJEh_ujtaH54YMb', '$2y$13$PanRPqAUo3WAzKqLH3QSoetkQdIXeIVxRH415Go0bafl2MABfoybK', NULL, 'urso@gmail.com', 10, 1580262712, 1580262712, 'NnjazLzgJzvygiubTG57C5H-7FGKbkI3_1580262712');
 
 --
--- Índices para tabelas despejadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices para tabela `auth_assignment`
+-- Indexes for table `auth_assignment`
 --
 ALTER TABLE `auth_assignment`
   ADD PRIMARY KEY (`item_name`,`user_id`);
 
 --
--- Índices para tabela `auth_item`
+-- Indexes for table `auth_item`
 --
 ALTER TABLE `auth_item`
   ADD PRIMARY KEY (`name`),
@@ -352,54 +334,54 @@ ALTER TABLE `auth_item`
   ADD KEY `type` (`type`);
 
 --
--- Índices para tabela `auth_item_child`
+-- Indexes for table `auth_item_child`
 --
 ALTER TABLE `auth_item_child`
   ADD PRIMARY KEY (`parent`,`child`),
   ADD KEY `child` (`child`);
 
 --
--- Índices para tabela `auth_rule`
+-- Indexes for table `auth_rule`
 --
 ALTER TABLE `auth_rule`
   ADD PRIMARY KEY (`name`);
 
 --
--- Índices para tabela `category`
+-- Indexes for table `category`
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`),
   ADD KEY `parent_id` (`parent_id`);
 
 --
--- Índices para tabela `migration`
+-- Indexes for table `migration`
 --
 ALTER TABLE `migration`
   ADD PRIMARY KEY (`version`);
 
 --
--- Índices para tabela `product`
+-- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_category` (`id_category`);
 
 --
--- Índices para tabela `profile`
+-- Indexes for table `profile`
 --
 ALTER TABLE `profile`
   ADD PRIMARY KEY (`id`),
   ADD KEY `profile_ibfk_1` (`id_user`);
 
 --
--- Índices para tabela `sale`
+-- Indexes for table `sale`
 --
 ALTER TABLE `sale`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Índices para tabela `sale_item`
+-- Indexes for table `sale_item`
 --
 ALTER TABLE `sale_item`
   ADD PRIMARY KEY (`id`),
@@ -407,7 +389,7 @@ ALTER TABLE `sale_item`
   ADD KEY `id_sale` (`id_sale`);
 
 --
--- Índices para tabela `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
@@ -416,47 +398,47 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `password_reset_token` (`password_reset_token`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `category`
+-- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de tabela `product`
+-- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- AUTO_INCREMENT de tabela `profile`
+-- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT de tabela `sale`
+-- AUTO_INCREMENT for table `sale`
 --
 ALTER TABLE `sale`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT de tabela `sale_item`
+-- AUTO_INCREMENT for table `sale_item`
 --
 ALTER TABLE `sale_item`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT de tabela `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- Restrições para despejos de tabelas
+-- Constraints for dumped tables
 --
 
 --

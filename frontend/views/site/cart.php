@@ -45,10 +45,14 @@ $this->registerJsFile('https://www.paypal.com/sdk/js?client-id=AaTG6AWmTKiOm3nUJ
                         <td data-th="Item">
                             <div class="row">
                                 <div class="col-sm-2 hidden-xs">
+                                <a href="<?= Url::to(['product/view', 'id' => $cart[$i]->id]);?>"> 
                                     <?= Html::img('@web/images/' . $cart[$i]->product_image, ['class' => 'img-responsive']); ?>
+                                </a>
                                 </div>
                                 <div class="col-sm-9">
-                                    <h5><?= $cart[$i]->product_name ?></h5>
+                                    <a href="<?= Url::to(['product/view', 'id' => $cart[$i]->id]);?>"> 
+                                        <h5><?= $cart[$i]->product_name ?></h5> 
+                                    </a>
                                 </div>
                             </div>
                         </td>

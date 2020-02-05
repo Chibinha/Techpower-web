@@ -246,6 +246,11 @@ a.desc:after {
     vertical-align: middle;
 }
 
+.table>tbody>tr>td .row a{
+    color: black;
+    text-decoration: none;
+}
+
 @media screen and (max-width: 767px) {
     /* View do Carrinho */
     .site-cart .table tbody td .form-control{

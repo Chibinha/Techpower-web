@@ -215,7 +215,10 @@ a.desc:after {
 
 .product-price {
     display: inline;
-    padding: 0 30px;
+    padding: 0 20px;
+    vertical-align: -4px;
+    font-size: 19px;
+    font-weight: bold;
 }
 
 .product-name {
@@ -225,6 +228,16 @@ a.desc:after {
 .product-bottom {
     padding: 30px 0;
     float: right;
+}
+
+.product-view .btn-success{
+    background-color: #E95420;
+    border-color: transparent;
+    font-weight: bold;
+}
+
+.product-view .btn-success:hover{
+    background-color: rgb(216, 58, 0);
 }
 
 
@@ -304,13 +317,17 @@ a.desc:after {
     }
 }
 
+
 /* View das categorias */
 .category-view .btn-success{
     background-color: #E95420;
-    border-color: floralwhite;
+    border-color: transparent;
     font-weight: bold;
 }
 
+.category-view .btn-success:hover{
+background-color: rgb(216, 58, 0);
+}
 
 
 /* NAVBAR BREAKPOINT */

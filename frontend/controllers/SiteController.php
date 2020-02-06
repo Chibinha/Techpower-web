@@ -287,10 +287,10 @@ class SiteController extends Controller
             if ($session->has('cart')) {
                 $cartArray = $session->get('cart');
 
-                $cart = Product::findAll(array_keys($cartArray));
-
+                
                 foreach ($cartArray as $key => $value) {
                     $product = Product::findOne($key);
+                    array_push($cart, $product);
 
                     // Calculate subtotal
                     $subtotal = $product->unit_price * $value;
